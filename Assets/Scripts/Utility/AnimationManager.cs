@@ -32,10 +32,10 @@ public class AnimationManager : MonoBehaviour
 
         Init();
 
-        StartCoroutine(Update());
+        StartCoroutine(UpdateAnimation());
     }
 
-   public IEnumerator Update()
+   public IEnumerator UpdateAnimation()
     {
         while(true)
         {
