@@ -1,51 +1,58 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class CageManager : MonoBehaviour
 {
-    enum Sexuality
-    {
-        MALE,
-        FEMALE,
-    }
 
-    struct AnimalStatus
-    {
-        // ID
-        int id;
-        // 名前
-        string name;
-        // 購入金額
-        int purchasePrice;
-        // 一日にかかる食費
-        int foodCost;
-        // 愛情度
-        int loveDegree;
-        // 次のレベルまでの値
-        int nextLevel;
-        // 呼び込める客の数
-        int attractNum;
-        // 性別
-        Sexuality sexuality;
-        // レア度
-        int rarity;
-    }
-    private AnimalStatus Status { get; set; }
+    public List<GameObject> cageList = new List<GameObject>();
 
-    bool IsActive { get; set; }
+    [SerializeField]
+    private int maxCageNum = 12;
+    [SerializeField]
+    private GameObject cage = null;
 
     void Start()
     {
-        StartCoroutine(UpdateCage());
+        if (cage == null)
+            Debug.Log("eroor : GameObject[cage] が null です");
+
+        for (int i = 0; i < maxCageNum; i++)
+        {
+            cageList.Add(Instantiate(cage));
+            cageList[i].transform.SetParent(GameObject.Find("Canvas").transform);
+            cageList[i].transform.localPosition = 
+                new Vector3(
+                    90.0f * (i % 3 - 1),
+                    90.0f * (i / 3 - 2) - 20.0f,
+                    cageList[i].transform.position.z);
+        }
+
+
     }
 
-    IEnumerator UpdateCage()
+    public AnimalStatusManager GetAnimal(string name)
     {
-        while(true)
+        foreach(GameObject cage in cageList)
         {
+            var animalStatusManager = cage.GetComponent<AnimalStatusManager>();
+            if (!animalStatusManager.IsActive)
+                continue;
+            if (animalStatusManager.Status.Name != name)
+                continue;
 
-
-            yield return null;
+            return animalStatusManager;
         }
+
+        Debug.Log("error : [" + name + "] の動物は動物園に存在しません orz");
+
+        return null;
+    }
+
+    public void Swap(int i, int k)
+    {
+        GameObject cage = cageList[i];
+        cageList[i] = cageList[k];
+        cageList[k] = cage;
     }
 }
