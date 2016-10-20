@@ -13,6 +13,7 @@ GameObject:
   - 114: {fileID: 11473708}
   - 114: {fileID: 11460072}
   - 114: {fileID: 11480820}
+  - 114: {fileID: 11429882}
   m_Layer: 5
   m_Name: Cage
   m_TagString: Untagged
@@ -20,6 +21,17 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &11429882
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 157036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14e85ad01bc77994695eb7a6084cafc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11445934
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -98,7 +110,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 11445934}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11429882}
+        m_MethodName: GoRaise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &11480820
