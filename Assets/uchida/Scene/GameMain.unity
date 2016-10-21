@@ -241,7 +241,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 202092483}
-        m_MethodName: DisplayMenu
+        m_MethodName: CreateWindow
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -296,9 +296,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 202092478}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14e85ad01bc77994695eb7a6084cafc1, type: 3}
+  m_Script: {fileID: 11500000, guid: 61e645801ea4f264b8dd0276ad1e295d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  window: {fileID: 142514, guid: ca0111001f77da54589770ca4f7b4eca, type: 2}
 --- !u!1 &273853480
 GameObject:
   m_ObjectHideFlags: 0
@@ -838,46 +839,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1417839625}
---- !u!1 &1473349993
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1473349995}
-  - 114: {fileID: 1473349994}
-  m_Layer: 0
-  m_Name: MenuManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1473349994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1473349993}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73d8892b2fa35254f94538d071127fd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  menu: {fileID: 142514, guid: ca0111001f77da54589770ca4f7b4eca, type: 2}
---- !u!4 &1473349995
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1473349993}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 42.28112, y: 230.93814, z: 17.666077}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
 --- !u!1 &1475422135
 GameObject:
   m_ObjectHideFlags: 0
@@ -1037,7 +998,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1749005310}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 817629a42b1f8984c9576cc9bf17d013, type: 3}
+  m_Script: {fileID: 11500000, guid: 565359693ddb4784399b55f82a8a05c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cageList: []
@@ -1082,7 +1043,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bc488107046dc649adc554cebe83cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cageManager: {fileID: 0}
+  cageManager: {fileID: 1749005310}
 --- !u!4 &1789789391
 Transform:
   m_ObjectHideFlags: 0
@@ -1094,7 +1055,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
 --- !u!1 &1871177773
 GameObject:
   m_ObjectHideFlags: 0

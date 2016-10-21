@@ -11,9 +11,9 @@ GameObject:
   - 222: {fileID: 22236364}
   - 114: {fileID: 11445934}
   - 114: {fileID: 11473708}
-  - 114: {fileID: 11460072}
-  - 114: {fileID: 11480820}
-  - 114: {fileID: 11429882}
+  - 114: {fileID: 11480216}
+  - 114: {fileID: 11410428}
+  - 114: {fileID: 11432798}
   m_Layer: 5
   m_Name: Cage
   m_TagString: Untagged
@@ -21,7 +21,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &11429882
+--- !u!114 &11410428
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -29,9 +29,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 157036}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14e85ad01bc77994695eb7a6084cafc1, type: 3}
+  m_Script: {fileID: 11500000, guid: 61e645801ea4f264b8dd0276ad1e295d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11432798
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 157036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a95d3d5c8e7a34fabd14fba72beb18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationDataList: []
+  animationType: 0
 --- !u!114 &11445934
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -59,19 +72,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &11460072
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 157036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3f9405ada2f04d489f99a79062ab3b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animationDataList: []
-  animationType: 0
 --- !u!114 &11473708
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11429882}
+      - m_Target: {fileID: 0}
         m_MethodName: GoRaise
         m_Mode: 1
         m_Arguments:
@@ -124,7 +124,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &11480820
+--- !u!114 &11480216
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -132,7 +132,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 157036}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92c1580069c98984f983f6e13bb285ad, type: 3}
+  m_Script: {fileID: 11500000, guid: 716dd8adc5fe0364e803950a72c8c8b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!222 &22236364

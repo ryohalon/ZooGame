@@ -3,14 +3,17 @@ using System.Collections;
 
 public class OnClickEvent : MonoBehaviour
 {
-    public void HideMenu()
+    [SerializeField]
+    private GameObject window = null;
+
+    public void DeleteWindow()
     {
-        GameObject.Find("MenuManager").GetComponent<MenuManager>().DestroyMenu();
+        Destroy(GameObject.Find(window.name));
     }
 
-    public void DisplayMenu()
+    public void CreateWindow()
     {
-        GameObject.Find("MenuManager").GetComponent<MenuManager>().CreateMenu();
+        Instantiate(window);
     }
 
     public void GoShop()
