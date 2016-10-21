@@ -6,7 +6,7 @@ public class SceneChanger : MonoBehaviour
 {
     public string NextSceneName;
 
-    void OnMouseDown()
+    public void TouchButton()
     {
         SceneManager.LoadScene(NextSceneName);
     }
