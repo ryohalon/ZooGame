@@ -1,0 +1,70 @@
+﻿;チュートリアル用スクリプトファイル
+
+;メッセージ表示
+[showmessage]
+
+
+
+;ゲーム作成で便利なマクロ集
+[call file=wide/libs/utils]
+[text_new name=_sp_chara_name layer=ui x="-168" y=-108.5 val="" color="DDFF00" fontsize=16 anchor="MiddleLeft"]
+[text_show name="_sp_chara_name"]
+
+;背景の新規定義
+[bg_new storage="room"]
+
+;背景の表示
+[bg_show ]
+
+[wait time=2]
+
+
+
+あ[p]
+
+い[p]
+う[l]え[p]
+お[r]
+ああああ[p]
+
+
+;背景移動のスクリプト
+;ガタガタ[p]
+;廊下で物音がする。[p]
+;誰か来たのかな？[p]
+
+;[bg_mod storage="rouka" time=0.5]
+
+;誰もいない。。。[p]
+;気のせいだったか[p]
+;教室にもどろう[p]
+
+;[bg_mod storage="room" time=2]
+
+;キャラクターの宣言 
+[chara_new name=yuko storage=yuko1 scale="2" y=-1 jname=ゆうこ jcolor="#249390" ] 
+[chara_face name=yuko face="nico" storage="yuko2" ]
+
+;キャラクターを表示
+[show name=yuko]
+
+#プレイヤー
+おはよう。[p]
+
+[chara_mod name="yuko" face="nico"]
+#yuko
+おはよう。[p]
+
+#俺
+あ[p]
+
+[chara_mod name="yuko" face="default"]
+#yuko
+い[p]
+
+;新しいキャラクターを追加
+;[chara_new name="haruko" storage="haruko1" scale=2 y=-1 x=6 jname=はるこ jcolor="#FFE4E1"] 
+;[show name="haruko"]
+
+;#haruko
+;おはようー。
