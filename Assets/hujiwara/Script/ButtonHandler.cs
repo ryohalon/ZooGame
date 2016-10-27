@@ -19,4 +19,11 @@ public class ButtonHandler : MonoBehaviour
             window.SetActive(false);
         }
     }
+
+    public void TapTab()
+    {
+        var sibling = window.GetComponent<Transform>();
+
+        sibling.transform.SetAsLastSibling();
+    }
 }
