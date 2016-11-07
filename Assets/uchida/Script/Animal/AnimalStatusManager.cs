@@ -33,10 +33,39 @@ public class AnimalStatusManager : MonoBehaviour
         public Sexuality Sexuality { get; set; }
         // レア度
         public int Rarity { get; set; }
+        // 檻の番号
+        // 控えは99
+        public int CageID { get; set; }
     }
-    public AnimalStatus Status { get; set; }
+    public AnimalStatus status;
 
+    // 購入してあるか
+    public bool IsPurchase { get; set; }
+    // 檻に入っているかどうか
     public bool IsActive { get; set; }
+
+
+    void Start()
+    {
+        InitStatus();
+    }
+
+    void InitStatus()
+    {
+        status.ID = 99;
+        status.Name = "***";
+        status.PurchasePrice = 0;
+        status.FoodCost = 0;
+        status.SatietyLevel = 100;
+        status.LoveDegree = 1;
+        status.NextLevel = 0;
+        status.AttractVisitors = 0;
+        status.Ratio = 1.0f;
+        status.Sexuality = Sexuality.MALE;
+        status.Rarity = 1;
+        IsPurchase = false;
+        IsActive = false;
+    }
 
 
     // 経過した時間分の来場客数の計算
@@ -45,21 +74,8 @@ public class AnimalStatusManager : MonoBehaviour
     //＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
     public int GetVisitors(float elapsedTime)
     {
-        float visitors = (float)Status.AttractVisitors * Status.Ratio* elapsedTime;
+        float visitors = (float)status.AttractVisitors * status.Ratio* elapsedTime;
 
         return (int)visitors;
-    }
-
-
-    // 動物の配置入れ替え
-    // 返り値で帰ってくるので、ステータスを渡した側は返り値で変更する
-    // 使わない可能性(大)
-    public AnimalStatus Swap(AnimalStatus status1)
-    {
-        var status2 = this.GetComponent<AnimalStatusManager>().Status;
-        AnimalStatus status3 = status2;
-        status2 = status1;
-
-        return status3;
     }
 }
