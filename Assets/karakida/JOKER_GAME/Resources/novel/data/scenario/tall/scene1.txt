@@ -6,7 +6,7 @@
 
 
 ;ゲーム作成で便利なマクロ集
-[call file=wide/libs/utils]
+[call file=tall/libs/utils]
 [text_new name=_sp_chara_name layer=ui x="-168" y=-108.5 val="" color="DDFF00" fontsize=16 anchor="MiddleLeft"]
 [text_show name="_sp_chara_name"]
 
@@ -20,47 +20,49 @@
 
 
 
-あ[p]
+;あ[p]
 
-い[p]
-う[l]え[p]
-お[r]
-ああああ[p]
+;い[p]
+;う[l]え[p]
+;お[r]
+;ああああ[p]
 
 
-;背景移動のスクリプト
-;ガタガタ[p]
-;廊下で物音がする。[p]
-;誰か来たのかな？[p]
 
-;[bg_mod storage="rouka" time=0.5]
-
-;誰もいない。。。[p]
-;気のせいだったか[p]
-;教室にもどろう[p]
-
-;[bg_mod storage="room" time=2]
 
 ;キャラクターの宣言 
-[chara_new name=yuko storage=yuko1 scale="2" y=-1 jname=ゆうこ jcolor="#249390" ] 
+[chara_new name=yuko storage=yuko1 scale="1.3" y=-0.3 x=-1 jname=ゆうこ jcolor="FF77FF" ] 
 [chara_face name=yuko face="nico" storage="yuko2" ]
+[chara_new name="haruko" storage="haruko1" scale="1.3" y=-0.3 x=1.75 jname=はるこ jcolor="#FFE4E1"] 
+[show name="haruko"]
+
+@chara_pos name="yuko" x=0 y=-0.7
+
 
 ;キャラクターを表示
 [show name=yuko]
 
-#プレイヤー
-おはよう。[p]
+#haruko
+おはようー。[p]
+
+;#プレイヤー
+;おはよう。[p]
 
 [chara_mod name="yuko" face="nico"]
 #yuko
 おはよう。[p]
 
-#俺
+#プレイヤー
 あ[p]
 
 [chara_mod name="yuko" face="default"]
 #yuko
 い[p]
+う[p]
+え[p]
+お[p]
+
+
 
 ;新しいキャラクターを追加
 ;[chara_new name="haruko" storage="haruko1" scale=2 y=-1 x=6 jname=はるこ jcolor="#FFE4E1"] 
