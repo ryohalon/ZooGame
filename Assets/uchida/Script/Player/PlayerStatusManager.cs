@@ -11,7 +11,7 @@ public class PlayerStatusManager : MonoBehaviour
 
     // 動物の檻のリスト
     [SerializeField]
-    private GameObject cageManager = null;
+    private GameObject AnimalListManager = null;
 
     // 動物園の名前
     // これがないとモチベが上がらんしょ
@@ -111,13 +111,13 @@ public class PlayerStatusManager : MonoBehaviour
     // 経過時間でやってきたお客さんの総数
     private int GetElapsedTimeVisitors(float elapsedTime)
     {
-        var cageList = cageManager.GetComponent<CageManager>().cageList;
+        var animalList = AnimalListManager.GetComponent<AnimalListManager>().animalList;
 
         int totalVisitors = 0;
-        foreach(var cage in cageList)
+        foreach(var animal in animalList)
         {
-            var animalStatus = cage.GetComponent<AnimalStatusManager>();
-            if (!animalStatus.IsActive)
+            var animalStatus = animal.GetComponent<AnimalStatusManager>();
+            if (animalStatus.status.CageID == 99)
                 continue;
 
             totalVisitors += animalStatus.GetVisitors(elapsedTime);

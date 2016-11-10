@@ -5,29 +5,28 @@ using System.Collections.Generic;
 
 public class AnimationManager : MonoBehaviour
 {
-    [System.Serializable]
-    struct AnimationData
+    public struct AnimationData
     {
         public float animationTime;
         public Sprite sprite;
     }
+    public List<AnimationData> animationDataList = new List<AnimationData>();
 
-    [SerializeField]
-    private List<AnimationData> animationDataList = new List<AnimationData>();
+    public bool dataOnly = false;
 
-    enum AnimationType
+    public enum AnimationType
     {
         LOOP,
         ONE_TIME,
     }
 
     [SerializeField]
-    private AnimationType animationType = AnimationType.LOOP;
-    private AnimationType prevAnimationType;
+    public AnimationType animationType = AnimationType.LOOP;
+    public AnimationType prevAnimationType;
 
-    private int nowAnimationIndex = 0;
-    private Image nowImage = null;
-    private float playingTime = 0.0f;
+    public int nowAnimationIndex = 0;
+    public Image nowImage = null;
+    public float playingTime = 0.0f;
     public bool IsPlay { get; set; }
 
 
@@ -40,6 +39,9 @@ public class AnimationManager : MonoBehaviour
 
         if (animationDataList.Count <= 0)
             Debug.Log("animationDataList is empty");
+
+        if (dataOnly)
+            return;
 
         Init();
 
