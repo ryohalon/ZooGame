@@ -13,21 +13,8 @@ public class OnClickEvent : MonoBehaviour
 
     public void CreateWindow()
     {
+        if (GameObject.Find(window.name + "(Clone)") != null)
+            return;
         Instantiate(window);
-    }
-
-    public void GoShop()
-    {
-        var sceneChanger = this.GetComponent<SceneChanger>();
-    }
-
-    public void GoTheater()
-    {
-        var sceneChanger = this.GetComponent<SceneChanger>();
-    }
-
-    public void GoRaise()
-    {
-        var sceneChanger = this.GetComponent<SceneChanger>();
     }
 }

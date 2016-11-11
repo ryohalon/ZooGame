@@ -3,47 +3,42 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-public class AnimationManager : MonoBehaviour
+public class SpriteAnimationManager : MonoBehaviour
 {
-    [System.Serializable]
-    struct AnimationData
-    {
-        public float animationTime;
-        public Sprite sprite;
-    }
+    public List<AnimationManager.AnimationData> animationDataList = new List<AnimationManager.AnimationData>();
+
+    private SpriteRenderer nowSprite = null;
 
     [SerializeField]
-    private List<AnimationData> animationDataList = new List<AnimationData>();
+    public AnimationManager.AnimationType animationType = AnimationManager.AnimationType.LOOP;
+    public AnimationManager.AnimationType prevAnimationType;
 
-    enum AnimationType
-    {
-        LOOP,
-        ONE_TIME,
-    }
-
-    [SerializeField]
-    private AnimationType animationType = AnimationType.LOOP;
-    private AnimationType prevAnimationType;
-
-    private int nowAnimationIndex = 0;
-    private Image nowImage = null;
-    private float playingTime = 0.0f;
+    public int nowAnimationIndex = 0;
+    public float playingTime = 0.0f;
     public bool IsPlay { get; set; }
-
+    public bool dataOnly = false;
 
     void Start()
     {
         IsPlay = true;
-        if (GetComponent<Image>() == null)
-            this.gameObject.AddComponent<Image>();
-        nowImage = GetComponent<Image>();
+        nowSprite = GetComponent<SpriteRenderer>();
 
-        if (animationDataList.Count <= 0)
-            Debug.Log("animationDataList is empty");
-
-        Init();
+        if (dataOnly)
+            return;
 
         StartCoroutine(UpdateAnimation());
+    }
+
+    void Init()
+    {
+        if (animationDataList.Count <= 0)
+            return;
+
+        nowAnimationIndex = 0;
+        nowSprite.sprite = animationDataList[nowAnimationIndex].sprite;
+        playingTime = 0.0f;
+        IsPlay = true;
+        prevAnimationType = animationType;
     }
 
     private IEnumerator UpdateAnimation()
@@ -61,10 +56,10 @@ public class AnimationManager : MonoBehaviour
 
                     switch (animationType)
                     {
-                        case AnimationType.LOOP:
+                        case AnimationManager.AnimationType.LOOP:
                             break;
 
-                        case AnimationType.ONE_TIME:
+                        case AnimationManager.AnimationType.ONE_TIME:
                             OneTimeAnimation();
                             break;
                         default:
@@ -79,18 +74,6 @@ public class AnimationManager : MonoBehaviour
         }
     }
 
-    public void Init()
-    {
-        if (animationDataList.Count <= 0)
-            return;
-
-        nowAnimationIndex = 0;
-        nowImage.sprite = animationDataList[nowAnimationIndex].sprite;
-        playingTime = 0.0f;
-        IsPlay = true;
-        prevAnimationType = animationType;
-    }
-
     private void LoopAnimation()
     {
         playingTime += Time.deltaTime;
@@ -99,7 +82,7 @@ public class AnimationManager : MonoBehaviour
 
         playingTime = 0.0f;
         nowAnimationIndex = (nowAnimationIndex + 1) % animationDataList.Count;
-        nowImage.sprite = animationDataList[nowAnimationIndex].sprite;
+        nowSprite.sprite = animationDataList[nowAnimationIndex].sprite;
     }
 
     private void OneTimeAnimation()
