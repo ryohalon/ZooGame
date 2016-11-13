@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class ButtonHandler : MonoBehaviour
 {
-    public GameObject window;
+    public UnityEngine.GameObject window;
 
     // 各ウィンドウボタンをタッチした時の反応
     public void SetWindowIsActive()

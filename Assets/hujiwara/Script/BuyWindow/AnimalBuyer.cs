@@ -3,13 +3,22 @@ using System.Collections;
 
 public class AnimalBuyer : MonoBehaviour
 {
-    AnimalStatusManager animalStatus;
+    public GameObject animalStatusManager;
+
+    void Start()
+    {
+        Debug.Log(animalStatusManager.GetComponent<AnimalStatusManager>().status.IsPurchase);
+    }
 
     public void Sell()
     {
-        if(!animalStatus.IsPurchase)
+        var animal = animalStatusManager.GetComponent<AnimalStatusManager>();
+
+        if(!animal.status.IsPurchase)
         {
-            animalStatus.IsPurchase = true;
+            animal.status.IsPurchase = true;
+            Debug.Log("購入しました");
+            Debug.Log(animal.status.IsPurchase);
         }
     }
 }

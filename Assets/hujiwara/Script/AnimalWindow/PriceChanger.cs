@@ -3,12 +3,43 @@ using UnityEngine.UI;
 
 public class PriceChanger : MonoBehaviour
 {
-    public FoodStatusAsset _asset;
+    public GameObject animalList;
 
-    public GameObject _gameObject;
+    public int ID;
+
+    private Text price;
+
+    private DebugShopAnimalList animal;
 
     void Start()
     {
-        gameObject.GetComponent<Text>().text = _asset._foodStatus.Price.ToString();
+       animal = animalList.GetComponent<DebugShopAnimalList>();
+        price = gameObject.GetComponent<Text>();
+
+        UpdatePriceText();
+    }
+
+    public void UpdatePriceText()
+    {
+        if (animal.animalList[ID].status.Rarity == 0)
+        {
+            price.text = "100";
+        }
+        else if (animal.animalList[ID].status.Rarity == 1)
+        {
+            price.text = "200";
+        }
+        else if (animal.animalList[ID].status.Rarity == 2)
+        {
+            price.text = "300";
+        }
+        else if (animal.animalList[ID].status.Rarity == 3)
+        {
+            price.text = "400";
+        }
+        else if (animal.animalList[ID].status.Rarity == 4)
+        {
+            price.text = "500";
+        }
     }
 }
