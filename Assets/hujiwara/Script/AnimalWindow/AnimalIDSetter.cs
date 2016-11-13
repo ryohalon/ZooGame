@@ -8,6 +8,7 @@ public class AnimalIDSetter : MonoBehaviour
     public int ID;
 
     public GameObject BuyWindowPriceText;
+    public GameObject BuyWindowYesButton;
 
     void Awake()
     {
@@ -17,7 +18,9 @@ public class AnimalIDSetter : MonoBehaviour
     public void SetID()
     {
         var buyWindowPrice = BuyWindowPriceText.GetComponent<PriceChanger>();
+        var buyWindowYesButton = BuyWindowYesButton.GetComponent<AnimalBuyer>();
         buyWindowPrice.ID = ID;
+        buyWindowYesButton.ID = ID;
 
         buyWindowPrice.UpdatePriceText();
     }

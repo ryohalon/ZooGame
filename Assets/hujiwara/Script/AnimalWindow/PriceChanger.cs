@@ -14,9 +14,9 @@ public class PriceChanger : MonoBehaviour
     void Start()
     {
        animal = animalList.GetComponent<DebugShopAnimalList>();
-        price = gameObject.GetComponent<Text>();
+       price = gameObject.GetComponent<Text>();
 
-        UpdatePriceText();
+       UpdatePriceText();
     }
 
     public void UpdatePriceText()

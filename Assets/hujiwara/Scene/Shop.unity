@@ -379,7 +379,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae5e9a98a64cebb4a99d0bed00d4d7a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animalStatusManager: {fileID: 0}
+  animalList: {fileID: 1717796863}
+  ID: 0
 --- !u!1 &54430912
 GameObject:
   m_ObjectHideFlags: 0
@@ -1175,6 +1176,7 @@ MonoBehaviour:
   animalList: {fileID: 1717796863}
   ID: 0
   BuyWindowPriceText: {fileID: 255215516}
+  BuyWindowYesButton: {fileID: 37534038}
 --- !u!1 &311891319
 GameObject:
   m_ObjectHideFlags: 0
@@ -2611,6 +2613,7 @@ MonoBehaviour:
   animalList: {fileID: 1717796863}
   ID: 1
   BuyWindowPriceText: {fileID: 255215516}
+  BuyWindowYesButton: {fileID: 37534038}
 --- !u!114 &1082222903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3304,6 +3307,7 @@ MonoBehaviour:
   animalList: {fileID: 1717796863}
   ID: 2
   BuyWindowPriceText: {fileID: 255215516}
+  BuyWindowYesButton: {fileID: 37534038}
 --- !u!1 &1303087511
 GameObject:
   m_ObjectHideFlags: 0
@@ -4607,7 +4611,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1742712055
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4897,6 +4901,7 @@ MonoBehaviour:
   animalList: {fileID: 1717796863}
   ID: 3
   BuyWindowPriceText: {fileID: 255215516}
+  BuyWindowYesButton: {fileID: 37534038}
 --- !u!1001 &1963791134
 Prefab:
   m_ObjectHideFlags: 0
