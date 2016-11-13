@@ -33,6 +33,5 @@ public class DebugShopAnimalList : MonoBehaviour
             animalList[i].status.Rarity = i;
             animalList[i].status.IsPurchase = false;
         }
-
     }
 }

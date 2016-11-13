@@ -10,14 +10,9 @@ public class AnimalIDSetter : MonoBehaviour
     public GameObject BuyWindowPriceText;
     public GameObject BuyWindowYesButton;
 
-    void Awake()
-    {
-
-    }
-
     public void SetID()
     {
-        var buyWindowPrice = BuyWindowPriceText.GetComponent<PriceChanger>();
+        var buyWindowPrice = BuyWindowPriceText.GetComponent<AnimalPriceChanger>();
         var buyWindowYesButton = BuyWindowYesButton.GetComponent<AnimalBuyer>();
         buyWindowPrice.ID = ID;
         buyWindowYesButton.ID = ID;
