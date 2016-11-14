@@ -6,7 +6,7 @@ public class TextChanger : MonoBehaviour
 {
     Text _price;
 
-    public FoodStatusAsset _food;
+    public GameObject animalList;
 
     void Start()
     {
@@ -16,9 +16,6 @@ public class TextChanger : MonoBehaviour
 
     public void UpdateFoodStatusAsset()
     {
-        if (_food != null && _price)
-        {
-            _price.text = _food._foodStatus.Price.ToString();
-        }
+        
     }
 }
