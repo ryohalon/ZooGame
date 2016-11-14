@@ -5,16 +5,17 @@ public class AnimalPriceChanger : MonoBehaviour
 {
     public GameObject animalList;
 
-    public int ID;
+    public int ID = 0;
 
-    private Text price;
+    public int price;
+    private Text priceText;
 
     private DebugShopAnimalList animal;
 
     void Start()
     {
        animal = animalList.GetComponent<DebugShopAnimalList>();
-       price = gameObject.GetComponent<Text>();
+       priceText = gameObject.GetComponent<Text>();
 
        UpdatePriceText();
     }
@@ -23,23 +24,28 @@ public class AnimalPriceChanger : MonoBehaviour
     {
         if (animal.animalList[ID].status.Rarity == 0)
         {
-            price.text = "100";
+            price = animal.animalList[ID].status.PurchasePrice;
+            priceText.text = price.ToString();
         }
         else if (animal.animalList[ID].status.Rarity == 1)
         {
-            price.text = "200";
+            price = animal.animalList[ID].status.PurchasePrice;
+            priceText.text = price.ToString();
         }
         else if (animal.animalList[ID].status.Rarity == 2)
         {
-            price.text = "300";
+            price = animal.animalList[ID].status.PurchasePrice;
+            priceText.text = price.ToString();
         }
         else if (animal.animalList[ID].status.Rarity == 3)
         {
-            price.text = "400";
+            price = animal.animalList[ID].status.PurchasePrice;
+            priceText.text = price.ToString();
         }
         else if (animal.animalList[ID].status.Rarity == 4)
         {
-            price.text = "500";
+            price = animal.animalList[ID].status.PurchasePrice;
+            priceText.text = price.ToString();
         }
     }
 }

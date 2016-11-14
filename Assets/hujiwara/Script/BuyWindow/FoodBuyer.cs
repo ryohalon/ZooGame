@@ -20,9 +20,4 @@ public class FoodBuyer : MonoBehaviour
             food.foodList[ID].status_.possession += 1;
         }
     }
-
-    void Update()
-    {
-        Debug.Log(food.foodList[ID].status_.possession);
-    }
 }

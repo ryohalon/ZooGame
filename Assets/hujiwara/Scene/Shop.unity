@@ -1185,6 +1185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animalList: {fileID: 1717796863}
   ID: 0
+  price: 0
 --- !u!1 &279542490
 GameObject:
   m_ObjectHideFlags: 0
@@ -1289,6 +1290,45 @@ MonoBehaviour:
   ID: 0
   BuyWindowPriceText: {fileID: 255215516}
   BuyWindowYesButton: {fileID: 37534038}
+--- !u!1 &317615409
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 317615411}
+  - 114: {fileID: 317615410}
+  m_Layer: 0
+  m_Name: WindowSizeSetter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &317615410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 317615409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c1447d01f24dd1469e20954b6007df8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &317615411
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 317615409}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 156.7349, y: 126.839066, z: -6.903595}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
 --- !u!1 &332260746
 GameObject:
   m_ObjectHideFlags: 0
@@ -1347,6 +1387,7 @@ MonoBehaviour:
   ID: 4
   BuyWindowPriceText: {fileID: 1751078404}
   BuyWidnowYesButton: {fileID: 375981840}
+  BuyWindowTotalText: {fileID: 1943613244}
 --- !u!1 &375981840
 GameObject:
   m_ObjectHideFlags: 0
@@ -1725,6 +1766,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animalList: {fileID: 1717796863}
   ID: 0
+  price: 0
 --- !u!1 &423665886 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 168036, guid: ceecbe8d8e92f684e9b9159ddd6bf1fd, type: 2}
@@ -1742,6 +1784,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animalList: {fileID: 1717796863}
   ID: 2
+  price: 0
 --- !u!1 &430477766
 GameObject:
   m_ObjectHideFlags: 0
@@ -1829,6 +1872,7 @@ MonoBehaviour:
   ID: 5
   BuyWindowPriceText: {fileID: 1751078404}
   BuyWidnowYesButton: {fileID: 375981840}
+  BuyWindowTotalText: {fileID: 1943613244}
 --- !u!1001 &464842517
 Prefab:
   m_ObjectHideFlags: 0
@@ -2481,11 +2525,80 @@ MonoBehaviour:
   ID: 2
   BuyWindowPriceText: {fileID: 1751078404}
   BuyWidnowYesButton: {fileID: 375981840}
+  BuyWindowTotalText: {fileID: 1943613244}
 --- !u!224 &665435351 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 22480930, guid: d1f55e8685033684995bbbf83d382000,
     type: 2}
   m_PrefabInternal: {fileID: 1387601322}
+--- !u!1 &694610644
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 694610645}
+  - 222: {fileID: 694610647}
+  - 114: {fileID: 694610646}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &694610645
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 694610644}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1487958411}
+  m_Father: {fileID: 1663972711}
+  m_RootOrder: 4
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -190}
+  m_SizeDelta: {x: 250, y: 120}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &694610646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 694610644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.5147059, g: 0.5147059, b: 0.5147059, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 7991106fe6669c44088c438340392030, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &694610647
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 694610644}
 --- !u!224 &713585151 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 22450158, guid: 7388a2a4f2efd81459f6191d1829ca69,
@@ -2663,6 +2776,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodList: {fileID: 2101130048}
   ID: 4
+  price: 0
 --- !u!1001 &824137241
 Prefab:
   m_ObjectHideFlags: 0
@@ -3080,6 +3194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodList: {fileID: 2101130048}
   ID: 0
+  price: 0
 --- !u!224 &1041664202 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 22488300, guid: 37489b1875a47a0499e8e44defde585b,
@@ -3853,6 +3968,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodList: {fileID: 2101130048}
   ID: 5
+  price: 0
 --- !u!1 &1212015595 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 118334, guid: f1403a9dfb3e80c46a864a2b56f3f9ec, type: 2}
@@ -3872,6 +3988,7 @@ MonoBehaviour:
   ID: 1
   BuyWindowPriceText: {fileID: 1751078404}
   BuyWidnowYesButton: {fileID: 375981840}
+  BuyWindowTotalText: {fileID: 1943613244}
 --- !u!1 &1242285277
 GameObject:
   m_ObjectHideFlags: 0
@@ -4250,6 +4367,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodList: {fileID: 2101130048}
   ID: 3
+  price: 0
 --- !u!1 &1385948228
 GameObject:
   m_ObjectHideFlags: 0
@@ -4485,6 +4603,7 @@ MonoBehaviour:
   ID: 3
   BuyWindowPriceText: {fileID: 1751078404}
   BuyWidnowYesButton: {fileID: 375981840}
+  BuyWindowTotalText: {fileID: 1943613244}
 --- !u!224 &1415786179 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 22491218, guid: 7388a2a4f2efd81459f6191d1829ca69,
@@ -4642,6 +4761,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodList: {fileID: 2101130048}
   ID: 2
+  price: 0
 --- !u!1 &1428252239
 GameObject:
   m_ObjectHideFlags: 0
@@ -4909,6 +5029,79 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1466140774}
+--- !u!1 &1487958410
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 1487958411}
+  - 222: {fileID: 1487958413}
+  - 114: {fileID: 1487958412}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1487958411
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1487958410}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 694610645}
+  m_RootOrder: 0
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1487958412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1487958410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 22
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "\u304A\u3082\u3061\u3083\u4E00\u89A7"
+--- !u!222 &1487958413
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1487958410}
 --- !u!224 &1511884175 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 22480930, guid: d1f55e8685033684995bbbf83d382000,
@@ -5004,6 +5197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animalList: {fileID: 1717796863}
   ID: 1
+  price: 0
 --- !u!1 &1552632254
 GameObject:
   m_ObjectHideFlags: 0
@@ -5089,6 +5283,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animalList: {fileID: 1717796863}
   ID: 3
+  price: 0
 --- !u!1 &1623267451
 GameObject:
   m_ObjectHideFlags: 0
@@ -5310,6 +5505,7 @@ RectTransform:
   - {fileID: 1511884175}
   - {fileID: 665435351}
   - {fileID: 1041664202}
+  - {fileID: 694610645}
   m_Father: {fileID: 2102833846}
   m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -5407,6 +5603,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodList: {fileID: 2101130048}
   ID: 1
+  price: 0
 --- !u!1 &1692936177
 GameObject:
   m_ObjectHideFlags: 0
@@ -5912,6 +6109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodList: {fileID: 2101130048}
   ID: 0
+  price: 0
 --- !u!1 &1754883471 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 118334, guid: f1403a9dfb3e80c46a864a2b56f3f9ec, type: 2}
@@ -5931,6 +6129,7 @@ MonoBehaviour:
   ID: 0
   BuyWindowPriceText: {fileID: 1751078404}
   BuyWidnowYesButton: {fileID: 375981840}
+  BuyWindowTotalText: {fileID: 1943613244}
 --- !u!224 &1763158548 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 22464580, guid: 614308693afb60a46af6cce1d9c61172,
@@ -6089,7 +6288,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 161366, guid: 7388a2a4f2efd81459f6191d1829ca69, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11413798, guid: 7388a2a4f2efd81459f6191d1829ca69, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -6247,6 +6446,7 @@ GameObject:
   - 224: {fileID: 1943613245}
   - 222: {fileID: 1943613247}
   - 114: {fileID: 1943613246}
+  - 114: {fileID: 1943613248}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -6310,6 +6510,21 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1943613244}
+--- !u!114 &1943613248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1943613244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cc946fb878d8c046ba3f3893e5a9919, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodList: {fileID: 2101130048}
+  price: 0
+  number: 1
+  ID: 0
 --- !u!1001 &1963791134
 Prefab:
   m_ObjectHideFlags: 0
@@ -6452,7 +6667,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 121310, guid: 37489b1875a47a0499e8e44defde585b, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 37489b1875a47a0499e8e44defde585b, type: 2}

@@ -8,14 +8,15 @@ public class FoodPriceChanger : MonoBehaviour
 
     public int ID;
 
-    private Text price;
+    public int price;
+    private Text priceText;
 
     private DebugFoodList food;
 
     void Start()
     {
         food = foodList.GetComponent<DebugFoodList>();
-        price = gameObject.GetComponent<Text>();
+        priceText = gameObject.GetComponent<Text>();
 
         UpdatePriceText();
     }
@@ -24,15 +25,18 @@ public class FoodPriceChanger : MonoBehaviour
     {
         if(food.foodList[ID].status_.grade == 0)
         {
-            price.text = "100";
+            price = 100;
+            priceText.text = price.ToString();
         }
         else if(food.foodList[ID].status_.grade == 1)
         {
-            price.text = "200";
+            price = 200;
+            priceText.text = price.ToString();
         }
         else if(food.foodList[ID].status_.grade == 2)
         {
-            price.text = "300";
+            price = 300;
+            priceText.text = price.ToString();
         }
     }
 }

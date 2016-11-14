@@ -32,6 +32,9 @@ public class DebugShopAnimalList : MonoBehaviour
             animalList[i].status.ID = i;
             animalList[i].status.Rarity = i;
             animalList[i].status.IsPurchase = false;
+            animalList[i].status.PurchasePrice = (i + 1) * 100;
         }
+
+        
     }
 }

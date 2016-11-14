@@ -8,14 +8,18 @@ public class FoodIDSetter : MonoBehaviour
 
     public GameObject BuyWindowPriceText;
     public GameObject BuyWidnowYesButton;
+    public GameObject BuyWindowTotalText;
 
     public void SetID()
     {
         var buyWinowPrice = BuyWindowPriceText.GetComponent<FoodPriceChanger>();
         var buyWindowYesButton = BuyWidnowYesButton.GetComponent<FoodBuyer>();
+        var buyWindowTotalText = BuyWindowTotalText.GetComponent<TotalMoney>();
         buyWinowPrice.ID = ID;
         buyWindowYesButton.ID = ID;
+        buyWindowTotalText.ID = ID;
 
         buyWinowPrice.UpdatePriceText();
+        buyWindowTotalText.UpdateTotalMoneyText();
     }
 }
