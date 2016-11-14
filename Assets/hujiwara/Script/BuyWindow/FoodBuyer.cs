@@ -6,7 +6,7 @@ public class FoodBuyer : MonoBehaviour
     public GameObject foodList;
     public int ID;
 
-    private DebugFoodList food;
+    public DebugFoodList food;
 
     void Awake()
     {
@@ -17,7 +17,7 @@ public class FoodBuyer : MonoBehaviour
     {
         if(food.foodList[ID].CanPurchase(1000))
         {
-            food.foodList[ID].status_.possession += 1;
+            food.foodList[ID].Buy();
         }
     }
 }

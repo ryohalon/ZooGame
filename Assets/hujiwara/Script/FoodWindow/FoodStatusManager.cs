@@ -30,6 +30,16 @@ public class FoodStatusManager : MonoBehaviour
     }
     public FoodStatus status_;
 
+    public void Buy()
+    {
+        status_.possession += 1;
+    }
+
+    public void Use()
+    {
+        status_.possession -= 1;
+    }
+
     // 購入可能か
     public bool CanPurchase(int handMoney)
     {
