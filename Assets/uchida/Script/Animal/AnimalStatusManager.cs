@@ -24,9 +24,9 @@ public class AnimalStatusManager : MonoBehaviour
         // 集客数
         public int AttractVisitors { get; set; }
         // 愛情度
-        public int LoveDegree { get; set; }
+        public float LoveDegree { get; set; }
         // 満腹度
-        public int SatietyLevel { get; set; }
+        public float SatietyLevel { get; set; }
         // おもちゃ
         public int ToyID { get; set; }
         // 購入してあるか
@@ -54,8 +54,8 @@ public class AnimalStatusManager : MonoBehaviour
         status.FoodType = 0;
         status.Rarity = 1;
         status.AttractVisitors = 0;
-        status.LoveDegree = 1;
-        status.SatietyLevel = 100;
+        status.LoveDegree = 1.0f;
+        status.SatietyLevel = 100.0f;
         status.ToyID = 0;
 
         status.IsPurchase = false;
