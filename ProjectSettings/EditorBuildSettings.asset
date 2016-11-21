@@ -4,4 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/adachi/Scene/Title.unity
+  - enabled: 1
+    path: Assets/uchida/Scene/GameMain.unity
+  - enabled: 1
+    path: Assets/nunomura/Scene/Raise.unity
+  - enabled: 1
+    path: Assets/karakida/Scene/Story.unity
+  - enabled: 1
+    path: Assets/hujiwara/Scene/Shop.unity
