@@ -14,6 +14,11 @@ public class NotActiveAnimals : MonoBehaviour
     public bool is_select = false;
     public float distance = 5.0f;
 
+    void Awake()
+    {
+        is_select = false;
+    }
+
     void Start()
     {
         if (cage == null)
@@ -22,6 +27,7 @@ public class NotActiveAnimals : MonoBehaviour
             return;
         }
 
+        distance = 10.0f + cage.GetComponent<RectTransform>().rect.width;
         CreateCage();
 
         if (animalListManager == null)
@@ -46,17 +52,21 @@ public class NotActiveAnimals : MonoBehaviour
                 continue;
 
             cageList.Add(Instantiate(cage));
+            cageList[cageList.Count - 1].transform.SetParent(GameObject.Find("Canvas").transform);
             cageList[cageList.Count - 1].GetComponent<CageManager>().animalID = animalStatus.status.ID;
-            cageList[cageList.Count - 1].transform.localScale = new Vector3(0.75f, 0.75f, 1.0f);
-            cageList[cageList.Count - 1].GetComponent<SpriteAnimationManager>().animationDataList =
-                animal.GetComponent<SpriteAnimationManager>().animationDataList;
+            cageList[cageList.Count - 1].transform.localScale = Vector3.one;
+            cageList[cageList.Count - 1].GetComponent<AnimationManager>().animationDataList =
+                animal.GetComponent<AnimationManager>().animationDataList;
+            cageList[cageList.Count - 1].GetComponent<PushDownObject>().pushOnly = true;
+            cageList[cageList.Count - 1].GetComponent<DragObject>().isDrag = false;
+            cageList[cageList.Count - 1].GetComponent<DropObject>().isDrop = false;
         }
 
         for (int i = 0; i < cageList.Count; i++)
         {
-            cageList[i].transform.position =
-                new Vector3(distance * (-i % 3 + 1),
-                distance * (-i / 3 + 2),
+            cageList[i].transform.localPosition =
+                new Vector3(distance * (i % 3 - 1),
+                distance * (-i / 3 + 1) + 25.0f,
                 22.0f);
         }
     }
@@ -73,25 +83,24 @@ public class NotActiveAnimals : MonoBehaviour
 
     private void SelectAnimal()
     {
-        if (!Input.GetMouseButtonDown(0))
+        if (is_select)
             return;
 
         foreach (var cage in cageList)
         {
-            if (!cage.GetComponent<Collision>().IsHit(GetComponent<RayCollision>().HitRayPosCameraToMouse()))
-                continue;
-
-            selectID = cage.GetComponent<CageManager>().animalID;
-            is_select = true;
-            break;
+            var pushDownObject = cage.GetComponent<PushDownObject>();
+            if (pushDownObject.isPushed)
+            {
+                selectID = cage.GetComponent<CageManager>().animalID;
+                is_select = true;
+                break;
+            }
         }
 
-        if(!is_select)
+        var backPushDownOject = transform.GetChild(0).gameObject.GetComponent<PushDownObject>();
+        if (backPushDownOject.isPushed)
         {
-            var back = transform.GetChild(0).gameObject;
-
-           if(back.GetComponent<Collision>().IsHit(GetComponent<RayCollision>().HitRayPosCameraToMouse()))
-                is_select = true;
+            is_select = true;
         }
 
         if (is_select)
@@ -99,6 +108,33 @@ public class NotActiveAnimals : MonoBehaviour
             foreach (var cage in cageList)
                 Destroy(cage);
         }
+
+        //if (!Input.GetMouseButtonDown(0))
+        //    return;
+
+        //foreach (var cage in cageList)
+        //{
+        //    if (!cage.GetComponent<Collision>().IsHit(GetComponent<RayCollision>().HitRayPosCameraToMouse()))
+        //        continue;
+
+        //    selectID = cage.GetComponent<CageManager>().animalID;
+        //    is_select = true;
+        //    break;
+        //}
+
+        //if(!is_select)
+        //{
+        //    var back = transform.GetChild(0).gameObject;
+
+        //   if(back.GetComponent<Collision>().IsHit(GetComponent<RayCollision>().HitRayPosCameraToMouse()))
+        //        is_select = true;
+        //}
+
+        //if (is_select)
+        //{
+        //    foreach (var cage in cageList)
+        //        Destroy(cage);
+        //}
 
     }
 }
