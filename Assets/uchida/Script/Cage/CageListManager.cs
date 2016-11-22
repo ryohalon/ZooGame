@@ -63,6 +63,7 @@ public class CageListManager : MonoBehaviour
     {
         if (touchType != TouchType.PRESS)
             return;
+        GetComponent<SceneChanger>().NextSceneName = "TestTraining";
         GetComponent<SceneChanger>().TouchButton();
     }
 
@@ -111,61 +112,8 @@ public class CageListManager : MonoBehaviour
             {
                 touchType = TouchType.PRESS;
                 pushDownPbject.isPressed = false;
-                animalListManager.GetComponent<AnimalListManager>().animalList[changeCageID].GetComponent<AnimalStatusManager>().IsRaise = true;
+                animalListManager.GetComponent<AnimalListManager>().animalList[i].GetComponent<AnimalStatusManager>().IsRaise = true;
             }
-
-            //if (cageList[i].GetComponent<Collision>().IsHit(Input.mousePosition))
-            //{
-            //    Debug.Log("cage : " + i);
-
-            //    if (!is_push)
-            //    {
-            //        if (Input.GetMouseButtonDown(0))
-            //        {
-            //            is_push = true;
-            //            prevMouseDown = true;
-            //            changeCageID = i;
-            //        }
-
-            //        break;
-            //    }
-
-            //    if (Input.GetMouseButton(0))
-            //    {
-            //        if (pressTime < maxPressTime)
-            //        {
-            //            pressTime = Mathf.Min(maxPressTime, pressTime + Time.deltaTime);
-            //            break;
-            //        }
-
-            //        if (pressTime == maxPressTime)
-            //        {
-            //            if (animalListManager.GetComponent<AnimalListManager>().animalList.Count > 0)
-            //                animalListManager.GetComponent<AnimalListManager>().animalList[changeCageID].GetComponent<AnimalStatusManager>().IsRaise = true;
-            //            touchType = TouchType.PRESS;
-            //            pressTime = 0.0f;
-            //            prevMouseDown = false;
-            //            Debug.Log("touchType : " + touchType);
-            //            Debug.Log("changeCageID : " + changeCageID);
-            //            break;
-            //        }
-            //    }
-
-            //    if (Input.GetMouseButtonUp(0))
-            //    {
-            //        touchType = TouchType.TOUCH;
-            //        pressTime = 0.0f;
-            //        prevMouseDown = false;
-            //        Debug.Log("touchType : " + touchType);
-            //        Debug.Log("changeCageID : " + changeCageID);
-
-            //        Instantiate(notActiveAnimals);
-
-            //        break;
-            //    }
-
-            //    break;
-            //}
         }
     }
 

@@ -12,7 +12,6 @@ GameObject:
   - 114: {fileID: 11445934}
   - 114: {fileID: 11432798}
   - 114: {fileID: 11466190}
-  - 114: {fileID: 11406834}
   - 61: {fileID: 6135916}
   - 114: {fileID: 11438954}
   - 114: {fileID: 11477214}
@@ -55,18 +54,6 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
---- !u!114 &11406834
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 157036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 268b3c9e9dc0a08488ed333b0efec9ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  size: 0
 --- !u!114 &11416818
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -78,6 +65,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82ba8538bb5a48d4b99109fdc4258463, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pushOnly: 0
 --- !u!114 &11432798
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -106,6 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34065cc4a2297641ad8d014077264bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDrag: 1
 --- !u!114 &11445934
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -190,6 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dab924c609116046986df45989cd020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDrop: 1
 --- !u!222 &22224138
 CanvasRenderer:
   m_ObjectHideFlags: 1
