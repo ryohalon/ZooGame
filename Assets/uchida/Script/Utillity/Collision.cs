@@ -7,7 +7,7 @@ public class Collision : MonoBehaviour
 
     void Start()
     {
-        size = GetComponent<SpriteRenderer>().bounds.size.x;
+        size = GetComponent<RectTransform>().sizeDelta.x;
     }
 
     public bool IsHit(Vector3 touchPos)

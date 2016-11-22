@@ -17,7 +17,7 @@ public class Back : MonoBehaviour
             {
                 if(GetComponent<Collision>().IsHit(GetComponent<RayCollision>().HitRayPosCameraToMouse()))
                 {
-                    GameObject.Find("Cage2ListManager").GetComponent<Cage2ListManager>().touchType = Cage2ListManager.TouchType.NONE;
+                    GameObject.Find("CageListManager").GetComponent<CageListManager>().touchType = CageListManager.TouchType.NONE;
                     GetComponent<OnClickEvent>().DeleteWindow();
                 }
             }

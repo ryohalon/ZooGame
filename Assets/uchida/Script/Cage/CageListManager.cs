@@ -7,261 +7,250 @@ using UnityEngine.UI;
 public class CageListManager : MonoBehaviour
 {
 
-    //public List<GameObject> cageList = new List<GameObject>();
+    public List<GameObject> cageList = new List<GameObject>();
 
-    //[SerializeField]
-    //private GameObject animalListManager = null;
+    [SerializeField]
+    private GameObject animalListManager = null;
+    [SerializeField]
+    private GameObject notActiveAnimals = null;
 
-    //[SerializeField]
-    //private int maxCageNum = 9;
-    //[SerializeField]
-    //private GameObject cage = null;
+    [SerializeField]
+    private int maxCageNum = 9;
+    [SerializeField]
+    private GameObject cage = null;
 
-    //private int changeCageID = 99;
+    private int changeCageID = 99;
 
-    //private float distance = 0.0f;
+    private float distance = 0.0f;
 
-    //[SerializeField]
-    //private float maxPressTime = 2.0f;
-    //private float pressTime = 0.0f;
-    //public enum TouchType
-    //{
-    //    NONE,
-    //    TOUCH,
-    //    PRESS,
-    //    SWIPE,
-    //}
-    //public TouchType touchType = TouchType.NONE;
-    //private bool prevMouseDown = false;
+    public enum TouchType
+    {
+        NONE,
+        TOUCH,
+        PRESS,
+    }
+    public TouchType touchType = TouchType.NONE;
 
-    //void Start()
-    //{
-    //    if (cage == null)
-    //        Debug.Log("eroor : GameObject[cage] が null です");
+    void Start()
+    {
+        if (cage == null)
+            Debug.Log("eroor : GameObject[cage] が null です");
 
-    //    distance = 15.0f + cage.GetComponent<RectTransform>().rect.width;
+        distance = 15.0f + cage.GetComponent<RectTransform>().rect.width;
 
-    //    CreateCage();
-    //    SetCageToAnimal();
+        CreateCage();
+        SetCageToAnimal();
 
-    //    StartCoroutine(UpDateCageList());
-    //}
+        StartCoroutine(UpDateCageList());
+    }
 
-    //private IEnumerator UpDateCageList()
-    //{
-    //    while (true)
-    //    {
-    //        EventCage();
-    //        CageSwap();
-    //        ChangeAnimal();
-    //        GoRaise();
+    private IEnumerator UpDateCageList()
+    {
+        while (true)
+        {
+            EventCage();
+            ChangeAnimal();
+            GoRaise();
 
-    //        //if (Input.GetMouseButtonDown(0))
-    //        //{
-    //        //    Debug.Log("mousepos : " + Input.mousePosition);
-    //        //    Debug.Log("cageList[0] : " + cageList[0].transform.localPosition);
-    //        //}
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Debug.DrawLine(ray.origin, ray.direction * 50);
 
-    //        yield return null;
-    //    }
-    //}
+            yield return null;
+        }
+    }
 
-    //private void GoRaise()
-    //{
-    //    if (touchType != TouchType.PRESS)
-    //        return;
-    //    GetComponent<SceneChanger>().TouchButton();
-    //}
+    private void GoRaise()
+    {
+        if (touchType != TouchType.PRESS)
+            return;
+        GetComponent<SceneChanger>().TouchButton();
+    }
 
-    //private void ChangeAnimal()
-    //{
-    //    if (touchType != TouchType.TOUCH)
-    //        return;
+    private void ChangeAnimal()
+    {
+        if (touchType != TouchType.TOUCH)
+            return;
 
-    //    touchType = TouchType.NONE;
-    //}
+        if (!GameObject.Find(notActiveAnimals.name + "(Clone)").GetComponent<NotActiveAnimals>().is_select)
+            return;
 
-    //private void CageSwap()
-    //{
-    //    if (touchType != TouchType.SWIPE)
-    //        return;
+        var selectNotActiveAnimalID = GameObject.Find(notActiveAnimals.name + "(Clone)").GetComponent<NotActiveAnimals>().selectID;
+        if (selectNotActiveAnimalID != int.MaxValue)
+        {
+            AnimalSwap(changeCageID, selectNotActiveAnimalID);
+        }
 
-    //    // スワイプ中の檻をタッチしているところに追従させる
-    //    Vector3 mousePos = Input.mousePosition;
-    //    cageList[changeCageID].transform.position =
-    //        new Vector3(mousePos.x,
-    //        mousePos.y,
-    //        cageList[changeCageID].transform.position.z);
+        Destroy(GameObject.Find(notActiveAnimals.name + "(Clone)"));
+        touchType = TouchType.NONE;
 
-    //    // 離さない限り何もしない
-    //    if (!Input.GetMouseButtonUp(0))
-    //        return;
+        foreach (var cage in cageList)
+            Debug.Log(cage.GetComponent<CageManager>().animalID);
+    }
 
-    //    // スワイプしていた檻を元の位置に戻す
-    //    cageList[changeCageID].transform.position = cageList[changeCageID].GetComponent<CageManager>().originPos;
+    private void EventCage()
+    {
+        if (touchType != TouchType.NONE)
+            return;
 
-    //    for (int i = 0; i < cageList.Count; i++)
-    //    {
-    //        // スワイプしていた檻と同じものだったらはじく
-    //        if (i == changeCageID)
-    //            continue;
+        for (int i = 0; i < cageList.Count; i++)
+        {
+            var pushDownPbject = cageList[i].GetComponent<PushDownObject>();
+            if (pushDownPbject.isPushed)
+            {
+                changeCageID = i;
+                touchType = TouchType.TOUCH;
+                pushDownPbject.isPushed = false;
+                var notActiveAnimals_ = Instantiate(notActiveAnimals);
+                notActiveAnimals_.transform.SetParent(GameObject.Find("Canvas").transform);
+                notActiveAnimals_.GetComponent<RectTransform>().localPosition = Vector3.zero;
+                notActiveAnimals_.GetComponent<RectTransform>().localScale = Vector3.one;
 
-    //        if (!cageList[i].GetComponent<CageManager>().IsHit())
-    //            continue;
+            }
 
-    //        CageSwap(changeCageID, i);
-    //        Debug.Log("すわっぴー");
-    //        break;
-    //    }
+            if (pushDownPbject.isPressed)
+            {
+                touchType = TouchType.PRESS;
+                pushDownPbject.isPressed = false;
+                animalListManager.GetComponent<AnimalListManager>().animalList[changeCageID].GetComponent<AnimalStatusManager>().IsRaise = true;
+            }
 
-    //    touchType = TouchType.NONE;
-    //}
+            //if (cageList[i].GetComponent<Collision>().IsHit(Input.mousePosition))
+            //{
+            //    Debug.Log("cage : " + i);
 
-    //private void EventCage()
-    //{
-    //    if (touchType != TouchType.NONE)
-    //        return;
+            //    if (!is_push)
+            //    {
+            //        if (Input.GetMouseButtonDown(0))
+            //        {
+            //            is_push = true;
+            //            prevMouseDown = true;
+            //            changeCageID = i;
+            //        }
 
-    //    for (int i = 0; i < cageList.Count; i++)
-    //    {
-    //        if (cageList[i].GetComponent<CageManager>().IsHit())
-    //        {
-    //            //Debug.Log("HIT : " + i);
+            //        break;
+            //    }
 
-    //            if (Input.GetMouseButtonDown(0))
-    //            {
-    //                changeCageID = i;
-    //                pressTime = 0.0f;
-    //                prevMouseDown = false;
-    //            }
+            //    if (Input.GetMouseButton(0))
+            //    {
+            //        if (pressTime < maxPressTime)
+            //        {
+            //            pressTime = Mathf.Min(maxPressTime, pressTime + Time.deltaTime);
+            //            break;
+            //        }
 
-    //            if (Input.GetMouseButton(0))
-    //            {
-    //                if (pressTime < maxPressTime)
-    //                {
-    //                    pressTime = Mathf.Min(maxPressTime, pressTime + Time.deltaTime);
+            //        if (pressTime == maxPressTime)
+            //        {
+            //            if (animalListManager.GetComponent<AnimalListManager>().animalList.Count > 0)
+            //                animalListManager.GetComponent<AnimalListManager>().animalList[changeCageID].GetComponent<AnimalStatusManager>().IsRaise = true;
+            //            touchType = TouchType.PRESS;
+            //            pressTime = 0.0f;
+            //            prevMouseDown = false;
+            //            Debug.Log("touchType : " + touchType);
+            //            Debug.Log("changeCageID : " + changeCageID);
+            //            break;
+            //        }
+            //    }
 
-    //                    if (prevMouseDown == false && pressTime < maxPressTime / 2.0f)
-    //                    {
-    //                        prevMouseDown = true;
-    //                    }
+            //    if (Input.GetMouseButtonUp(0))
+            //    {
+            //        touchType = TouchType.TOUCH;
+            //        pressTime = 0.0f;
+            //        prevMouseDown = false;
+            //        Debug.Log("touchType : " + touchType);
+            //        Debug.Log("changeCageID : " + changeCageID);
 
-    //                    break;
-    //                }
-    //                else
-    //                {
-    //                    touchType = TouchType.PRESS;
-    //                    pressTime = 0.0f;
-    //                    prevMouseDown = false;
-    //                    Debug.Log("touchType : " + touchType);
-    //                    Debug.Log("changeCageID : " + changeCageID);
-    //                    break;
-    //                }
-    //            }
+            //        Instantiate(notActiveAnimals);
 
-    //            if (Input.GetMouseButtonUp(0))
-    //            {
-    //                touchType = TouchType.TOUCH;
-    //                pressTime = 0.0f;
-    //                prevMouseDown = false;
-    //                Debug.Log("touchType : " + touchType);
-    //                Debug.Log("changeCageID : " + changeCageID);
-    //            }
-    //        }
-    //        else if (prevMouseDown == true && Input.GetMouseButton(0))
-    //        {
-    //            touchType = TouchType.SWIPE;
-    //            pressTime = 0.0f;
-    //            prevMouseDown = false;
-    //            Debug.Log("touchType : " + touchType);
-    //            Debug.Log("changeCageID : " + changeCageID);
-    //            break;
-    //        }
-    //    }
+            //        break;
+            //    }
 
-    //    if (pressTime >= maxPressTime / 2.0f && prevMouseDown == true)
-    //        prevMouseDown = false;
-    //}
+            //    break;
+            //}
+        }
+    }
 
-    //// 檻の生成
-    //private void CreateCage()
-    //{
-    //    for (int i = 0; i < maxCageNum; i++)
-    //    {
-    //        cageList.Add(Instantiate(cage));
-    //        cageList[i].transform.SetParent(GameObject.Find("Canvas").transform);
-    //        cageList[i].transform.localPosition =
-    //            new Vector3(
-    //                distance * (i % 3 - 1),
-    //                distance * (i / 3 - 1) - 20.0f,
-    //                cageList[i].transform.localPosition.z);
-    //        cageList[i].GetComponent<CageManager>().originPos = cageList[i].transform.position;
+    // 檻の生成
+    private void CreateCage()
+    {
+        for (int i = 0; i < maxCageNum; i++)
+        {
+            cageList.Add(Instantiate(cage));
+            cageList[i].transform.SetParent(GameObject.Find("Canvas").transform);
+            cageList[i].transform.localPosition =
+                new Vector3(
+                    distance * (i % 3 - 1),
+                    distance * (i / 3 - 1) - 20.0f,
+                    0.0f);
+            cageList[i].GetComponent<CageManager>().originPos =
+                cageList[i].transform.position;
+            cageList[i].transform.localScale = Vector3.one;
 
+            cageList[i].transform.FindChild("Text").GetComponent<Text>().text = i.ToString();
+        }
+    }
 
-    //        cageList[i].transform.FindChild("Text").GetComponent<Text>().text = i.ToString();
-    //    }
-    //}
+    // 檻に動物をセット
+    private void SetCageToAnimal()
+    {
+        var animalList = animalListManager.GetComponent<AnimalListManager>().animalList;
 
-    //// 檻に動物をセット
-    //private void SetCageToAnimal()
-    //{
-    //    var animalList = animalListManager.GetComponent<AnimalListManager>().animalList;
+        for (int i = 0; i < cageList.Count; i++)
+        {
+            foreach (var animal in animalList)
+            {
+                var animalStatus = animal.GetComponent<AnimalStatusManager>().status;
+                if (i != animalStatus.CageID)
+                    continue;
 
-    //    for (int i = 0; i < cageList.Count; i++)
-    //    {
-    //        foreach (var animal in animalList)
-    //        {
-    //            var animalStatus = animal.GetComponent<AnimalStatusManager>().status;
-    //            if (i != animalStatus.CageID)
-    //                continue;
+                cageList[i].GetComponent<CageManager>().animalID = animalStatus.ID;
+                //cageList[i].GetComponent<AnimationManager>().animationDataList =
+                //    animal.GetComponent<AnimationManager>().animationDataList;
+                break;
+            }
+        }
+    }
 
-    //            cageList[i].GetComponent<CageManager>().animalID = animalStatus.ID;
-    //            cageList[i].GetComponent<AnimationManager>().animationDataList = animal.GetComponent<AnimationManager>().animationDataList;
-    //            break;
-    //        }
-    //    }
-    //}
+    // 檻に入っている動物の配置入れ替え
+    public void CageSwap(int i, int k)
+    {
+        GameObject cage = cageList[i];
+        cageList[i] = cageList[k];
+        cageList[k] = cage;
 
-    //// 檻に入っている動物の配置入れ替え
-    //public void CageSwap(int i, int k)
-    //{
-    //    GameObject cage = cageList[i];
-    //    cageList[i] = cageList[k];
-    //    cageList[k] = cage;
+        // Debug
+        cageList[i].transform.FindChild("Text").GetComponent<Text>().text = k.ToString();
+        cageList[k].transform.FindChild("Text").GetComponent<Text>().text = i.ToString();
+    }
 
-    //    // Debug
-    //    cageList[i].transform.FindChild("Text").GetComponent<Text>().text = k.ToString();
-    //    cageList[k].transform.FindChild("Text").GetComponent<Text>().text = i.ToString();
-    //}
+    // 控えにいる動物との入れ替え
+    public void AnimalSwap(int cageID, int animalID)
+    {
+        var notActiveAnimalID = cageList[cageID].GetComponent<CageManager>().animalID;
+        // 檻に入る動物のIDに変更
+        cageList[cageID].GetComponent<CageManager>().animalID = animalID;
 
-    //// 控えにいる動物との入れ替え
-    //public void AnimalSwap(int cageID, int animalID)
-    //{
-    //    var animalList = animalListManager.GetComponent<AnimalListManager>().animalList;
+        var animalList = animalListManager.GetComponent<AnimalListManager>().animalList;
+        for (int i = 0; i < animalList.Count; i++)
+        {
+            var animalStatus = animalList[i].GetComponent<AnimalStatusManager>();
+            if (animalID == animalStatus.status.ID)
+            {
+                animalStatus.status.CageID = cageID;
+                // アニメーションの変更
+                cageList[cageID].GetComponent<AnimationManager>().animationDataList =
+                    animalList[i].GetComponent<AnimationManager>().animationDataList;
+                // debug
+                if (animalList[i].GetComponent<AnimationManager>().animationDataList.Count > 0)
+                {
+                    cageList[cageID].GetComponent<Image>().sprite =
+                        animalList[i].GetComponent<AnimationManager>().animationDataList[0].sprite;
+                }
 
-    //    for (int i = 0; i < animalList.Count; i++)
-    //    {
-    //        var animalStatus = animalList[i].GetComponent<AnimalStatusManager>();
-    //        if (animalID == animalStatus.status.ID)
-    //        {
-    //            // 檻に入る動物
-    //            animalStatus.IsActive = true;
-    //            animalStatus.status.CageID = cageID;
-    //            // アニメーションの変更
-    //            cageList[cageID].GetComponent<AnimationManager>().animationDataList =
-    //                animalList[i].GetComponent<AnimationManager>().animationDataList;
+                continue;
+            }
 
-    //            continue;
-    //        }
-    //        if (cageList[cageID].GetComponent<CageManager>().animalID == animalStatus.status.ID)
-    //        {
-    //            // 控えに移動する動物
-    //            animalStatus.IsActive = false;
-    //            animalStatus.status.CageID = 99;
-    //        }
-    //    }
-
-    //    // 檻に入る動物のIDに変更
-    //    cageList[cageID].GetComponent<CageManager>().animalID = animalID;
-    //}
+            if (notActiveAnimalID == animalStatus.status.ID)
+                animalStatus.status.CageID = 99;
+        }
+    }
 }

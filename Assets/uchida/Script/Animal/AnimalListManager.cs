@@ -23,20 +23,20 @@ public class AnimalListManager : MonoBehaviour
     {
         animal.GetComponent<AnimalStatusManager>().InitStatus();
 
-        for (int i = 0; i < 15; i++)
+        for (int i = 0; i < 10; i++)
         {
             animalList.Add(Instantiate(animal));
             animalList[i].transform.SetParent(animalList_.transform);
         }
 
-        for (int i = 0; i < 15; i++)
+        for (int i = 0; i < 10; i++)
         {
             animalList[i].GetComponent<AnimalStatusManager>().status.ID = i;
             animalList[i].GetComponent<AnimalStatusManager>().status.IsPurchase = true;
             AnimationManager.AnimationData animationdata = new AnimationManager.AnimationData();
             animationdata.animationTime = 0.0f;
             animationdata.sprite = debugSprite;
-            animalList[i].GetComponent<SpriteAnimationManager>().animationDataList.Add(animationdata);
+            animalList[i].GetComponent<AnimationManager>().animationDataList.Add(animationdata);
             //if (i < 9)
             //    animalList[i].GetComponent<AnimalStatusManager>().status.CageID = i;
             //else
