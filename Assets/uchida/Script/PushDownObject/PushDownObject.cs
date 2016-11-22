@@ -57,6 +57,13 @@ public class PushDownObject : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     {
         while(true)
         {
+            var dragging = GetComponent<DragObject>().dragging;
+            if(pressStart && dragging)
+            {
+                pressTime = 0.0f;
+                pressStart = false;
+            }
+
             if (pressStart)
             {
                 Debug.Log(pressTime);
@@ -83,6 +90,7 @@ public class PushDownObject : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
         Debug.Log("俺は今押しているぅ～！");
         pressStart = true;
+        pressTime = 0.0f;
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -93,5 +101,6 @@ public class PushDownObject : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
         isPushed = true;
         pressStart = false;
+        pressTime = 0.0f;
     }
 }
