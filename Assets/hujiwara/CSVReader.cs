@@ -6,8 +6,6 @@ using System.Collections.Generic;
 
 public class CSVReader : MonoBehaviour
 {
-    StreamReader reader = new StreamReader("C:\\Users\\vantan\\Desktop\\作業用ZooGame\\Assets\\hujiwara" + "\\" + "TestSavedata.csv");
-
     List<List<string>> m_data = new List<List<string>>();
 
     public const char SplitChar = ',';
@@ -15,6 +13,8 @@ public class CSVReader : MonoBehaviour
 
     public bool Load(string fileName)
     {
+        StreamReader reader = CreateStreamReader(fileName);
+
         int counter = 0;
         string line = "";
 
@@ -41,10 +41,10 @@ public class CSVReader : MonoBehaviour
         reader.Close();
         return true;
     }
-
-    public void ReaderClose()
+    
+    private StreamReader CreateStreamReader(string fileName)
     {
-        reader.Close();
+        return new StreamReader(fileName);
     }
 
     public string GetString(int row, int col)

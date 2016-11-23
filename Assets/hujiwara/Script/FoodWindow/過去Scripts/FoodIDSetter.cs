@@ -13,10 +13,10 @@ public class FoodIDSetter : MonoBehaviour
     public void SetID()
     {
         var buyWinowPrice = BuyWindowPriceText.GetComponent<FoodPriceChanger>();
-        var buyWindowYesButton = BuyWidnowYesButton.GetComponent<FoodBuyer>();
+        var buyWindowYesButtonBuyer = BuyWidnowYesButton.GetComponent<FoodBuyer>();
         var buyWindowTotalText = BuyWindowTotalText.GetComponent<TotalMoney>();
         buyWinowPrice.ID = ID;
-        buyWindowYesButton.ID = ID;
+        buyWindowYesButtonBuyer.ID = ID;
         buyWindowTotalText.ID = ID;
 
         buyWinowPrice.UpdatePriceText();
