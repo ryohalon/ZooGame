@@ -4,28 +4,24 @@ using System.Collections.Generic;
 
 public class FoodList : MonoBehaviour
 {
-    FoodStatusManager2 foodStatusManager;
-
-    List<FoodStatusManager2> foodList = new List<FoodStatusManager2>();
-
-    // ここでファイルが入っているフォルダ場所を指定(適宜変えてください。)
-    // 絶対パスの場合は一番後ろの + "\\" は消さないでください。
-    // Application.dataPathを使う場合は消して大丈夫です。
-    string directory = "C:/Users/vantan/Desktop/作業用ZooGame/Assets/hujiwara" + "/";
+    public List<FoodStatusManager2> foodList = new List<FoodStatusManager2>();
     // 読み込むファイル名(csv専用です。)
     string path = "FoodStatus.csv";
 
     bool isCreate = false;
 
+    // CSVReaderを参照してください。
     CSVReader reader = new CSVReader();
 
     void Awake()
     {
+        // 読み込み
         reader.Load(Application.dataPath + "/" + path);
     }
 
     void Start()
-    {   
+    {
+        // テストしてないけどシーン移行時消されないようにしてます多分
         if(!isCreate)
         {
             DontDestroyOnLoad(gameObject);
@@ -40,6 +36,8 @@ public class FoodList : MonoBehaviour
             foodList.Add(new FoodStatusManager2());
         }
 
+        // csvデータから読み込んでデータを入れてます。
+        // 使うときは foodList[ID].Name のように使ってください。
         for (int i = 0; i < 6; ++i)
         {
             foodList[i].ID = reader.GetInt(i, 0);
