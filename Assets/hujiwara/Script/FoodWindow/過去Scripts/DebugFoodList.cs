@@ -8,9 +8,19 @@ public class DebugFoodList : MonoBehaviour
 
     public List<FoodStatusManager> foodList = new List<FoodStatusManager>();
 
+    bool isCreate = false;
+
     void Awake()
     {
         Init();
+        if(!isCreate)
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     void Init()

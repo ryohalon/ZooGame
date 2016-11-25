@@ -22,7 +22,7 @@ public class FoodStatusManager : MonoBehaviour
         // 愛情度上昇値
         public int loveDegreeUpValue { get; set; }
         // 満腹度上昇値
-        public int satietyLevelUpValue { get; set; }
+        public float satietyLevelUpValue { get; set; }
         // 食べ物の種類
         public FoodType foodType { get; set; }
         // 所持数
