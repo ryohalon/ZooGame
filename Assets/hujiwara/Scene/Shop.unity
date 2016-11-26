@@ -118,9 +118,9 @@ RectTransform:
   m_Father: {fileID: 1324599430}
   m_RootOrder: 1
   m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: -17}
+  m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &3259253
 MonoBehaviour:
@@ -363,6 +363,8 @@ GameObject:
   - 114: {fileID: 73351511}
   - 114: {fileID: 73351510}
   - 114: {fileID: 73351513}
+  - 114: {fileID: 73351514}
+  - 114: {fileID: 73351515}
   m_Layer: 5
   m_Name: VegetablesGrade2
   m_TagString: Untagged
@@ -437,6 +439,28 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 73351514}
+        m_MethodName: IDWriter
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 73351515}
+        m_MethodName: IDReader
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &73351511
@@ -485,6 +509,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   window: {fileID: 581185275}
   thisLayer: {fileID: 1158816470}
+--- !u!114 &73351514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 73351508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eea82f597c7ca741945e91b37096289, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 4
+--- !u!114 &73351515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 73351508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11b05c53c6874884fb6b52b7afe8c818, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodIDSetter: {fileID: 1647289044}
 --- !u!1 &105735066
 GameObject:
   m_ObjectHideFlags: 0
@@ -568,6 +616,7 @@ GameObject:
   - 224: {fileID: 120231302}
   - 222: {fileID: 120231304}
   - 114: {fileID: 120231303}
+  - 114: {fileID: 120231305}
   m_Layer: 5
   m_Name: LoveDegree
   m_TagString: Untagged
@@ -631,6 +680,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 120231301}
+--- !u!114 &120231305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 120231301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca3c79309bb2776489c9926854540646, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &127646111
 Prefab:
   m_ObjectHideFlags: 0
@@ -767,7 +827,7 @@ RectTransform:
   m_Father: {fileID: 1413380933}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.23583333, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1279,9 +1339,9 @@ RectTransform:
   m_Father: {fileID: 1324599430}
   m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -171}
-  m_SizeDelta: {x: -17, y: 20}
+  m_SizeDelta: {x: 0, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &386341561
 MonoBehaviour:
@@ -1321,7 +1381,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 134437448}
   m_HandleRect: {fileID: 134437447}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 0.23583333
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1374,6 +1434,8 @@ GameObject:
   - 114: {fileID: 475004184}
   - 114: {fileID: 475004183}
   - 114: {fileID: 475004186}
+  - 114: {fileID: 475004187}
+  - 114: {fileID: 475004188}
   m_Layer: 5
   m_Name: MeetGrade3
   m_TagString: Untagged
@@ -1448,6 +1510,28 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 475004187}
+        m_MethodName: IDWriter
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 475004188}
+        m_MethodName: IDReader
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &475004184
@@ -1496,6 +1580,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   window: {fileID: 581185275}
   thisLayer: {fileID: 1158816470}
+--- !u!114 &475004187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 475004181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eea82f597c7ca741945e91b37096289, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 2
+--- !u!114 &475004188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 475004181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11b05c53c6874884fb6b52b7afe8c818, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodIDSetter: {fileID: 1647289044}
 --- !u!1 &494053952
 GameObject:
   m_ObjectHideFlags: 0
@@ -1512,7 +1620,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &494053953
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1728,6 +1836,7 @@ RectTransform:
   - {fileID: 1683024189}
   - {fileID: 849368201}
   - {fileID: 933345933}
+  - {fileID: 1647289045}
   m_Father: {fileID: 2061256406}
   m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1778,6 +1887,7 @@ GameObject:
   - 224: {fileID: 603257769}
   - 222: {fileID: 603257771}
   - 114: {fileID: 603257770}
+  - 114: {fileID: 603257772}
   m_Layer: 5
   m_Name: FoodName
   m_TagString: Untagged
@@ -1841,6 +1951,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 603257768}
+--- !u!114 &603257772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 603257768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca3c79309bb2776489c9926854540646, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &660156543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1929,6 +2050,7 @@ GameObject:
   - 224: {fileID: 667225902}
   - 222: {fileID: 667225904}
   - 114: {fileID: 667225903}
+  - 114: {fileID: 667225905}
   m_Layer: 5
   m_Name: SatietyLevel
   m_TagString: Untagged
@@ -1992,6 +2114,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 667225901}
+--- !u!114 &667225905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 667225901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca3c79309bb2776489c9926854540646, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &694610644
 GameObject:
   m_ObjectHideFlags: 0
@@ -2444,7 +2577,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 849368206}
-        m_MethodName: FoodStatusClassSave
+        m_MethodName: Sell
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2509,9 +2642,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 849368200}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 328d2e3601d3c734d83271e62d7a5ac3, type: 3}
+  m_Script: {fileID: 11500000, guid: e1b306fbb636f134abad117ab3b480d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  foodList: {fileID: 1874436058}
+  foodIDSetter: {fileID: 1647289044}
 --- !u!1 &881454178
 GameObject:
   m_ObjectHideFlags: 0
@@ -2594,7 +2729,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 933345933}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: "\u4F1A\u8A71"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2630,8 +2765,9 @@ GameObject:
   - 224: {fileID: 973293970}
   - 222: {fileID: 973293972}
   - 114: {fileID: 973293971}
+  - 114: {fileID: 973293973}
   m_Layer: 5
-  m_Name: Text
+  m_Name: priceText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2693,6 +2829,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 973293969}
+--- !u!114 &973293973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 973293969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54161e6ce41675745beb5c1718e3d3b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodList: {fileID: 1874436058}
+  foodIDSetter: {fileID: 1647289044}
 --- !u!1 &978867381
 GameObject:
   m_ObjectHideFlags: 0
@@ -2870,6 +3019,8 @@ GameObject:
   - 114: {fileID: 1119369511}
   - 114: {fileID: 1119369510}
   - 114: {fileID: 1119369513}
+  - 114: {fileID: 1119369514}
+  - 114: {fileID: 1119369515}
   m_Layer: 5
   m_Name: MeetGrade2
   m_TagString: Untagged
@@ -2944,6 +3095,28 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1119369514}
+        m_MethodName: IDWriter
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1119369515}
+        m_MethodName: IDReader
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1119369511
@@ -2992,6 +3165,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   window: {fileID: 581185275}
   thisLayer: {fileID: 1158816470}
+--- !u!114 &1119369514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1119369508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eea82f597c7ca741945e91b37096289, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 1
+--- !u!114 &1119369515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1119369508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11b05c53c6874884fb6b52b7afe8c818, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodIDSetter: {fileID: 1647289044}
 --- !u!1001 &1121117494
 Prefab:
   m_ObjectHideFlags: 0
@@ -3172,7 +3369,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1158816471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3420,9 +3617,9 @@ RectTransform:
   m_Father: {fileID: 1324599430}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -17, y: -17}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1371869939
 MonoBehaviour:
@@ -3756,7 +3953,7 @@ RectTransform:
   m_Father: {fileID: 2050855085}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3950,6 +4147,8 @@ GameObject:
   - 114: {fileID: 1643588927}
   - 114: {fileID: 1643588926}
   - 114: {fileID: 1643588929}
+  - 114: {fileID: 1643588930}
+  - 114: {fileID: 1643588931}
   m_Layer: 5
   m_Name: MeetGrade1
   m_TagString: Untagged
@@ -4024,6 +4223,28 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1643588930}
+        m_MethodName: IDWriter
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1643588931}
+        m_MethodName: IDReader
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1643588927
@@ -4072,6 +4293,75 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   window: {fileID: 581185275}
   thisLayer: {fileID: 1158816470}
+--- !u!114 &1643588930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1643588924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eea82f597c7ca741945e91b37096289, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 0
+--- !u!114 &1643588931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1643588924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11b05c53c6874884fb6b52b7afe8c818, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodIDSetter: {fileID: 1647289044}
+--- !u!1 &1647289044
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 1647289045}
+  - 114: {fileID: 1647289046}
+  m_Layer: 5
+  m_Name: FoodIDSetter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1647289045
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1647289044}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 581185276}
+  m_RootOrder: 6
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1647289046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1647289044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 912f593f405b07b4499fedc0effa7e2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodPriceChanger: {fileID: 973293969}
 --- !u!1 &1663972710
 GameObject:
   m_ObjectHideFlags: 0
@@ -4950,6 +5240,8 @@ GameObject:
   - 114: {fileID: 1844682481}
   - 114: {fileID: 1844682480}
   - 114: {fileID: 1844682483}
+  - 114: {fileID: 1844682484}
+  - 114: {fileID: 1844682485}
   m_Layer: 5
   m_Name: VegetablesGrade3
   m_TagString: Untagged
@@ -5024,6 +5316,28 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1844682484}
+        m_MethodName: IDWriter
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1844682485}
+        m_MethodName: IDReader
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1844682481
@@ -5072,6 +5386,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   window: {fileID: 581185275}
   thisLayer: {fileID: 1158816470}
+--- !u!114 &1844682484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1844682478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eea82f597c7ca741945e91b37096289, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 5
+--- !u!114 &1844682485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1844682478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11b05c53c6874884fb6b52b7afe8c818, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodIDSetter: {fileID: 1647289044}
 --- !u!1 &1852727890
 GameObject:
   m_ObjectHideFlags: 0
@@ -5172,6 +5510,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b48939057138305459fbf7d6c9fa928f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  foodList: []
 --- !u!4 &1874436060
 Transform:
   m_ObjectHideFlags: 0
@@ -5366,7 +5705,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -917, y: 0}
   m_SizeDelta: {x: 1200, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &2041269642
@@ -5736,6 +6075,8 @@ GameObject:
   - 114: {fileID: 2104112956}
   - 114: {fileID: 2104112955}
   - 114: {fileID: 2104112958}
+  - 114: {fileID: 2104112959}
+  - 114: {fileID: 2104112960}
   m_Layer: 5
   m_Name: VegetablesGrade1
   m_TagString: Untagged
@@ -5810,6 +6151,28 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2104112959}
+        m_MethodName: IDWriter
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2104112960}
+        m_MethodName: IDReader
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &2104112956
@@ -5858,3 +6221,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   window: {fileID: 581185275}
   thisLayer: {fileID: 1158816470}
+--- !u!114 &2104112959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2104112953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eea82f597c7ca741945e91b37096289, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 3
+--- !u!114 &2104112960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2104112953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11b05c53c6874884fb6b52b7afe8c818, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodIDSetter: {fileID: 1647289044}
