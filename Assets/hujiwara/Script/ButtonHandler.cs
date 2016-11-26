@@ -4,14 +4,16 @@ using UnityEngine.UI;
 
 public class ButtonHandler : MonoBehaviour
 {
-    public UnityEngine.GameObject window;
+    public GameObject window = null;
+    public GameObject thisLayer = null;
 
     // 各ウィンドウボタンをタッチした時の反応
     public void SetWindowIsActive()
     {
-        var isActive = window.activeSelf;
+        var windowIsActive = window.activeSelf;
+        var thisLayerIsActive = thisLayer.activeSelf;
 
-        if(isActive == false)
+        if(windowIsActive == false)
         {
             window.SetActive(true);
         }
@@ -19,12 +21,14 @@ public class ButtonHandler : MonoBehaviour
         {
             window.SetActive(false);
         }
-    }
 
-    public void TapTab()
-    {
-        var sibling = window.GetComponent<Transform>();
-
-        sibling.transform.SetAsLastSibling();
+        if(thisLayerIsActive == false)
+        {
+            thisLayer.SetActive(true);
+        }
+        else
+        {
+            thisLayer.SetActive(false);
+        }
     }
 }

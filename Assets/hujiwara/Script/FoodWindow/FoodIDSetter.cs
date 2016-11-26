@@ -1,25 +1,27 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.UI;
 
 public class FoodIDSetter : MonoBehaviour
 {
-    public GameObject foodList;
-    public int ID;
+    int ID;
 
-    public GameObject BuyWindowPriceText;
-    public GameObject BuyWidnowYesButton;
-    public GameObject BuyWindowTotalText;
+    public GameObject foodPriceChanger;
+    FoodPriceChanger priceChanger;
 
-    public void SetID()
+    void Start()
     {
-        var buyWinowPrice = BuyWindowPriceText.GetComponent<FoodPriceChanger>();
-        var buyWindowYesButton = BuyWidnowYesButton.GetComponent<FoodBuyer>();
-        var buyWindowTotalText = BuyWindowTotalText.GetComponent<TotalMoney>();
-        buyWinowPrice.ID = ID;
-        buyWindowYesButton.ID = ID;
-        buyWindowTotalText.ID = ID;
+        priceChanger = new FoodPriceChanger();
+        priceChanger = foodPriceChanger.GetComponent<FoodPriceChanger>();
+    }
 
-        buyWinowPrice.UpdatePriceText();
-        buyWindowTotalText.UpdateTotalMoneyText();
+    public void SetID(int readID)
+    {
+        ID = readID;
+        priceChanger.TextUpdater();
+    }
+
+    public int GetID()
+    {
+        return ID;
     }
 }
