@@ -2,10 +2,10 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class HeartManager : MonoBehaviour
+public class CutTextureManager : MonoBehaviour
 {
     [SerializeField]
-    GameObject[] heart = null;
+    GameObject[] cutTexture = null;
 
     [SerializeField]
     public int MaxValue = 0;
@@ -13,9 +13,11 @@ public class HeartManager : MonoBehaviour
     [SerializeField]
     public int NowValue = 0;
 
-
     [SerializeField]
     public Vector2 size = new Vector2(100, 100);
+
+    [SerializeField]
+    Texture2D texture = null;
 
     public void Change(int nowValue, int maxValue)
     {
@@ -24,24 +26,30 @@ public class HeartManager : MonoBehaviour
 
         int valueSize = MaxValue / 5;
         int count = 0;
-        while (nowValue > valueSize)
+        while (nowValue >= valueSize)
         {
-            heart[count].SetActive(true);
+            cutTexture[count].SetActive(true);
+            cutTexture[count].GetComponent<RectTransform>().sizeDelta = new Vector2(size.x , size.y);
+            Sprite sprite = new Sprite();
+            Vector2 pivot = new Vector2(0.5f, 0.5f);
+            Rect rect = new Rect(0.0f, 0.0f, texture.width, texture.height);
+            sprite = Sprite.Create(texture, rect, pivot, 1f);
+            cutTexture[count].GetComponent<Image>().sprite = sprite;
             ++count;
+
             nowValue -= valueSize;
         }
 
-        if(nowValue > 0)
+        if (nowValue > 0)
         {
             Vector2 pivot = new Vector2(0.5f, 0.5f);
-            Texture2D texture = Resources.Load<Texture2D>("Heart");
             Debug.Log(texture);
             Sprite sprite = new Sprite();
             Rect rect = new Rect(0.0f, 0.0f, texture.width * ((float)nowValue / (float)valueSize), texture.height);
             sprite = Sprite.Create(texture, rect, pivot, 1f);
-            heart[count].SetActive(true);
-            heart[count].GetComponent<Image>().sprite = sprite;
-            heart[count].GetComponent<RectTransform>().sizeDelta = new Vector2(size.x * ((float)nowValue / (float)valueSize), size.y);
+            cutTexture[count].SetActive(true);
+            cutTexture[count].GetComponent<Image>().sprite = sprite;
+            cutTexture[count].GetComponent<RectTransform>().sizeDelta = new Vector2(size.x * ((float)nowValue / (float)valueSize), size.y);
         }
 
 
@@ -49,7 +57,6 @@ public class HeartManager : MonoBehaviour
 
     void Start()
     {
-        Change(50, 100);
     }
 
     void Update()
