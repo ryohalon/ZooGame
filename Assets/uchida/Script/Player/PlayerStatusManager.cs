@@ -6,7 +6,7 @@ using System;
 public class PlayerStatusManager : MonoBehaviour
 {
     // 来場者一人当たりの入園料(固定)※今のところ
-    private int entranceFee = 20;
+    public int entranceFee = 20;
 
 
     // 動物の檻のリスト
@@ -30,6 +30,12 @@ public class PlayerStatusManager : MonoBehaviour
     public int OneDayUsedMoney { get; set; }
     // その日に来場した客のかず
     public int OneDayVisitors { get; set; }
+    // その日にフードに使用した金額
+    public int OneDayFoodCost { get; set; }
+    // その日に動物購入で使用した金額
+    public int OneDayAnimalPurchaseCost { get; set; }
+    // その日におもちゃで使用した金額
+    public int OneDayToyCost { get; set; }
 
     // 今までに稼いだ総金額
     public int TotalMoney { get; set; }
@@ -48,6 +54,8 @@ public class PlayerStatusManager : MonoBehaviour
         return ((TargetMoney - HandMoney) >= 0) ? 
             (TargetMoney - HandMoney) : 0;
     }
+
+    
 
     // すべてリセット(仮)
     public void Reset()
@@ -78,11 +86,21 @@ public class PlayerStatusManager : MonoBehaviour
         Debug.Log("まだ書いてない");
     }
 
+    private void  DebugStatus()
+    {
+        OneDayFoodCost = 50000;
+        OneDayAnimalPurchaseCost = 2000000;
+        OneDayToyCost = 20000;
+        OneDayVisitors = 560000;
+    }
+
 
     void Start()
     {
         LoadStatus();
 
+        DebugStatus();
+        
         StartCoroutine(UpdatePlayerStatus());
     }
 
