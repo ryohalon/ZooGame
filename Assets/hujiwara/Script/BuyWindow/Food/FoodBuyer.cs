@@ -34,7 +34,7 @@ public class FoodBuyer : MonoBehaviour
 
         for(int i = 0; i < 6; ++i)
         {
-            Debug.Log(food.foodList[i].possessionNumber);
+            Debug.Log("foodID[" + i + "]=" + food.foodList[i].possessionNumber);
         }
     }
 

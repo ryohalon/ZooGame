@@ -11,25 +11,35 @@ public class FoodIDReader : MonoBehaviour
     public GameObject foodIDSetter;
     private FoodIDSetter setter;
 
+    private FoodIDWriter writer;
+
     void Start()
     {
         directory = Application.persistentDataPath + "/";
         path = "sample.txt";
 
         setter = foodIDSetter.GetComponent<FoodIDSetter>();
+        writer = gameObject.GetComponent<FoodIDWriter>();
     }
 
     public void IDReader()
     {
-        using (var stream = new FileStream(directory + path, FileMode.Open))
+        if(File.Exists(directory+path))
         {
-            using (var reader = new StreamReader(stream))
+            using (var stream = new FileStream(directory + path, FileMode.Open))
             {
-                string data = reader.ReadLine();
-                ID = int.Parse(data);
+                using (var reader = new StreamReader(stream))
+                {
+                    string data = reader.ReadLine();
+                    ID = int.Parse(data);
 
-                Debug.Log("readID="+ID);
+                    Debug.Log("readID=" + ID);
+                }
             }
+        }
+        else
+        {
+            writer.IDWriter();
         }
 
         setter.SetID(ID);
