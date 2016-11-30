@@ -11,6 +11,8 @@ public class FoodPriceChanger : MonoBehaviour
 
     int ID;
 
+    int price;
+
     void Start()
     {
         food = new FoodList();
