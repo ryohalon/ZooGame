@@ -16,7 +16,7 @@ public class FoodIDReader : MonoBehaviour
     void Start()
     {
         directory = Application.persistentDataPath + "/";
-        path = "sample.txt";
+        path = "FoodIDSave.txt";
 
         setter = foodIDSetter.GetComponent<FoodIDSetter>();
         writer = gameObject.GetComponent<FoodIDWriter>();

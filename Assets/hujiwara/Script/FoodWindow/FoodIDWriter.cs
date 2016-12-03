@@ -12,7 +12,7 @@ public class FoodIDWriter : MonoBehaviour
     void Awake()
     {
         directory = Application.persistentDataPath + "/";
-        path = "sample.txt";
+        path = "FoodIDSave.txt";
     }
 
     public void IDWriter()
