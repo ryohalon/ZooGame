@@ -11,20 +11,33 @@ public class FoodList : MonoBehaviour
 
     bool isCreate;
 
-    // CSVReaderを参照してください。
+    // スクリプトCSVReaderを参照してください。
     CSVReader reader;
 
     CSVReader saveDataReader;
 
+    static FoodList _instance = null;
+
     void Awake()
     {
+        if(_instance == null)
+        {
+            _instance = this;
+            DontDestroyOnLoad(this);
+        }
+        else
+        {
+            Destroy(this);
+        }
+
         foodList = new List<FoodStatusManager2>();
 
         reader = new CSVReader();
         saveDataReader = new CSVReader();
-        // 読み込み
-        reader.Load(Application.dataPath + "/" + path);
+        // 元になるご飯のデータを読み込んでいます。
+        reader.Load(Application.dataPath + "/" + "hujiwara" + "/" + path);
 
+        // セーブデータがある場合それを読み込んでいます。
         if (File.Exists(Application.persistentDataPath+"/"+"sample.csv"))
         {
             saveDataReader.Load(Application.persistentDataPath + "/" + "sample.csv");
@@ -35,15 +48,6 @@ public class FoodList : MonoBehaviour
 
     void Start()
     {
-        // テストしてないけどシーン移行時消されないようにしてます多分
-        if (!isCreate)
-        {
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
 
         for (int i = 0; i < 6; ++i)
         {

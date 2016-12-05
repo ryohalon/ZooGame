@@ -3,19 +3,43 @@ using System.Collections;
 
 public class SetActive : MonoBehaviour
 {
-    public GameObject test;
+    public GameObject foodComm;
+    public GameObject animalComm;
 
-    public void Set()
+    public GameObject handMoneyText;
+    HandMoneyChanger handMoneyChanger;
+
+    void Start()
     {
-        var isActive = test.activeSelf;
+        handMoneyChanger = new HandMoneyChanger();
+        handMoneyChanger = handMoneyText.GetComponent<HandMoneyChanger>();
+    }
 
-        if(isActive == false)
+    public void SetFood()
+    {
+        var isActive = foodComm.activeSelf;
+
+        if(handMoneyChanger.isFoodPriceInHandMoney() && !isActive)
         {
-            test.SetActive(true);
+            foodComm.SetActive(true);
         }
-        else
+        else if(isActive)
         {
-            test.SetActive(false);
+            foodComm.SetActive(false);
+        }
+    }
+
+    public void SetAnimal()
+    {
+        var isActive = animalComm.activeSelf;
+
+        if(handMoneyChanger.isAnimalPriceInHandMoney() && !isActive)
+        {
+            animalComm.SetActive(true);
+        }
+        else if(isActive)
+        {
+            animalComm.SetActive(false);
         }
     }
 }

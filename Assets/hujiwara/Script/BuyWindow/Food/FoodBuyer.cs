@@ -14,6 +14,18 @@ public class FoodBuyer : MonoBehaviour
     public GameObject purchaseCountChanger;
     PurchaseCountChanger countChanger;
 
+    public GameObject totalPriceText;
+    FoodTotalPriceChanger totalPriceChanger;
+
+    public GameObject handMoneyText;
+    HandMoneyChanger handMoneyChanger;
+
+    public GameObject missingImage;
+    ImageFadeouter fadeouter;
+
+    public GameObject debugPlayerStatus;
+    DebugPlayerStatus playerStatus;
+    
     int ID;
 
     string directory;
@@ -30,6 +42,18 @@ public class FoodBuyer : MonoBehaviour
         countChanger = new PurchaseCountChanger();
         countChanger = purchaseCountChanger.GetComponent<PurchaseCountChanger>();
 
+        totalPriceChanger = new FoodTotalPriceChanger();
+        totalPriceChanger = totalPriceText.GetComponent<FoodTotalPriceChanger>();
+
+        handMoneyChanger = new HandMoneyChanger();
+        handMoneyChanger = handMoneyText.GetComponent<HandMoneyChanger>();
+
+        fadeouter = new ImageFadeouter();
+        fadeouter = missingImage.GetComponent<ImageFadeouter>();
+
+        playerStatus = new DebugPlayerStatus();
+        playerStatus = debugPlayerStatus.GetComponent<DebugPlayerStatus>();
+
         ID = 0;
 
         directory = Application.persistentDataPath + "/";
@@ -40,9 +64,19 @@ public class FoodBuyer : MonoBehaviour
     {
         ID = setter.GetID();
 
-        food.foodList[ID].possessionNumber += countChanger.GetCounter();
+        if(handMoneyChanger.isFoodPriceInHandMoney())
+        {
+            food.foodList[ID].possessionNumber += countChanger.GetCounter();
+        }
+        else
+        {
+            fadeouter.Fadeout();
+        }
 
         Saver();
+
+        handMoneyChanger.BuyFood();
+        handMoneyChanger.TextUpdater();
 
         for(int i = 0; i < 6; ++i)
         {
@@ -50,6 +84,7 @@ public class FoodBuyer : MonoBehaviour
         }
     }
 
+    // 以下セーブ関係
     void Saver()
     {
         List<List<int>> data = new List<List<int>>();

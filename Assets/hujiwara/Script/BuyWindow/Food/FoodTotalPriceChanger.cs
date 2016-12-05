@@ -28,9 +28,7 @@ public class FoodTotalPriceChanger : MonoBehaviour
         countChanger = new PurchaseCountChanger();
         countChanger = purchaseCountChanger.GetComponent<PurchaseCountChanger>();
 
-        ID = 0;
-
-        totalPrice = 0;
+        ID = setter.GetID();
 
         TextUpdater();
     }
@@ -42,13 +40,22 @@ public class FoodTotalPriceChanger : MonoBehaviour
         int price = food.foodList[ID].purchasePrice;
         int count = countChanger.GetCounter();
 
+        totalPrice = Multiplication(price, count);
+
         var total = gameObject.GetComponent<Text>();
-        total.text = Multiplication(price, count).ToString();
+        total.text = totalPrice.ToString();
     }
 
-    int Multiplication(int _price, int _possessionCount)
+    int Multiplication(int _price, int _count)
     {
-        int _total = _price * _possessionCount;
+        int _total = _price * _count;
         return _total;
     }
+
+    public int GetTotalPrice()
+    {
+        return totalPrice;
+    }
+
+
 }
