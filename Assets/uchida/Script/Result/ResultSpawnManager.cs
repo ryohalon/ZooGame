@@ -7,14 +7,27 @@ public class ResultSpawnManager : MonoBehaviour
     [SerializeField]
     private GameObject result = null;
 
-    [SerializeField]
     private Timer timer = null;
 
     private bool isEndOfTheDay = false;
-    
+    private GameObject resultWindow = null;
+
+    static private ResultSpawnManager instance = null;
+
     void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+        if(instance == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        timer = GameObject.Find("Timer").GetComponent<Timer>();
+
         isEndOfTheDay = false;
     }
 
@@ -27,13 +40,13 @@ public class ResultSpawnManager : MonoBehaviour
     {
         while (true)
         {
-            // Timerが完成したら書き直す
-            if (Input.GetMouseButtonDown(0) && !isEndOfTheDay)
+            yield return null;
+            if (!isEndOfTheDay && resultWindow != null) continue;
+
+            if (timer.isEndDay)
                 isEndOfTheDay = true;
 
             SpawnResult();
-
-            yield return null;
         }
     }
 
@@ -41,11 +54,13 @@ public class ResultSpawnManager : MonoBehaviour
     {
         if (!isEndOfTheDay)
             return;
+        if (resultWindow != null)
+            return;
 
-        var result_ = Instantiate(result);
-        result_.transform.SetParent(GameObject.Find("Canvas").transform);
-        result_.transform.localScale = Vector3.one;
-        result_.transform.localPosition = Vector3.zero;
+        resultWindow = Instantiate(result);
+        resultWindow.transform.SetParent(GameObject.Find("Canvas").transform);
+        resultWindow.transform.localScale = Vector3.one;
+        resultWindow.transform.localPosition = Vector3.zero;
         isEndOfTheDay = false;
     }
 }

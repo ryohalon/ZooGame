@@ -6,6 +6,7 @@ using System;
 
 public class ResultManager : MonoBehaviour
 {
+    private Timer timer = null;
     private PlayerStatusManager player = null;
     private GameObject coin = null;
     private GameObject coinBox = null;
@@ -32,6 +33,7 @@ public class ResultManager : MonoBehaviour
 
     void Start()
     {
+        timer = GameObject.Find("Timer").GetComponent<Timer>();
         player = GameObject.Find("Player").GetComponent<PlayerStatusManager>();
 
         easing = GetComponent<Easing>();
@@ -108,7 +110,8 @@ public class ResultManager : MonoBehaviour
         if (!Input.GetMouseButtonDown(0))
             return;
 
-        GetComponent<SceneChanger>().NextSceneName = "Title";
+        timer.SetStartDayTime();
+        GetComponent<SceneChanger>().NextSceneName = "GameMain";
         GetComponent<SceneChanger>().TouchButton();
     }
 
