@@ -41,6 +41,16 @@ public class TrainingRoot : MonoBehaviour
     [SerializeField]
     GameObject Heart = null;
 
+    [SerializeField]
+    float[] MeetNums;
+    [SerializeField]
+    Text[] MeetTexts = null;
+
+    [SerializeField]
+    float[] VegetableNums;
+    [SerializeField]
+    Text[] VegetableTexts = null;
+
     private bool isSelectButton = false;
 
     public int satietyLelel = 0;
@@ -107,14 +117,18 @@ public class TrainingRoot : MonoBehaviour
 
     Vector2 moyaSize;
 
+    private FoodList foodList = null;
+
 
     void Start()
     {
-        animalStatusManager.status.Rarity = 4;
-        animalStatusManager.status.FoodType = 0;
-        int rarity = animalStatusManager.status.Rarity;
-        foodType = animalStatusManager.status.FoodType;
-        maxLoveLevel = rarity * 20;
+        foodList = GameObject.Find("FoodList").GetComponent<FoodList>();
+
+        //animalStatusManager.status.Rarity = 4;
+        //animalStatusManager.status.FoodType = 0;
+        //int rarity = animalStatusManager.status.Rarity;
+        //foodType = animalStatusManager.status.FoodType;
+        //maxLoveLevel = rarity * 20;
         maxSatietyLevel = 10;
 
         BrushPos = Brush.GetComponent<RectTransform>().position;
@@ -122,10 +136,22 @@ public class TrainingRoot : MonoBehaviour
         FoodPos = Food.GetComponent<RectTransform>().position;
         FoodSize = Food.GetComponent<RectTransform>().sizeDelta;
         moyaSize = Moya.GetComponent<RectTransform>().sizeDelta;
+
+        for (int i = 0; i < 3; ++i)
+            MeetNums[i] = foodList.foodList[i].possessionNumber;
+
+
+        for (int i = 3; i < 6; ++i)
+            VegetableNums[i - 3] = foodList.foodList[i].possessionNumber;
+
+
+        for (int i = 0; i < 6; ++i)
+            Debug.Log(foodList.foodList[i].possessionNumber);
     }
 
     void Update()
     {
+
         if (isAnimation == true)
         {
             if (animationType == Type.BRUSH)
@@ -208,7 +234,7 @@ public class TrainingRoot : MonoBehaviour
 
                 if (foodCommentType == FoodCommentType.DONT_LIKE)
                 {
-                    Moya.GetComponent<RectTransform>().sizeDelta += new Vector2(0,0.4f);
+                    Moya.GetComponent<RectTransform>().sizeDelta += new Vector2(0, 0.4f);
                 }
                 if (animationTime > 2.5f)
                 {
@@ -226,6 +252,15 @@ public class TrainingRoot : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+
+    void SetFoodText()
+    {
+        for (int i = 0; i < 3; ++i)
+        {
+            MeetTexts[i].text = "x " + MeetNums[i].ToString();
+            VegetableTexts[i].text = "x " + VegetableNums[i].ToString();
         }
     }
 
@@ -292,6 +327,11 @@ public class TrainingRoot : MonoBehaviour
 
     public void PushMeatType(int choiseFoodRank)
     {
+        if (MeetNums[choiseFoodRank] == 0) return;
+        --MeetNums[choiseFoodRank];
+
+        SetFoodText();
+
         if (foodType == 0)
         {
             foodCommentType = FoodCommentType.LIKE;
@@ -332,6 +372,10 @@ public class TrainingRoot : MonoBehaviour
 
     public void PushVegetableType(int choiseFoodRank)
     {
+        if (VegetableNums[choiseFoodRank] == 0) return;
+        --VegetableNums[choiseFoodRank];
+        SetFoodText();
+
         if (foodType == 1)
         {
             foodCommentType = FoodCommentType.LIKE;
