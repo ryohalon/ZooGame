@@ -5,13 +5,13 @@ using UnityEngine.UI;
 public class FoodTotalPriceChanger : MonoBehaviour
 {
     public GameObject foodList;
-    FoodList food;
+    FoodList food = null;
 
     public GameObject foodIDSetter;
-    FoodIDSetter setter;
+    FoodIDSetter setter = null;
 
     public GameObject purchaseCountChanger;
-    PurchaseCountChanger countChanger;
+    PurchaseCountChanger countChanger = null;
 
     int ID;
 

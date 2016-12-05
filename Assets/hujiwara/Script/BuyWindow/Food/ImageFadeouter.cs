@@ -17,8 +17,6 @@ public class ImageFadeouter : MonoBehaviour
     float time = 2;
     float setTime = 2;
 
-    bool isActive;
-
     void Start()
     {
         image = gameObject.GetComponent<Image>();
@@ -28,8 +26,6 @@ public class ImageFadeouter : MonoBehaviour
         textColor = text.color;
 
         isShow = false;
-
-        isActive = gameObject.activeSelf;
 
         InitAlpha();
     }

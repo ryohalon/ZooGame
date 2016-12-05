@@ -14,17 +14,11 @@ public class FoodBuyer : MonoBehaviour
     public GameObject purchaseCountChanger;
     PurchaseCountChanger countChanger = null;
 
-    public GameObject totalPriceText;
-    FoodTotalPriceChanger totalPriceChanger = null;
-
     public GameObject handMoneyText;
     HandMoneyChanger handMoneyChanger = null;
 
     public GameObject missingImage;
     ImageFadeouter fadeouter = null;
-
-    public GameObject debugPlayerStatus;
-    DebugPlayerStatus playerStatus = null;
     
     int ID;
 
@@ -42,17 +36,11 @@ public class FoodBuyer : MonoBehaviour
         countChanger = new PurchaseCountChanger();
         countChanger = purchaseCountChanger.GetComponent<PurchaseCountChanger>();
 
-        totalPriceChanger = new FoodTotalPriceChanger();
-        totalPriceChanger = totalPriceText.GetComponent<FoodTotalPriceChanger>();
-
         handMoneyChanger = new HandMoneyChanger();
         handMoneyChanger = handMoneyText.GetComponent<HandMoneyChanger>();
 
         fadeouter = new ImageFadeouter();
         fadeouter = missingImage.GetComponent<ImageFadeouter>();
-
-        playerStatus = new DebugPlayerStatus();
-        playerStatus = debugPlayerStatus.GetComponent<DebugPlayerStatus>();
 
         ID = 0;
 
