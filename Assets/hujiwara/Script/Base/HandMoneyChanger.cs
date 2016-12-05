@@ -6,22 +6,22 @@ using System.IO;
 public class HandMoneyChanger : MonoBehaviour
 {
     public GameObject PlayerStatus;
-    DebugPlayerStatus status;
+    DebugPlayerStatus status = null;
 
     public GameObject foodList;
-    FoodList food;
+    FoodList food = null;
 
     public GameObject foodIDSetter;
-    FoodIDSetter foodSetter;
+    FoodIDSetter foodSetter = null;
 
     public GameObject foodTotalText;
-    FoodTotalPriceChanger foodTotalChanger;
+    FoodTotalPriceChanger foodTotalChanger = null;
 
     public GameObject debugAnimalList;
-    DebugAnimalList animalList;
+    DebugAnimalList animalList = null;
 
     public GameObject animalIDSetter;
-    AnimalIDSetter animalSetter;
+    AnimalIDSetter animalSetter = null;
 
     int handMoney;
 

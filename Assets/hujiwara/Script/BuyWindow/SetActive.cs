@@ -7,7 +7,7 @@ public class SetActive : MonoBehaviour
     public GameObject animalComm;
 
     public GameObject handMoneyText;
-    HandMoneyChanger handMoneyChanger;
+    HandMoneyChanger handMoneyChanger = null;
 
     void Start()
     {

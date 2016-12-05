@@ -10,9 +10,9 @@ public class AnimalIDReader : MonoBehaviour
     string path;
 
     public GameObject animalIDSetter;
-    AnimalIDSetter setter;
+    AnimalIDSetter setter = null;
 
-    AnimalIDWriter writer;
+    AnimalIDWriter writer = null;
 
     void Start()
     {
