@@ -20,9 +20,6 @@ public class FoodIDSetter : MonoBehaviour
     public GameObject foodTotalPriceChanger;
     FoodTotalPriceChanger totalPriceChanger = null;
 
-    public GameObject handMoneyChanger;
-    HandMoneyChanger moneyChanger = null;
-
     void Start()
     {
         priceChanger = new FoodPriceChanger();
@@ -39,9 +36,6 @@ public class FoodIDSetter : MonoBehaviour
 
         totalPriceChanger = new FoodTotalPriceChanger();
         totalPriceChanger = foodTotalPriceChanger.GetComponent<FoodTotalPriceChanger>();
-
-        moneyChanger = new HandMoneyChanger();
-        moneyChanger = handMoneyChanger.GetComponent<HandMoneyChanger>();
     }
 
     public void SetID(int readID)

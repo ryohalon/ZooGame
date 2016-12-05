@@ -4,13 +4,13 @@ using System.Collections;
 public class AnimalBuyer : MonoBehaviour
 {
     public GameObject debugAnimalList;
-    DebugAnimalList animalList;
+    DebugAnimalList animalList = null;
 
     public GameObject animalIDSetter;
-    AnimalIDSetter setter;
+    AnimalIDSetter setter = null;
 
     public GameObject handMoneyText;
-    HandMoneyChanger handMoneyChanger;
+    HandMoneyChanger handMoneyChanger = null;
 
     int ID;
 

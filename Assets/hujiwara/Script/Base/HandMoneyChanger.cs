@@ -8,12 +8,6 @@ public class HandMoneyChanger : MonoBehaviour
     public GameObject PlayerStatus;
     DebugPlayerStatus status = null;
 
-    public GameObject foodList;
-    FoodList food = null;
-
-    public GameObject foodIDSetter;
-    FoodIDSetter foodSetter = null;
-
     public GameObject foodTotalText;
     FoodTotalPriceChanger foodTotalChanger = null;
 
@@ -31,12 +25,6 @@ public class HandMoneyChanger : MonoBehaviour
     {
         status = new DebugPlayerStatus();
         status = PlayerStatus.GetComponent<DebugPlayerStatus>();
-
-        food = new FoodList();
-        food = foodList.GetComponent<FoodList>();
-
-        foodSetter = new FoodIDSetter();
-        foodSetter = foodIDSetter.GetComponent<FoodIDSetter>();
 
         foodTotalChanger = new FoodTotalPriceChanger();
         foodTotalChanger = foodTotalText.GetComponent<FoodTotalPriceChanger>();
