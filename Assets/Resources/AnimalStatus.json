@@ -1,0 +1,30 @@
+{
+  "Animal0": {
+    "Name": "ÉEÉTÉM",
+    "Prace": 100,
+    "Food": 0,
+    "Rarelity": 1,
+    "Attract": [ 10, 20, 30, 40, 50 ],
+    "LoveDegree": 0,
+    "SatietyLevel": 0,
+    "IsPurchase": 0,
+    "NextLevel": 0,
+    "Ratio": 0,
+    "Sexuality": 0,
+    "CageID": 0
+  },
+  "Animal1": {
+    "Name": "ÉEÉiÉM",
+    "Prace": 100,
+    "Food": 0,
+    "Rarelity": 1,
+    "Attract": [ 10, 20, 30, 40, 50 ],
+    "LoveDegree": 0,
+    "SatietyLevel": 0,
+    "IsPurchase": 0,
+    "NextLevel": 0,
+    "Ratio": 0,
+    "Sexuality": 0,
+    "CageID": 0
+  }
+}
