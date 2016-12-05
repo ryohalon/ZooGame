@@ -6,25 +6,25 @@ using System.Text;
 public class FoodBuyer : MonoBehaviour
 {
     public GameObject foodList;
-    FoodList food;
+    FoodList food = null;
 
     public GameObject foodIDSetter;
-    FoodIDSetter setter;
+    FoodIDSetter setter = null;
 
     public GameObject purchaseCountChanger;
-    PurchaseCountChanger countChanger;
+    PurchaseCountChanger countChanger = null;
 
     public GameObject totalPriceText;
-    FoodTotalPriceChanger totalPriceChanger;
+    FoodTotalPriceChanger totalPriceChanger = null;
 
     public GameObject handMoneyText;
-    HandMoneyChanger handMoneyChanger;
+    HandMoneyChanger handMoneyChanger = null;
 
     public GameObject missingImage;
-    ImageFadeouter fadeouter;
+    ImageFadeouter fadeouter = null;
 
     public GameObject debugPlayerStatus;
-    DebugPlayerStatus playerStatus;
+    DebugPlayerStatus playerStatus = null;
     
     int ID;
 

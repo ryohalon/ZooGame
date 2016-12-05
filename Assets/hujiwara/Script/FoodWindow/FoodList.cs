@@ -5,16 +5,16 @@ using System.IO;
 
 public class FoodList : MonoBehaviour
 {
-    public List<FoodStatusManager2> foodList;
+    public List<FoodStatusManager2> foodList = null;
     // 読み込むファイル名(csv専用です。)
     string path = "FoodStatus.csv";
 
     bool isCreate;
 
     // スクリプトCSVReaderを参照してください。
-    CSVReader reader;
+    CSVReader reader = null;
 
-    CSVReader saveDataReader;
+    CSVReader saveDataReader = null;
 
     static FoodList _instance = null;
 

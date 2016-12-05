@@ -6,13 +6,13 @@ public class AnimalIDSetter : MonoBehaviour
     int ID;
 
     public GameObject animalNameChanger;
-    AnimalNameChanger nameChanger;
+    AnimalNameChanger nameChanger = null;
 
     public GameObject animalPurchasePriceText;
-    AnimalPurchasePriceTextChanger purchasePriceChanger;
+    AnimalPurchasePriceTextChanger purchasePriceChanger = null;
 
     public GameObject handMoneyText;
-    HandMoneyChanger handMoneyChanger;
+    HandMoneyChanger handMoneyChanger = null;
 
     void Start()
     {

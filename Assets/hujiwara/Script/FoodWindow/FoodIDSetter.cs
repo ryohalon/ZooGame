@@ -6,22 +6,22 @@ public class FoodIDSetter : MonoBehaviour
     int ID;
 
     public GameObject foodPriceChanger;
-    FoodPriceChanger priceChanger;
+    FoodPriceChanger priceChanger = null;
 
     public GameObject foodNameTextChanger;
-    FoodNameTextChanger nameChanger;
+    FoodNameTextChanger nameChanger = null;
 
     public GameObject foodLoveDegreeChanger;
-    FoodLoveDegreeChanger loveDegreeChanger;
+    FoodLoveDegreeChanger loveDegreeChanger = null;
 
     public GameObject foodSatietyLevelChanger;
-    FoodSatietyLevelChanger satietyLevelChanger;
+    FoodSatietyLevelChanger satietyLevelChanger = null;
 
     public GameObject foodTotalPriceChanger;
-    FoodTotalPriceChanger totalPriceChanger;
+    FoodTotalPriceChanger totalPriceChanger = null;
 
     public GameObject handMoneyChanger;
-    HandMoneyChanger moneyChanger;
+    HandMoneyChanger moneyChanger = null;
 
     void Start()
     {
