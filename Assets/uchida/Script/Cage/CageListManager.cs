@@ -21,7 +21,7 @@ public class CageListManager : MonoBehaviour
 
     private int changeCageID = 99;
 
-    private float distance = 0.0f;
+    private Vector2 distance = Vector2.zero;
 
     public enum TouchType
     {
@@ -36,7 +36,8 @@ public class CageListManager : MonoBehaviour
         if (cage == null)
             Debug.Log("eroor : GameObject[cage] が null です");
 
-        distance = 15.0f + cage.GetComponent<RectTransform>().rect.width;
+        distance.x = 30.0f + cage.GetComponent<RectTransform>().rect.width;
+        distance.y = 45.0f + cage.GetComponent<RectTransform>().rect.width;
 
         CreateCage();
         SetCageToAnimal();
@@ -126,8 +127,8 @@ public class CageListManager : MonoBehaviour
             cageList[i].transform.SetParent(GameObject.Find("Canvas").transform);
             cageList[i].transform.localPosition =
                 new Vector3(
-                    distance * (i % 3 - 1),
-                    distance * (i / 3 - 1) - 20.0f,
+                    distance.x * (i % 3 - 1),
+                    distance.y * (i / 3 - 1) - 15.0f,
                     0.0f);
             cageList[i].GetComponent<CageManager>().originPos =
                 cageList[i].transform.position;
