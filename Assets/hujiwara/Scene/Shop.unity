@@ -4137,10 +4137,8 @@ MonoBehaviour:
   foodList: {fileID: 1874436058}
   foodIDSetter: {fileID: 1647289044}
   purchaseCountChanger: {fileID: 61993441}
-  totalPriceText: {fileID: 881454178}
   handMoneyText: {fileID: 1435318330}
   missingImage: {fileID: 1000728997}
-  debugPlayerStatus: {fileID: 1109823954}
 --- !u!1 &873394858
 GameObject:
   m_ObjectHideFlags: 0
@@ -4939,7 +4937,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6e4d8ffc2025434fa0c92b612367523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NextSceneName: 
+  NextSceneName: GameMain
 --- !u!1 &1063186458
 GameObject:
   m_ObjectHideFlags: 0
@@ -6122,8 +6120,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerStatus: {fileID: 1109823954}
-  foodList: {fileID: 1874436058}
-  foodIDSetter: {fileID: 1647289044}
   foodTotalText: {fileID: 881454178}
   debugAnimalList: {fileID: 688273688}
   animalIDSetter: {fileID: 1891720816}
@@ -6938,7 +6934,6 @@ MonoBehaviour:
   foodLoveDegreeChanger: {fileID: 252425082}
   foodSatietyLevelChanger: {fileID: 1906134269}
   foodTotalPriceChanger: {fileID: 881454178}
-  handMoneyChanger: {fileID: 1435318330}
 --- !u!1 &1660270257
 GameObject:
   m_ObjectHideFlags: 0

@@ -88,7 +88,9 @@ public class PushDownObject : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         if (isPushed || pushOnly || dragging)
             return;
 
-        Debug.Log("俺は今押しているぅ～！");
+        if (GetComponent<CageManager>().animalID == 99)
+            return;
+
         pressStart = true;
         pressTime = 0.0f;
     }

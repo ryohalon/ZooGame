@@ -15,11 +15,11 @@ public class DebugPlayerStatus : MonoBehaviour
 
     void Init()
     {
-        status.HandMoney = 10000;
+        //status.HandMoney = 10000;
     }
 
     public int GetHandMoney()
     {
-        return status.HandMoney;
+        return 0;//(int)status.HandMoney;
     }
 }
