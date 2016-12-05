@@ -46,6 +46,13 @@ public class AnimalStatusManager : MonoBehaviour
     // 育成する動物かどうか
     public bool IsRaise { get; set; }
 
+
+    static public GameObject instance = null;
+    void Awake()
+    {
+        
+    }
+
     public void InitStatus()
     {
         status.ID = 99;
@@ -72,10 +79,13 @@ public class AnimalStatusManager : MonoBehaviour
     //＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
     // プランナーに用相談
     //＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
-    public int GetVisitors(float elapsedTime)
+    public float GetVisitors(float elapsedTime)
     {
-        float visitors = (float)status.AttractVisitors * status.Ratio * elapsedTime;
+        float visitors = (float)status.AttractVisitors
+            * status.Ratio 
+            * (status.SatietyLevel / 100.0f) 
+            * elapsedTime;
 
-        return (int)visitors;
+        return visitors;
     }
 }

@@ -10,8 +10,6 @@ public class SignBoardmanager : MonoBehaviour
 
     private void LoadStatus()
     {
-        Debug.Log("何も書いてない");
-
         // 仮置き
         var zooName = this.gameObject.transform.FindChild("ZooName").gameObject;
         zooName.GetComponent<Text>().text = "***" + "動物園";
@@ -33,8 +31,7 @@ public class SignBoardmanager : MonoBehaviour
         while (true)
         {
             var playerStatus = player.GetComponent<PlayerStatusManager>();
-            int moneyToTheTarget = playerStatus.GetMoneyToTheTarget();
-            int oneDayVisitors = playerStatus.OneDayVisitors;
+            int oneDayVisitors = (int)playerStatus.OneDayVisitors;
 
             var visitorsNum = this.gameObject.transform.FindChild("VisitorsNum").gameObject;
             var visiNumText = visitorsNum.GetComponent<Text>();
