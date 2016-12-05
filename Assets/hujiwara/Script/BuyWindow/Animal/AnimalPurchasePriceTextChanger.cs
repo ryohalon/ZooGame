@@ -5,10 +5,10 @@ using UnityEngine.UI;
 public class AnimalPurchasePriceTextChanger : MonoBehaviour
 {
     public GameObject animalIDSetter;
-    AnimalIDSetter setter;
+    AnimalIDSetter setter = null;
 
     public GameObject debugAnimalList;
-    DebugAnimalList animalList;
+    DebugAnimalList animalList = null;
 
     int ID;
 
