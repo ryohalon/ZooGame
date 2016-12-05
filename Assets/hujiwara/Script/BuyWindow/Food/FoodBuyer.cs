@@ -11,7 +11,13 @@ public class FoodBuyer : MonoBehaviour
     public GameObject foodIDSetter;
     FoodIDSetter setter;
 
+    public GameObject purchaseCountChanger;
+    PurchaseCountChanger countChanger;
+
     int ID;
+
+    string directory;
+    string path;
     
     void Start()
     {
@@ -21,20 +27,26 @@ public class FoodBuyer : MonoBehaviour
         setter = new FoodIDSetter();
         setter = foodIDSetter.GetComponent<FoodIDSetter>();
 
+        countChanger = new PurchaseCountChanger();
+        countChanger = purchaseCountChanger.GetComponent<PurchaseCountChanger>();
+
         ID = 0;
+
+        directory = Application.persistentDataPath + "/";
+        path = "FoodSaveData.csv";
     }
 
     public void Sell()
     {
         ID = setter.GetID();
 
-        food.foodList[ID].possessionNumber += 1;
+        food.foodList[ID].possessionNumber += countChanger.GetCounter();
 
         Saver();
 
         for(int i = 0; i < 6; ++i)
         {
-            Debug.Log(food.foodList[i].possessionNumber);
+            Debug.Log("foodID[" + i + "]=" + food.foodList[i].possessionNumber);
         }
     }
 
@@ -48,7 +60,7 @@ public class FoodBuyer : MonoBehaviour
             line.Add(food.foodList[i].possessionNumber);
             data.Add(line);
         }
-        MapCSVSaver(data, Application.persistentDataPath + "/", "sample.csv");
+        MapCSVSaver(data, directory, path);
     }
 
     void MapCSVSaver(List<List<int>> data, string directory, string path)

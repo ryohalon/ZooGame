@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
+using System.Collections;
 using UnityEngine.UI;
 
-public class FoodPriceChanger : MonoBehaviour
+public class FoodNameTextChanger : MonoBehaviour
 {
     public GameObject foodList;
     FoodList food;
@@ -10,8 +11,6 @@ public class FoodPriceChanger : MonoBehaviour
     FoodIDSetter setter;
 
     int ID;
-
-    int price;
 
     void Start()
     {
@@ -30,7 +29,7 @@ public class FoodPriceChanger : MonoBehaviour
     {
         ID = setter.GetID();
 
-        var price = gameObject.GetComponent<Text>();
-        price.text = food.foodList[ID].purchasePrice.ToString();
+        var Name = gameObject.GetComponent<Text>();
+        Name.text = food.foodList[ID].Name.ToString();
     }
 }

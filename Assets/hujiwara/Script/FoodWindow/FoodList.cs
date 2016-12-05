@@ -24,7 +24,12 @@ public class FoodList : MonoBehaviour
         saveDataReader = new CSVReader();
         // 読み込み
         reader.Load(Application.dataPath + "/" + path);
-        saveDataReader.Load(Application.persistentDataPath + "/" + "sample.csv");
+
+        if (File.Exists(Application.persistentDataPath+"/"+"sample.csv"))
+        {
+            saveDataReader.Load(Application.persistentDataPath + "/" + "sample.csv");
+        }
+
         isCreate = false;
     }
 
