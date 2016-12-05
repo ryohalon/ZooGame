@@ -4,10 +4,10 @@ using UnityEngine.UI;
 public class CountChanger : MonoBehaviour
 {
     public GameObject countText;
-    PurchaseCountChanger counterText;
+    PurchaseCountChanger counterText = null;
 
     public GameObject totalText;
-    FoodTotalPriceChanger totalChanger;
+    FoodTotalPriceChanger totalChanger = null;
 
     void Start()
     {

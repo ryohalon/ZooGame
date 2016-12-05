@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class AnimalPurchasePriceChanger : MonoBehaviour
 {
     public GameObject debugAnimalList;
-    DebugAnimalList animalList;
+    DebugAnimalList animalList = null;
 
     public int ID;
 
