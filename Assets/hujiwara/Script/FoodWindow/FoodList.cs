@@ -5,49 +5,49 @@ using System.IO;
 
 public class FoodList : MonoBehaviour
 {
-    public List<FoodStatusManager2> foodList = null;
+    public List<FoodStatusManager2> foodList = new List<FoodStatusManager2>();
     // 読み込むファイル名(csv専用です。)
-    string path = "FoodStatus.csv";
 
-    bool isCreate;
+    string directory;
+    string path;
 
     // スクリプトCSVReaderを参照してください。
-    CSVReader reader = null;
+    CSVReader reader = new CSVReader();
 
-    CSVReader saveDataReader = null;
+    CSVReader saveDataReader = new CSVReader();
 
-    static FoodList _instance = null;
+    public static bool init = false;
+    public static FoodList _instance = new FoodList();
 
     void Awake()
     {
-        if(_instance == null)
+        if(!init)
         {
-            _instance = this;
+            init = true;
             DontDestroyOnLoad(this);
         }
-        else
-        {
-            Destroy(this);
-        }
-
-        foodList = new List<FoodStatusManager2>();
+        //if (_instance == null)
+        //{
+        //    _instance = this;
+            
+        //}
+        //else
+        //{
+        //    Destroy(gameObject);
+        //}
 
         reader = new CSVReader();
-        saveDataReader = new CSVReader();
+
+        directory = Application.dataPath + "/" + "hujiwara" + "/";
+        path = "FoodStatus.csv";
+
         // 元になるご飯のデータを読み込んでいます。
-        reader.Load(Application.dataPath + "/" + "hujiwara" + "/" + path);
-
-        // セーブデータがある場合それを読み込んでいます。
-        if (File.Exists(Application.persistentDataPath+"/"+"sample.csv"))
-        {
-            saveDataReader.Load(Application.persistentDataPath + "/" + "sample.csv");
-        }
-
-        isCreate = false;
+        reader.Load(directory + path);
     }
 
     void Start()
     {
+        reader.Load(directory + path);
 
         for (int i = 0; i < 6; ++i)
         {
@@ -58,23 +58,16 @@ public class FoodList : MonoBehaviour
         // 使うときは foodList[0].Name のように使ってください。
         for (int i = 0; i < 6; ++i)
         {
-            foodList[i].ID = reader.GetInt(i, 0);
-            foodList[i].Name = reader.GetString(i, 1);
-            foodList[i].purchasePrice = reader.GetInt(i, 2);
-            foodList[i].loveDegreeUpValue = reader.GetFloat(i, 3);
-            foodList[i].satietyLevelUpValue = reader.GetFloat(i, 4);
-            foodList[i].foodType = reader.GetInt(i, 5);
-
-            if(File.Exists(Application.persistentDataPath + "/" + "sample.csv"))
+            if (File.Exists(directory + path))
             {
-                foodList[i].possessionNumber = saveDataReader.GetInt(i, 1);
-                Debug.Log(foodList[i].possessionNumber);
-            }
-            else
-            {
+                foodList[i].ID = reader.GetInt(i, 0);
+                foodList[i].Name = reader.GetString(i, 1);
+                foodList[i].purchasePrice = reader.GetInt(i, 2);
+                foodList[i].loveDegreeUpValue = reader.GetFloat(i, 3);
+                foodList[i].satietyLevelUpValue = reader.GetFloat(i, 4);
+                foodList[i].foodType = reader.GetInt(i, 5);
                 foodList[i].possessionNumber = reader.GetInt(i, 6);
             }
-            
         }
     }
 }

@@ -9,16 +9,16 @@ public class FoodBuyer : MonoBehaviour
     FoodList food = null;
 
     public GameObject foodIDSetter;
-    FoodIDSetter setter = null;
+    FoodIDSetter setter = new FoodIDSetter();
 
     public GameObject purchaseCountChanger;
-    PurchaseCountChanger countChanger = null;
+    PurchaseCountChanger countChanger = new PurchaseCountChanger();
 
     public GameObject handMoneyText;
-    HandMoneyChanger handMoneyChanger = null;
+    HandMoneyChanger handMoneyChanger = new HandMoneyChanger();
 
     public GameObject missingImage;
-    ImageFadeouter fadeouter = null;
+    ImageFadeouter fadeouter = new ImageFadeouter();
     
     int ID;
 
@@ -27,7 +27,6 @@ public class FoodBuyer : MonoBehaviour
     
     void Start()
     {
-        food = new FoodList();
         food = foodList.GetComponent<FoodList>();
 
         setter = new FoodIDSetter();
@@ -44,7 +43,7 @@ public class FoodBuyer : MonoBehaviour
 
         ID = 0;
 
-        directory = Application.persistentDataPath + "/";
+        directory = Application.dataPath + "/" + "hujiwara" + "/";
         path = "FoodSaveData.csv";
     }
 
@@ -61,7 +60,7 @@ public class FoodBuyer : MonoBehaviour
             fadeouter.Fadeout();
         }
 
-        Saver();
+
 
         handMoneyChanger.BuyFood();
         handMoneyChanger.TextUpdater();

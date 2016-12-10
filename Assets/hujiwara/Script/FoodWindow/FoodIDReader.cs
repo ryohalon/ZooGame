@@ -9,13 +9,13 @@ public class FoodIDReader : MonoBehaviour
     string path;
 
     public GameObject foodIDSetter;
-    private FoodIDSetter setter;
+    FoodIDSetter setter;
 
-    private FoodIDWriter writer;
+    FoodIDWriter writer;
 
     void Start()
     {
-        directory = Application.persistentDataPath + "/";
+        directory = Application.dataPath + "/" + "hujiwara" + "/";
         path = "FoodIDSave.txt";
 
         setter = foodIDSetter.GetComponent<FoodIDSetter>();
