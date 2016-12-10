@@ -3,20 +3,20 @@ using System.Collections;
 
 public class DebugPlayerStatus : MonoBehaviour
 {
-    PlayerStatusManager status;
+//    PlayerStatusManager status;
 
-    void Awake()
-    {
-        status = new PlayerStatusManager();
-        status = gameObject.GetComponent<PlayerStatusManager>();
+//    void Awake()
+//    {
+//        status = new PlayerStatusManager();
+//        status = gameObject.GetComponent<PlayerStatusManager>();
 
-        Init();
-    }
+//        Init();
+//    }
 
-    void Init()
-    {
-        //status.HandMoney = 10000;
-    }
+//    void Init()
+//    {
+//        //status.HandMoney = 10000;
+//    }
 
     public int GetHandMoney()
     {

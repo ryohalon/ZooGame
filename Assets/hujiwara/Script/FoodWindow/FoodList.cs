@@ -14,8 +14,6 @@ public class FoodList : MonoBehaviour
     // スクリプトCSVReaderを参照してください。
     CSVReader reader = new CSVReader();
 
-    CSVReader saveDataReader = new CSVReader();
-
     public static bool init = false;
     public static FoodList _instance = new FoodList();
 
