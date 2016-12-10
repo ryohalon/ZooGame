@@ -20,6 +20,6 @@ public class DebugPlayerStatus : MonoBehaviour
 
     public int GetHandMoney()
     {
-        return 0;//(int)status.HandMoney;
+        return 100000;//(int)status.HandMoney;
     }
 }

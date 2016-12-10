@@ -44,7 +44,7 @@ public class FoodBuyer : MonoBehaviour
         ID = 0;
 
         directory = Application.dataPath + "/" + "hujiwara" + "/";
-        path = "FoodSaveData.csv";
+        path = "FoodStatus.csv";
     }
 
     public void Sell()
@@ -58,6 +58,67 @@ public class FoodBuyer : MonoBehaviour
         else
         {
             fadeouter.Fadeout();
+        }
+
+        if(File.Exists(directory+path))
+        {
+            using (var stream = new FileStream(directory + path, FileMode.Open))
+            {
+                using (var writer = new StreamWriter(stream, Encoding.UTF8))
+                {
+                    string csv = string.Empty;
+                    csv += "//ID" + "," + "//名前" + "," + "//値段" + "," + "//愛情度上昇値" + "," + "//満腹度上昇値" + "," + "//種類" + "," + "//初期所持数";
+                    csv += "\n";
+                    for(int i = 0; i < 6; ++i)
+                    {
+                        csv += food.foodList[i].ID;
+                        csv += ",";
+                        csv += food.foodList[i].Name;
+                        csv += ",";
+                        csv += food.foodList[i].purchasePrice;
+                        csv += ",";
+                        csv += food.foodList[i].loveDegreeUpValue;
+                        csv += ",";
+                        csv += food.foodList[i].satietyLevelUpValue;
+                        csv += ",";
+                        csv += food.foodList[i].foodType;
+                        csv += ",";
+                        csv += food.foodList[i].possessionNumber;
+                        csv += "\n";
+                    }
+                    writer.WriteLine(csv);
+                }
+            }
+        }
+        else
+        {
+            using (var stream = new FileStream(directory + path, FileMode.Create))
+            {
+                using (var writer = new StreamWriter(stream, Encoding.UTF8))
+                {
+                    string csv = string.Empty;
+                    csv += "//ID" + "," + "//名前" + "," + "//値段" + "," + "//愛情度上昇値" + "," + "//満腹度上昇値" + "," + "//種類" + "," + "//初期所持数";
+                    csv += "\n";
+                    for (int i = 0; i < 6; ++i)
+                    {
+                        csv += food.foodList[i].ID;
+                        csv += ",";
+                        csv += food.foodList[i].Name;
+                        csv += ",";
+                        csv += food.foodList[i].purchasePrice;
+                        csv += ",";
+                        csv += food.foodList[i].loveDegreeUpValue;
+                        csv += ",";
+                        csv += food.foodList[i].satietyLevelUpValue;
+                        csv += ",";
+                        csv += food.foodList[i].foodType;
+                        csv += ",";
+                        csv += food.foodList[i].possessionNumber;
+                        csv += "\n";
+                    }
+                    writer.WriteLine(csv);
+                }
+            }
         }
 
 
@@ -85,7 +146,7 @@ public class FoodBuyer : MonoBehaviour
         MapCSVSaver(data, directory, path);
     }
 
-    void MapCSVSaver(List<List<int>> data, string directory, string path)
+    void MapCSVSaver(List<List<int>> data, string _directory, string _path)
     {
         string save = string.Empty;
         for(int i = 0; i < data.Count-1; ++i)
@@ -95,7 +156,7 @@ public class FoodBuyer : MonoBehaviour
         }
         save += LineCSVMaker(data[data.Count - 1]);
 
-        Writer(save, directory, path);
+        Writer(save, _directory, _path);
     }
 
     string LineCSVMaker(List<int> data)
@@ -112,9 +173,9 @@ public class FoodBuyer : MonoBehaviour
         return csv;
     }
 
-    void Writer(string data, string directory, string path)
+    void Writer(string data, string _directory, string _path)
     {
-        using (var stream = new FileStream(directory + path, FileMode.OpenOrCreate))
+        using (var stream = new FileStream(_directory + _path, FileMode.OpenOrCreate))
         {
             using (var writer = new StreamWriter(stream, Encoding.UTF8))
             {
