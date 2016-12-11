@@ -11,7 +11,7 @@ public class FoodIDWriter : MonoBehaviour
 
     void Awake()
     {
-        directory = Application.persistentDataPath + "/";
+        directory = Application.dataPath + "/" + "hujiwara" + "/";
         path = "FoodIDSave.txt";
     }
 

@@ -14,7 +14,6 @@ public class FoodNameTextChanger : MonoBehaviour
 
     void Start()
     {
-        food = new FoodList();
         food = foodList.GetComponent<FoodList>();
 
         setter = new FoodIDSetter();
