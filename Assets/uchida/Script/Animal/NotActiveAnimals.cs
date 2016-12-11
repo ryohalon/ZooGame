@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class NotActiveAnimals : MonoBehaviour
 {
-    private GameObject animalListManager = null;
+    private GameObject animalList = null;
     [SerializeField]
     private GameObject cage = null;
 
@@ -22,7 +22,7 @@ public class NotActiveAnimals : MonoBehaviour
 
     void Start()
     {
-        animalListManager = GameObject.Find("AnimalListManager");
+        animalList = GameObject.Find("AnimalList");
 
         distance = 10.0f + cage.GetComponent<RectTransform>().rect.width;
         CreateCage();
@@ -32,10 +32,10 @@ public class NotActiveAnimals : MonoBehaviour
 
     private void CreateCage()
     {
-        var animalList = animalListManager.GetComponent<AnimalListManager>().animalList;
-        for(int i = 0; i < animalList.Count; i++)
+        var animalList_ = animalList.GetComponent<AnimalStatusCSV>().animals;
+        for(int i = 0; i < 13; i++)
         {
-            var animalStatus = animalList[i].GetComponent<AnimalStatusManager>();
+            var animalStatus = animalList_[i].GetComponent<AnimalStatusManager>();
             if (animalStatus.status.IsPurchase == false)
                 continue;
             if (animalStatus.status.CageID != -1)
@@ -49,7 +49,7 @@ public class NotActiveAnimals : MonoBehaviour
             cageList[cageList.Count - 1].GetComponent<DragObject>().isDrag = false;
             cageList[cageList.Count - 1].GetComponent<DropObject>().isDrop = false;
             cageList[cageList.Count - 1].GetComponent<Image>().sprite =
-                animalListManager.GetComponent<AnimalTextureManager>().animalTextureList[i][0];
+                animalList.GetComponent<AnimalTextureManager>().animalTextureList[i][0];
         }
 
         for (int i = 0; i < cageList.Count; i++)

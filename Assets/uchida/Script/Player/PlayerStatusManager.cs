@@ -12,7 +12,7 @@ public class PlayerStatusManager : MonoBehaviour
     private Timer timer = null;
 
     // 動物の檻のリスト
-    private GameObject animalListManager = null;
+    private GameObject animalList = null;
     private CombManager combManager = null;
 
     static private PlayerStatusManager instance = null;
@@ -152,7 +152,7 @@ public class PlayerStatusManager : MonoBehaviour
         }
 
         timer = GameObject.Find("Timer").GetComponent<Timer>();
-        animalListManager = GameObject.Find("AnimalListManager");
+        animalList = GameObject.Find("AnimalList");
         combManager = GameObject.Find("ComboManager").GetComponent<CombManager>();
 
         LoadStatus();
@@ -180,10 +180,10 @@ public class PlayerStatusManager : MonoBehaviour
     // 経過時間でやってきたお客さんの総数
     public void GetElapsedTimeVisitors(float elapsedTime)
     {
-        var animalList = animalListManager.GetComponent<AnimalListManager>().animalList;
+        var animalList_ = animalList.GetComponent<AnimalStatusCSV>().animals;
 
         float totalVisitors = 0;
-        foreach (var animal in animalList)
+        foreach (var animal in animalList_)
         {
             var animalStatus = animal.GetComponent<AnimalStatusManager>();
             if (animalStatus.status.CageID == -1)
