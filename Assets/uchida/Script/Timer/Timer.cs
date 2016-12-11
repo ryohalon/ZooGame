@@ -122,7 +122,7 @@ public class Timer : MonoBehaviour
         FileInfo fi = new FileInfo(Application.dataPath + "/uchida/resource/Text/LastDate.csv");
         try
         {
-            using (StreamReader sr = new StreamReader(fi.OpenRead()))
+            using (StreamReader sr = new StreamReader(fi.Open(FileMode.Open,FileAccess.Read)))
             {
                 txt += sr.ReadToEnd();
             }
