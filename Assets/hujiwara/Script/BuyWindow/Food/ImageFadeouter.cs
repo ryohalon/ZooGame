@@ -16,7 +16,7 @@ public class ImageFadeouter : MonoBehaviour
 
     float time = 2;
     float setTime = 2;
-
+    
     void Start()
     {
         image = gameObject.GetComponent<Image>();

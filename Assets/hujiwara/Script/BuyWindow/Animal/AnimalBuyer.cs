@@ -12,6 +12,10 @@ public class AnimalBuyer : MonoBehaviour
     public GameObject handMoneyText;
     HandMoneyChanger handMoneyChanger = null;
 
+    public GameObject missingImage;
+    ImageFadeouter fadeOuter = new ImageFadeouter();
+    
+
     int ID;
 
     string directory;
@@ -28,6 +32,8 @@ public class AnimalBuyer : MonoBehaviour
         handMoneyChanger = new HandMoneyChanger();
         handMoneyChanger = handMoneyText.GetComponent<HandMoneyChanger>();
 
+        fadeOuter = missingImage.GetComponent<ImageFadeouter>();
+
         ID = 0;
     }
 
@@ -39,6 +45,10 @@ public class AnimalBuyer : MonoBehaviour
         {
             animalList.debugAnimalList[ID].isPurchase = true;
             Debug.Log("ID=[" + ID + "]" + animalList.debugAnimalList[ID].isPurchase);
+        }
+        else
+        {
+            fadeOuter.Fadeout();
         }
 
         handMoneyChanger.BuyAnimal();
