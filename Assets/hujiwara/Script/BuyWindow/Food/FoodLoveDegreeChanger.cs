@@ -8,13 +8,13 @@ public class FoodLoveDegreeChanger : MonoBehaviour
     FoodList food = null;
 
     public GameObject foodIDSetter;
-    FoodIDSetter setter = null;
+    FoodIDSetter setter = new FoodIDSetter();
 
     int ID;
 
     void Start()
     {
-        food = new FoodList();
+//        foodList = GameObject.Find("FoodList");
         food = foodList.GetComponent<FoodList>();
 
         setter = new FoodIDSetter();

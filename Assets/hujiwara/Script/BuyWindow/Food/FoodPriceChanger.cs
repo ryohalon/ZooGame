@@ -15,7 +15,6 @@ public class FoodPriceChanger : MonoBehaviour
 
     void Start()
     {
-        food = new FoodList();
         food = foodList.GetComponent<FoodList>();
 
         setter = new FoodIDSetter();

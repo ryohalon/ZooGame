@@ -16,14 +16,14 @@ public class ImageFadeouter : MonoBehaviour
 
     float time = 2;
     float setTime = 2;
-
+    
     void Start()
     {
         image = gameObject.GetComponent<Image>();
         missingText = text.GetComponent<Text>();
 
         imageColor = image.color;
-        textColor = text.color;
+        textColor = missingText.color;
 
         isShow = false;
 
@@ -35,7 +35,7 @@ public class ImageFadeouter : MonoBehaviour
         imageColor.a = 0;
         textColor.a = 0;
         image.color = imageColor;
-        text.color = textColor;
+        missingText.color = textColor;
     }
 
     void Update()
@@ -51,7 +51,7 @@ public class ImageFadeouter : MonoBehaviour
                 imageColor.a = 0;
                 textColor.a = 0;
                 image.color = imageColor;
-                text.color = textColor;
+                missingText.color = textColor;
             }
         }
     }
@@ -66,13 +66,6 @@ public class ImageFadeouter : MonoBehaviour
         imageColor.a = 1;
         textColor.a = 1;
         image.color = imageColor;
-        text.color = textColor;
-
-        
-
-        if(!isShow)
-        {
-            
-        }
+        missingText.color = textColor;
     }
 }
