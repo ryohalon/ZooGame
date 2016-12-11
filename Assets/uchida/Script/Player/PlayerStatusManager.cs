@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.IO;
 
 public class PlayerStatusManager : MonoBehaviour
 {
@@ -52,6 +53,10 @@ public class PlayerStatusManager : MonoBehaviour
     public int MaxLoveDegreeAnimalNum { get; set; }
 
 
+
+    FileInfo playerFile = null;
+
+
     // 目標までの残り金額
     public int GetMoneyToTheTarget()
     {
@@ -86,7 +91,42 @@ public class PlayerStatusManager : MonoBehaviour
     // 起動時に外部ファイルからデータを読み込む
     private void LoadStatus()
     {
-        Debug.Log("まだ書いてない");
+        playerFile = new FileInfo(Application.dataPath + "/uchida/resource/Text/playerStatus.csv");
+        try
+        {
+            using (StreamReader sr = new StreamReader(playerFile.Open(FileMode.Open, FileAccess.Read)))
+            {
+                string txt = sr.ReadToEnd();
+
+                string[] playerStatus = txt.Split(',');
+
+                ZooName = playerStatus[0];
+                StoryLevel = int.Parse(playerStatus[1]);
+                HandMoney = float.Parse(playerStatus[2]);
+                TargetMoney = float.Parse(playerStatus[3]);
+                OneDayEarnedMoney = float.Parse(playerStatus[4]);
+                OneDayUsedMoney = float.Parse(playerStatus[5]);
+                OneDayVisitors = float.Parse(playerStatus[6]);
+                OneDayFoodCost = float.Parse(playerStatus[7]);
+                OneDayAnimalPurchaseCost = float.Parse(playerStatus[8]);
+                OneDayToyCost = float.Parse(playerStatus[9]);
+                TotalMoney = float.Parse(playerStatus[10]);
+                TotalUsedMoney = float.Parse(playerStatus[11]);
+                TotalVisitors = float.Parse(playerStatus[12]);
+                AnimalNum = int.Parse(playerStatus[13]);
+                MaxLoveDegreeAnimalNum = int.Parse(playerStatus[14]);
+
+
+                foreach(var p in playerStatus)
+                {
+                    Debug.Log(p);
+                }
+            }
+        }
+        catch (Exception e)
+        {
+
+        }
     }
 
     private void DebugStatus()
@@ -116,8 +156,6 @@ public class PlayerStatusManager : MonoBehaviour
         combManager = GameObject.Find("ComboManager").GetComponent<CombManager>();
 
         LoadStatus();
-        Reset();
-        DebugStatus();
     }
 
     void Start()
@@ -162,4 +200,30 @@ public class PlayerStatusManager : MonoBehaviour
         TotalMoney += earnedMoney;
         TotalVisitors += totalVisitors_;
     }
+
+
+
+    public void OnApplicationQuit()
+    {
+        StreamWriter sw = new StreamWriter(playerFile.Open(FileMode.Open, FileAccess.Write));
+
+        sw.WriteLine(ZooName +
+            "," + StoryLevel +
+            "," + HandMoney +
+            "," + TargetMoney +
+            "," + OneDayEarnedMoney +
+            "," + OneDayUsedMoney +
+            "," + OneDayVisitors +
+            "," + OneDayFoodCost +
+            "," + OneDayAnimalPurchaseCost +
+            "," + OneDayToyCost +
+            "," + TotalMoney +
+            "," + TotalUsedMoney +
+            "," + TotalVisitors +
+            "," + AnimalNum +
+            "," + MaxLoveDegreeAnimalNum);
+        sw.Flush();
+        sw.Close();
+    }
+
 }
