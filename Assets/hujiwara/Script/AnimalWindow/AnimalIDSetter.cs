@@ -14,6 +14,9 @@ public class AnimalIDSetter : MonoBehaviour
     public GameObject handMoneyText;
     HandMoneyChanger handMoneyChanger = null;
 
+    public GameObject animalNameTextChanger;
+    AnimalNameChanger nameTextChanger = null;
+
     void Start()
     {
         nameChanger = new AnimalNameChanger();
@@ -24,6 +27,9 @@ public class AnimalIDSetter : MonoBehaviour
 
         handMoneyChanger = new HandMoneyChanger();
         handMoneyChanger = handMoneyText.GetComponent<HandMoneyChanger>();
+
+        nameTextChanger = new AnimalNameChanger();
+        nameTextChanger = animalNameTextChanger.GetComponent<AnimalNameChanger>();
     }
 
     public void SetID(int readID)
@@ -32,6 +38,7 @@ public class AnimalIDSetter : MonoBehaviour
         nameChanger.TextUpdater();
         purchasePriceChanger.TextUpdater();
         handMoneyChanger.TextUpdater();
+        nameTextChanger.TextUpdater();
     }
 
     public int GetID()

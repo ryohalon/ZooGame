@@ -11936,6 +11936,7 @@ MonoBehaviour:
   animalNameChanger: {fileID: 86556108}
   animalPurchasePriceText: {fileID: 758674922}
   handMoneyText: {fileID: 1435318330}
+  animalNameTextChanger: {fileID: 1087492020}
 --- !u!1 &1906134269
 GameObject:
   m_ObjectHideFlags: 0
