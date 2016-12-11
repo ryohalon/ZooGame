@@ -46,7 +46,6 @@ public class AnimalStatusManager : MonoBehaviour
     // 育成する動物かどうか
     public bool IsRaise { get; set; }
 
-
     static public GameObject instance = null;
     void Awake()
     {
@@ -76,9 +75,6 @@ public class AnimalStatusManager : MonoBehaviour
 
 
     // 経過した時間分の来場客数の計算
-    //＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
-    // プランナーに用相談
-    //＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
     public float GetVisitors(float elapsedTime)
     {
         float visitors = (float)status.AttractVisitors

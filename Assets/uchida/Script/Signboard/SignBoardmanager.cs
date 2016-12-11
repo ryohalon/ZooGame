@@ -5,11 +5,12 @@ using System;
 
 public class SignBoardmanager : MonoBehaviour
 {
-    [SerializeField]
     private PlayerStatusManager playerStatus = null;
 
     void Start()
     {
+        playerStatus = GameObject.Find("Player").GetComponent<PlayerStatusManager>();
+
         StartCoroutine(UpdateSignBoard());
     }
 

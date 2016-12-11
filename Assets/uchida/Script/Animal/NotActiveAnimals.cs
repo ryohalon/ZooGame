@@ -2,6 +2,7 @@
 using System.Collections;
 using System;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class NotActiveAnimals : MonoBehaviour
 {
@@ -21,45 +22,34 @@ public class NotActiveAnimals : MonoBehaviour
 
     void Start()
     {
-        if (cage == null)
-        {
-            Debug.Log("cage is empty!");
-            return;
-        }
+        animalListManager = GameObject.Find("AnimalListManager");
 
         distance = 10.0f + cage.GetComponent<RectTransform>().rect.width;
         CreateCage();
-
-        if (animalListManager == null)
-        {
-            Debug.Log("animalListManager is empty!");
-            return;
-        }
 
         StartCoroutine(UpdateNotActiveAnimals());
     }
 
     private void CreateCage()
     {
-        animalListManager = GameObject.Find("AnimalListManager");
         var animalList = animalListManager.GetComponent<AnimalListManager>().animalList;
-        foreach (var animal in animalList)
+        for(int i = 0; i < animalList.Count; i++)
         {
-            var animalStatus = animal.GetComponent<AnimalStatusManager>();
+            var animalStatus = animalList[i].GetComponent<AnimalStatusManager>();
             if (animalStatus.status.IsPurchase == false)
                 continue;
-            if (animalStatus.status.CageID != 99)
+            if (animalStatus.status.CageID != -1)
                 continue;
 
             cageList.Add(Instantiate(cage));
             cageList[cageList.Count - 1].transform.SetParent(GameObject.Find("Canvas").transform);
             cageList[cageList.Count - 1].GetComponent<CageManager>().animalID = animalStatus.status.ID;
             cageList[cageList.Count - 1].transform.localScale = Vector3.one;
-            cageList[cageList.Count - 1].GetComponent<AnimationManager>().animationDataList =
-                animal.GetComponent<AnimationManager>().animationDataList;
             cageList[cageList.Count - 1].GetComponent<PushDownObject>().pushOnly = true;
             cageList[cageList.Count - 1].GetComponent<DragObject>().isDrag = false;
             cageList[cageList.Count - 1].GetComponent<DropObject>().isDrop = false;
+            cageList[cageList.Count - 1].GetComponent<Image>().sprite =
+                animalListManager.GetComponent<AnimalTextureManager>().animalTextureList[i][0];
         }
 
         for (int i = 0; i < cageList.Count; i++)
@@ -99,42 +89,12 @@ public class NotActiveAnimals : MonoBehaviour
 
         var backPushDownOject = transform.GetChild(0).gameObject.GetComponent<PushDownObject>();
         if (backPushDownOject.isPushed)
-        {
             is_select = true;
-        }
 
         if (is_select)
         {
             foreach (var cage in cageList)
                 Destroy(cage);
         }
-
-        //if (!Input.GetMouseButtonDown(0))
-        //    return;
-
-        //foreach (var cage in cageList)
-        //{
-        //    if (!cage.GetComponent<Collision>().IsHit(GetComponent<RayCollision>().HitRayPosCameraToMouse()))
-        //        continue;
-
-        //    selectID = cage.GetComponent<CageManager>().animalID;
-        //    is_select = true;
-        //    break;
-        //}
-
-        //if(!is_select)
-        //{
-        //    var back = transform.GetChild(0).gameObject;
-
-        //   if(back.GetComponent<Collision>().IsHit(GetComponent<RayCollision>().HitRayPosCameraToMouse()))
-        //        is_select = true;
-        //}
-
-        //if (is_select)
-        //{
-        //    foreach (var cage in cageList)
-        //        Destroy(cage);
-        //}
-
     }
 }

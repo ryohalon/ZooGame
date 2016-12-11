@@ -47,13 +47,11 @@ public class ResultManager : MonoBehaviour
     {
         while (true)
         {
-            if (Input.GetMouseButtonDown(2))
+            if (Input.GetMouseButtonDown(0))
                 time = easingStart[easingStart.Count - 1] + easingTakeTime[easingTakeTime.Count - 1];
 
             if(!isMoveEnd)
-            {
                 MoveWindow();
-            }
             else
             {
                 UpdateEasing();

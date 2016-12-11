@@ -23,7 +23,6 @@ public class Timer : MonoBehaviour
     public float timeOfDay = 6.0f;
     public bool isEndDay = false;
 
-    [SerializeField]
     private PlayerStatusManager player = null;
 
     static private Timer instance = null;
@@ -59,8 +58,6 @@ public class Timer : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
-        
     }
 
     private void MoneyEarnedWhenNotActivated()
@@ -122,7 +119,7 @@ public class Timer : MonoBehaviour
         FileInfo fi = new FileInfo(Application.dataPath + "/uchida/resource/Text/LastDate.csv");
         try
         {
-            using (StreamReader sr = new StreamReader(fi.Open(FileMode.Open,FileAccess.Read)))
+            using (StreamReader sr = new StreamReader(fi.Open(FileMode.Open, FileAccess.Read)))
             {
                 txt += sr.ReadToEnd();
             }
@@ -149,6 +146,8 @@ public class Timer : MonoBehaviour
 
     void Start()
     {
+        player = GameObject.Find("Player").GetComponent<PlayerStatusManager>();
+
         MoneyEarnedWhenNotActivated();
 
         StartCoroutine(UpdateTimer());
@@ -165,11 +164,8 @@ public class Timer : MonoBehaviour
                 {
                     if (Input.GetKey(KeyCode.B))
                     {
-                        if (Input.GetKey(KeyCode.C))
-                        {
-                            if (Input.GetKeyDown(KeyCode.Return))
+                        if (Input.GetKeyDown(KeyCode.C))
                                 isEndDay = true;
-                        }
                     }
                 }
 
