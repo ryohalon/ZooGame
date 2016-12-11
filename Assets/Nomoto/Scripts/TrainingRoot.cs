@@ -124,11 +124,11 @@ public class TrainingRoot : MonoBehaviour
     {
         foodList = GameObject.Find("FoodList").GetComponent<FoodList>();
 
-        //animalStatusManager.status.Rarity = 4;
-        //animalStatusManager.status.FoodType = 0;
-        //int rarity = animalStatusManager.status.Rarity;
-        //foodType = animalStatusManager.status.FoodType;
-        //maxLoveLevel = rarity * 20;
+        animalStatusManager.status.Rarity = 4;
+        animalStatusManager.status.FoodType = 0;
+        int rarity = animalStatusManager.status.Rarity;
+        foodType = animalStatusManager.status.FoodType;
+        maxLoveLevel = rarity * 20;
         maxSatietyLevel = 10;
 
         BrushPos = Brush.GetComponent<RectTransform>().position;
@@ -145,8 +145,7 @@ public class TrainingRoot : MonoBehaviour
             VegetableNums[i - 3] = foodList.foodList[i].possessionNumber;
 
 
-        for (int i = 0; i < 6; ++i)
-            Debug.Log(foodList.foodList[i].possessionNumber);
+        SetFoodText();
     }
 
     void Update()
@@ -313,9 +312,9 @@ public class TrainingRoot : MonoBehaviour
         CommentBoard.SetActive(true);
     }
 
-    public void PushBackButton()
+    public void PushBackHomeButton()
     {
-
+        
     }
 
     public void PushOfBackEatBoard()
