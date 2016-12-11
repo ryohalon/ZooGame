@@ -9,7 +9,7 @@ public class CageListManager : MonoBehaviour
 
     public List<GameObject> cageList = new List<GameObject>();
 
-    private GameObject animalListManager;
+    private GameObject animalList;
     private CombManager combManager = null;
     [SerializeField]
     private GameObject notActiveAnimals = null;
@@ -19,7 +19,7 @@ public class CageListManager : MonoBehaviour
     [SerializeField]
     private GameObject cage = null;
 
-    private int changeCageID = 99;
+    private int changeCageID = -1;
 
     private Vector2 distance = Vector2.zero;
 
@@ -33,7 +33,7 @@ public class CageListManager : MonoBehaviour
 
     void Start()
     {
-        animalListManager = GameObject.Find("AnimalListManager");
+        animalList = GameObject.Find("AnimalList");
         combManager = GameObject.Find("ComboManager").GetComponent<CombManager>();
 
         distance.x = 65.0f + cage.GetComponent<RectTransform>().rect.width;
@@ -113,7 +113,7 @@ public class CageListManager : MonoBehaviour
             {
                 touchType = TouchType.PRESS;
                 pushDownPbject.isPressed = false;
-                animalListManager.GetComponent<AnimalListManager>().animalList[i].GetComponent<AnimalStatusManager>().IsRaise = true;
+                animalList.GetComponent<AnimalStatusCSV>().animals[i].GetComponent<AnimalStatusManager>().IsRaise = true;
             }
         }
     }
@@ -139,11 +139,11 @@ public class CageListManager : MonoBehaviour
     // 檻に動物をセット
     private void SetCageToAnimal()
     {
-        var animalList = animalListManager.GetComponent<AnimalListManager>().animalList;
+        var animalList_ = animalList.GetComponent<AnimalStatusCSV>().animals;
 
         for (int i = 0; i < cageList.Count; i++)
         {
-            foreach (var animal in animalList)
+            foreach (var animal in animalList_)
             {
                 var animalStatus = animal.GetComponent<AnimalStatusManager>().status;
                 if (i != animalStatus.CageID)
@@ -151,7 +151,7 @@ public class CageListManager : MonoBehaviour
 
                 cageList[i].GetComponent<CageManager>().animalID = animalStatus.ID;
                 cageList[i].GetComponent<Image>().sprite =
-                    animalListManager.GetComponent<AnimalTextureManager>().animalTextureList[animalStatus.ID][0];
+                    animalList.GetComponent<AnimalTextureManager>().animalTextureList[animalStatus.ID][0];
                 break;
             }
         }
@@ -164,16 +164,16 @@ public class CageListManager : MonoBehaviour
         // 檻に入る動物のIDに変更
         cageList[cageID].GetComponent<CageManager>().animalID = animalID;
 
-        var animalList = animalListManager.GetComponent<AnimalListManager>().animalList;
-        for (int i = 0; i < animalList.Count; i++)
+        var animalList_ = animalList.GetComponent<AnimalStatusCSV>().animals;
+        for (int i = 0; i < 13; i++)
         {
-            var animalStatus = animalList[i].GetComponent<AnimalStatusManager>();
+            var animalStatus = animalList_[i].GetComponent<AnimalStatusManager>();
             if (animalID == animalStatus.status.ID)
             {
                 animalStatus.status.CageID = cageID;
                 // アニメーションの変更
                 cageList[cageID].GetComponent<Image>().sprite =
-                    animalListManager.GetComponent<AnimalTextureManager>().animalTextureList[i][0];
+                    animalList.GetComponent<AnimalTextureManager>().animalTextureList[i][0];
                 continue;
             }
 

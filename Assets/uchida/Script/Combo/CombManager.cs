@@ -46,6 +46,8 @@ public class CombManager : MonoBehaviour
 
                     comboRateList.Add(float.Parse(comboRate_) / 100.0f);
                 }
+
+                sr.Close();
             }
         }
         catch(Exception e)
@@ -75,6 +77,8 @@ public class CombManager : MonoBehaviour
 
                     comboList.Add(comboList_);
                 }
+
+                sr.Close();   
             }
         }
         catch (Exception e)

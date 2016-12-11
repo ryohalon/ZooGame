@@ -122,6 +122,8 @@ public class Timer : MonoBehaviour
             using (StreamReader sr = new StreamReader(fi.Open(FileMode.Open, FileAccess.Read)))
             {
                 txt += sr.ReadToEnd();
+
+                sr.Close();
             }
         }
         catch (Exception e)
