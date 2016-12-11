@@ -8,8 +8,9 @@ public class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     private Transform canvasTran;
     private GameObject draggingObject;
 
-    private Vector2 p;
-    private Vector2 size;
+    private Vector2 canvasReferenceResolution;
+    private Vector2 myRectSize;
+    private Vector2 differenceRatio;
 
     public bool isDrag = true;
 
@@ -21,9 +22,14 @@ public class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
     void Awake()
     {
-        canvasTran = GameObject.Find("Canvas").transform;
-        p = GameObject.Find("Canvas").GetComponent<RectTransform>().rect.size / 2.0f;
-        size = GetComponent<RectTransform>().rect.size / 2.0f;
+        var canvas = GameObject.Find("Canvas");
+        canvasTran = canvas.transform;
+        myRectSize = GetComponent<RectTransform>().rect.size;
+        Vector2 canvasPixelSize = canvas.GetComponent<Canvas>().pixelRect.size;
+        canvasReferenceResolution = canvas.GetComponent<RectTransform>().rect.size;
+        differenceRatio.x = canvasReferenceResolution.x / canvasPixelSize.x;
+        differenceRatio.y = canvasReferenceResolution.y / canvasPixelSize.y;
+
         dragging = false;
     }
 
@@ -32,8 +38,11 @@ public class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         if (!isDrag)
             return;
 
+        if (GetComponent<CageManager>().animalID == 99)
+            return;
+
         CreateDragObject();
-        draggingObject.transform.localPosition = pointerEventData.position - p - size;
+        draggingObject.transform.localPosition = Vector3.zero;
         dragging = true;
     }
 
@@ -42,7 +51,12 @@ public class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         if (!isDrag)
             return;
 
-        draggingObject.transform.localPosition = pointerEventData.position - p - size;
+        if (draggingObject == null)
+            return;
+
+        draggingObject.GetComponent<RectTransform>().localPosition =
+            new Vector2(pointerEventData.position.x * differenceRatio.x, pointerEventData.position.y * differenceRatio.y)
+            - canvasReferenceResolution / 2.0f - myRectSize / 2.0f;
     }
 
     public void OnEndDrag(PointerEventData pointerEventData)
@@ -71,8 +85,7 @@ public class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         Image draggingImage = draggingObject.AddComponent<Image>();
         Image sourceImage = GetComponent<Image>();
 
-        draggingObject.GetComponent<Image>().sprite = GameObject.Find("DebugTx").GetComponent<Image>().sprite;
-        //draggingImage.sprite = sourceImage.sprite;
+        draggingImage.sprite = sourceImage.sprite;
         draggingImage.rectTransform.sizeDelta = sourceImage.rectTransform.sizeDelta;
         draggingImage.color = sourceImage.color;
         draggingImage.material = sourceImage.material;

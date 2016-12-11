@@ -37,9 +37,6 @@ public class AnimationManager : MonoBehaviour
             this.gameObject.AddComponent<Image>();
         nowImage = GetComponent<Image>();
 
-        if (animationDataList.Count <= 0)
-            Debug.Log("animationDataList is empty");
-
         if (dataOnly)
             return;
 

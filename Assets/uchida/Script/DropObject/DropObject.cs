@@ -29,22 +29,15 @@ public class DropObject : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
         if (!isDrop)
             return;
 
-        var dragCageManager = pointerEventData.pointerDrag.GetComponent<CageManager>();
-        var dropCageManager = GetComponent<CageManager>();
-        var animalId = dragCageManager.animalID;
-        dragCageManager.animalID = dropCageManager.animalID;
-        dropCageManager.animalID = dragCageManager.animalID;
-        var animationDataList = pointerEventData.pointerDrag.GetComponent<AnimationManager>().animationDataList;
-        pointerEventData.pointerDrag.GetComponent<AnimationManager>().animationDataList = 
-            GetComponent<AnimationManager>().animationDataList;
-        GetComponent<AnimationManager>().animationDataList = animationDataList;
-        // debug
-        var text = pointerEventData.pointerDrag.transform.GetChild(0).gameObject.GetComponent<Text>().text;
-        pointerEventData.pointerDrag.transform.GetChild(0).gameObject.GetComponent<Text>().text =
-            transform.GetChild(0).gameObject.GetComponent<Text>().text;
-        transform.GetChild(0).gameObject.GetComponent<Text>().text = text;
+        var dragObject = pointerEventData.pointerDrag;
 
-        //GetComponent<Image>().sprite = droppedImage.sprite;
-        //GetComponent<Image>().color = Vector4.one;
+        var animalId = dragObject.GetComponent<CageManager>().animalID;
+        dragObject.GetComponent<CageManager>().animalID = GetComponent<CageManager>().animalID;
+        GetComponent<CageManager>().animalID = animalId;
+
+        var dragSprite = dragObject.GetComponent<Image>().sprite;
+        dragObject.GetComponent<Image>().sprite = GetComponent<Image>().sprite;
+        GetComponent<Image>().sprite = dragSprite;
+        GetComponent<Image>().color = Vector4.one;
     }
 }

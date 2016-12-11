@@ -6,9 +6,6 @@ public class AnimalListManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject animal = null;
-    [SerializeField]
-    private Sprite debugSprite = null;
-
     public List<GameObject> animalList = new List<GameObject>();
 
     static private AnimalListManager instance = null;
@@ -37,11 +34,7 @@ public class AnimalListManager : MonoBehaviour
             animalList[i].GetComponent<AnimalStatusManager>().status.AttractVisitors = 20;
             animalList[i].GetComponent<AnimalStatusManager>().status.SatietyLevel = 100;
             animalList[i].GetComponent<AnimalStatusManager>().status.Ratio = 1.0f;
-            AnimationManager.AnimationData animationdata = new AnimationManager.AnimationData();
-            animationdata.animationTime = 0.0f;
-            animationdata.sprite = debugSprite;
-            animalList[i].GetComponent<AnimationManager>().animationDataList.Add(animationdata);
-            animalList[i].GetComponent<AnimalStatusManager>().status.CageID = 99;
+            animalList[i].GetComponent<AnimalStatusManager>().status.CageID = -1;
         }
     }
 

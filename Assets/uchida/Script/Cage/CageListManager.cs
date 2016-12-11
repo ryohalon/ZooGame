@@ -9,8 +9,8 @@ public class CageListManager : MonoBehaviour
 
     public List<GameObject> cageList = new List<GameObject>();
 
-    [SerializeField]
-    private GameObject animalListManager = null;
+    private GameObject animalListManager;
+    private CombManager combManager = null;
     [SerializeField]
     private GameObject notActiveAnimals = null;
 
@@ -33,11 +33,11 @@ public class CageListManager : MonoBehaviour
 
     void Start()
     {
-        if (cage == null)
-            Debug.Log("eroor : GameObject[cage] が null です");
+        animalListManager = GameObject.Find("AnimalListManager");
+        combManager = GameObject.Find("ComboManager").GetComponent<CombManager>();
 
-        distance.x = 30.0f + cage.GetComponent<RectTransform>().rect.width;
-        distance.y = 45.0f + cage.GetComponent<RectTransform>().rect.width;
+        distance.x = 65.0f + cage.GetComponent<RectTransform>().rect.width;
+        distance.y = 95.0f + cage.GetComponent<RectTransform>().rect.width;
 
         CreateCage();
         SetCageToAnimal();
@@ -52,9 +52,6 @@ public class CageListManager : MonoBehaviour
             EventCage();
             ChangeAnimal();
             GoRaise();
-
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Debug.DrawLine(ray.origin, ray.direction * 50);
 
             yield return null;
         }
@@ -78,15 +75,18 @@ public class CageListManager : MonoBehaviour
 
         var selectNotActiveAnimalID = GameObject.Find(notActiveAnimals.name + "(Clone)").GetComponent<NotActiveAnimals>().selectID;
         if (selectNotActiveAnimalID != int.MaxValue)
-        {
             AnimalSwap(changeCageID, selectNotActiveAnimalID);
-        }
 
         Destroy(GameObject.Find(notActiveAnimals.name + "(Clone)"));
         touchType = TouchType.NONE;
 
-        foreach (var cage in cageList)
-            Debug.Log(cage.GetComponent<CageManager>().animalID);
+        int[] idList = new int[9];
+        for(int i = 0; i < 9; i++)
+        {
+            idList[i] = cageList[i].GetComponent<CageManager>().animalID;
+        }
+        
+        combManager.CheckCombo(idList);
     }
 
     private void EventCage()
@@ -128,13 +128,11 @@ public class CageListManager : MonoBehaviour
             cageList[i].transform.localPosition =
                 new Vector3(
                     distance.x * (i % 3 - 1),
-                    distance.y * (i / 3 - 1) - 15.0f,
+                    distance.y * (i / 3 - 1) - 25.0f,
                     0.0f);
             cageList[i].GetComponent<CageManager>().originPos =
                 cageList[i].transform.position;
             cageList[i].transform.localScale = Vector3.one;
-
-            cageList[i].transform.FindChild("Text").GetComponent<Text>().text = i.ToString();
         }
     }
 
@@ -152,23 +150,11 @@ public class CageListManager : MonoBehaviour
                     continue;
 
                 cageList[i].GetComponent<CageManager>().animalID = animalStatus.ID;
-                //cageList[i].GetComponent<AnimationManager>().animationDataList =
-                //    animal.GetComponent<AnimationManager>().animationDataList;
+                cageList[i].GetComponent<Image>().sprite =
+                    animalListManager.GetComponent<AnimalTextureManager>().animalTextureList[animalStatus.ID][0];
                 break;
             }
         }
-    }
-
-    // 檻に入っている動物の配置入れ替え
-    public void CageSwap(int i, int k)
-    {
-        GameObject cage = cageList[i];
-        cageList[i] = cageList[k];
-        cageList[k] = cage;
-
-        // Debug
-        cageList[i].transform.FindChild("Text").GetComponent<Text>().text = k.ToString();
-        cageList[k].transform.FindChild("Text").GetComponent<Text>().text = i.ToString();
     }
 
     // 控えにいる動物との入れ替え
@@ -186,20 +172,13 @@ public class CageListManager : MonoBehaviour
             {
                 animalStatus.status.CageID = cageID;
                 // アニメーションの変更
-                cageList[cageID].GetComponent<AnimationManager>().animationDataList =
-                    animalList[i].GetComponent<AnimationManager>().animationDataList;
-                // debug
-                if (animalList[i].GetComponent<AnimationManager>().animationDataList.Count > 0)
-                {
-                    cageList[cageID].GetComponent<Image>().sprite =
-                        animalList[i].GetComponent<AnimationManager>().animationDataList[0].sprite;
-                }
-
+                cageList[cageID].GetComponent<Image>().sprite =
+                    animalListManager.GetComponent<AnimalTextureManager>().animalTextureList[i][0];
                 continue;
             }
 
             if (notActiveAnimalID == animalStatus.status.ID)
-                animalStatus.status.CageID = 99;
+                animalStatus.status.CageID = -1;
         }
     }
 }

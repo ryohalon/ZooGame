@@ -6,26 +6,12 @@ using System;
 
 public class PushDownObject : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-    /// <summary>
-    /// 押しっぱなし時に呼び出すイベント
-    /// </summary>
-    //public UnityEvent onLongPress = new UnityEvent();
-    /// <summary>
-    /// 押しっぱなし判定の間隔（この間隔毎にイベントが呼ばれる）
-    /// </summary>
-    //public float intervalAction = 2.0f;
-    // 押下開始時にもイベントを呼び出すフラグ
-    //public bool callEventFirstPress;
-
     // 次の押下判定時間
     float maxPressTime = 1.0f;
     float pressTime = 0.0f;
 
     public bool pushOnly = false;
 
-    /// <summary>
-    /// 押下状態
-    /// </summary>
     public bool isPressed
     {
         get;
@@ -66,7 +52,6 @@ public class PushDownObject : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
             if (pressStart)
             {
-                Debug.Log(pressTime);
                 pressTime += Time.deltaTime;
                 if (pressTime > maxPressTime)
                     pressTime = maxPressTime;
@@ -88,7 +73,7 @@ public class PushDownObject : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         if (isPushed || pushOnly || dragging)
             return;
 
-        if (GetComponent<CageManager>().animalID == 99)
+        if (GetComponent<CageManager>().animalID == -1)
             return;
 
         pressStart = true;

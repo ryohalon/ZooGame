@@ -5,13 +5,14 @@ using System;
 
 public class PlayerStatusManager : MonoBehaviour
 {
-    // 来場者一人当たりの入園料(固定)※今のところ
+    // 来場者一人当たりの入園料(固定)
     public int entranceFee = 20;
 
     private Timer timer = null;
 
     // 動物の檻のリスト
     private GameObject animalListManager = null;
+    private CombManager combManager = null;
 
     static private PlayerStatusManager instance = null;
 
@@ -52,14 +53,14 @@ public class PlayerStatusManager : MonoBehaviour
 
 
     // 目標までの残り金額
-    public int GetMoneyToTheTarget() {
-        return ((TargetMoney - HandMoney) >= 0) ? 
+    public int GetMoneyToTheTarget()
+    {
+        return ((TargetMoney - HandMoney) >= 0) ?
             (int)(TargetMoney - HandMoney) : 0;
     }
 
-    
 
-    // すべてリセット(仮)
+
     public void Reset()
     {
         entranceFee = 20;
@@ -88,7 +89,7 @@ public class PlayerStatusManager : MonoBehaviour
         Debug.Log("まだ書いてない");
     }
 
-    private void  DebugStatus()
+    private void DebugStatus()
     {
         OneDayFoodCost = 50000;
         OneDayAnimalPurchaseCost = 2000000;
@@ -98,7 +99,7 @@ public class PlayerStatusManager : MonoBehaviour
 
     void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             DontDestroyOnLoad(gameObject);
             instance = this;
@@ -112,8 +113,10 @@ public class PlayerStatusManager : MonoBehaviour
 
         timer = GameObject.Find("Timer").GetComponent<Timer>();
         animalListManager = GameObject.Find("AnimalListManager");
+        combManager = GameObject.Find("ComboManager").GetComponent<CombManager>();
 
         LoadStatus();
+        Reset();
         DebugStatus();
     }
 
@@ -121,12 +124,11 @@ public class PlayerStatusManager : MonoBehaviour
     {
         StartCoroutine(UpdatePlayerStatus());
     }
-    
+
     // 毎フレーム行うお金が増えてく処理
-    // 見てて一番面白いところ(わっち的に(笑))
     private IEnumerator UpdatePlayerStatus()
     {
-        while(true)
+        while (true)
         {
             if (!timer.isEndDay)
             {
@@ -143,20 +145,21 @@ public class PlayerStatusManager : MonoBehaviour
         var animalList = animalListManager.GetComponent<AnimalListManager>().animalList;
 
         float totalVisitors = 0;
-        foreach(var animal in animalList)
+        foreach (var animal in animalList)
         {
             var animalStatus = animal.GetComponent<AnimalStatusManager>();
-            if (animalStatus.status.CageID == 99)
+            if (animalStatus.status.CageID == -1)
                 continue;
 
             totalVisitors += animalStatus.GetVisitors(elapsedTime);
         }
 
-        float earnedMoney = entranceFee * totalVisitors;
+        float totalVisitors_ = totalVisitors * combManager.totalComboRate;
+        float earnedMoney = entranceFee * totalVisitors_;
 
         OneDayEarnedMoney += earnedMoney;
-        OneDayVisitors += totalVisitors;
+        OneDayVisitors += totalVisitors_;
         TotalMoney += earnedMoney;
-        TotalVisitors += totalVisitors;
+        TotalVisitors += totalVisitors_;
     }
 }
