@@ -302,10 +302,10 @@ public class TrainingRoot : MonoBehaviour
 
     void SetActiveButton(bool active)
     {
-        EatButton.SetActive(active);
-        BrushButton.SetActive(active);
-        TalkButton.SetActive(active);
-        HomeButton.SetActive(active);
+        //EatButton.SetActive(active);
+        //BrushButton.SetActive(active);
+        //TalkButton.SetActive(active);
+        //HomeButton.SetActive(active);
     }
 
     public void PushEatButton()
