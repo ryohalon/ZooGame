@@ -11,9 +11,6 @@ public class AnimalStatusCSV : MonoBehaviour
     private int height = 0; // CSVの行数
 
     [SerializeField]
-    public GameObject AnimalBase = null;
-
-    [SerializeField]
     public GameObject[] animals = null;
 
     void Awake()

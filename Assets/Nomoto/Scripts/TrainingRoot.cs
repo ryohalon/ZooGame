@@ -2,12 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using System;
+using System.IO;
+
 
 public class TrainingRoot : MonoBehaviour
 {
-    [SerializeField]
-    AnimalStatusManager animalStatusManager = null;
-
+    //[SerializeField]
+    //AnimalStatusManager animalStatusManager = null;
     [SerializeField]
     GameObject HomeButton = null;
 
@@ -120,8 +122,23 @@ public class TrainingRoot : MonoBehaviour
     private FoodList foodList = null;
 
 
+    private string[] talkComment = new string[4];
+
+    private TextAsset csvFile; // CSVファイル
+    private List<string[]> csvDatas = new List<string[]>(); // CSVの中身を入れるリスト
+    private int height = 0; // CSVの行数
+    int selectNum;
     void Start()
     {
+        GameObject.Find("AnimalList").GetComponent<SelectAnimalNum>().SelectNum = 0;
+        selectNum = GameObject.Find("AnimalList").GetComponent<SelectAnimalNum>().SelectNum;
+
+        ReadTalkComment();
+
+        AnimalStatusManager animalStatusManager
+            = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[selectNum].GetComponent<AnimalStatusManager>();
+
+
         foodList = GameObject.Find("FoodList").GetComponent<FoodList>();
 
         animalStatusManager.status.Rarity = 4;
@@ -146,6 +163,26 @@ public class TrainingRoot : MonoBehaviour
 
 
         SetFoodText();
+    }
+
+
+    void ReadTalkComment()
+    {
+        csvFile = Resources.Load("AnimalComment/AnimalTalk" + selectNum.ToString()) as TextAsset; /* Resouces/CSV下のCSV読み込み */
+        StringReader reader = new StringReader(csvFile.text);
+
+        while (reader.Peek() > -1)
+        {
+            string line = reader.ReadLine();
+            csvDatas.Add(line.Split(',')); // リストに入れる
+            height++; // 行数加算
+        }
+
+        for (int i = 0; i < 4; ++i)
+        {
+            talkComment[i] = csvDatas[0][i];
+        }
+
     }
 
     void Update()
@@ -175,7 +212,7 @@ public class TrainingRoot : MonoBehaviour
 
                     for (int i = 0; i < 10; ++i)
                     {
-                        Vector3 pos = new Vector3(Random.Range(-20, 20), Random.Range(-30, 30), 1);
+                        Vector3 pos = new Vector3(UnityEngine.Random.Range(-20, 20), UnityEngine.Random.Range(-30, 30), 1);
                         GameObject obj = Instantiate(Heart,
                                                      new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
                         obj.transform.SetParent(GameObject.Find("Canvas").transform);
@@ -211,7 +248,7 @@ public class TrainingRoot : MonoBehaviour
                     {
                         for (int i = 0; i < 10; ++i)
                         {
-                            Vector3 pos = new Vector3(Random.Range(-20, 20), Random.Range(-30, 30), 1);
+                            Vector3 pos = new Vector3(UnityEngine.Random.Range(-20, 20), UnityEngine.Random.Range(-30, 30), 1);
                             GameObject obj = Instantiate(Heart,
                                                          new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
                             obj.transform.SetParent(GameObject.Find("Canvas").transform);
@@ -288,7 +325,7 @@ public class TrainingRoot : MonoBehaviour
         if (loveLevel + 1 <= maxLoveLevel)
             loveLevel += 1;
         HeartManager.Change(loveLevel, maxLoveLevel);
-        TalkText.text = "あぁん！！";
+        TalkText.text = talkComment[0];
 
         isAnimation = true;
         animationType = Type.BRUSH;
@@ -306,7 +343,7 @@ public class TrainingRoot : MonoBehaviour
             loveLevel = maxLoveLevel;
         HeartManager.Change(loveLevel, maxLoveLevel);
 
-        TalkText.text = "おぉん！！";
+        TalkText.text = talkComment[1];
         isAnimation = true;
         animationType = Type.COMMENT;
         CommentBoard.SetActive(true);
@@ -314,7 +351,7 @@ public class TrainingRoot : MonoBehaviour
 
     public void PushBackHomeButton()
     {
-        
+
     }
 
     public void PushOfBackEatBoard()
@@ -335,7 +372,7 @@ public class TrainingRoot : MonoBehaviour
         {
             foodCommentType = FoodCommentType.LIKE;
 
-            TalkText.text = "うまうま！！";
+            TalkText.text = talkComment[2];
             switch (choiseFoodRank)
             {
                 case 0:
@@ -355,7 +392,7 @@ public class TrainingRoot : MonoBehaviour
         else
         {
             foodCommentType = FoodCommentType.DONT_LIKE;
-            TalkText.text = "まずまず！！";
+            TalkText.text = talkComment[3];
         }
         if (satietyLelel > maxSatietyLevel)
             satietyLelel = maxSatietyLevel;
@@ -378,7 +415,7 @@ public class TrainingRoot : MonoBehaviour
         if (foodType == 1)
         {
             foodCommentType = FoodCommentType.LIKE;
-            TalkText.text = "うまうま！！";
+            TalkText.text = talkComment[2];
             switch (choiseFoodRank)
             {
                 case 0:
@@ -397,7 +434,7 @@ public class TrainingRoot : MonoBehaviour
         else
         {
             foodCommentType = FoodCommentType.DONT_LIKE;
-            TalkText.text = "まずまず！！";
+            TalkText.text = talkComment[3];
         }
         if (satietyLelel > maxSatietyLevel)
             satietyLelel = maxSatietyLevel;

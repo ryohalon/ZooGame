@@ -1,0 +1,85 @@
+fileFormatVersion: 2
+guid: 2f2097ac915e38548a3e7777a76d3fd5
+timeCreated: 1481429815
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: "i \u30DB\u30FC\u30E0_0"
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: "i \u30DB\u30FC\u30E0_0"
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1720
+        width: 275
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 118.5, y: 29}
+        - {x: 111.5, y: 54}
+        - {x: 77.5, y: 84}
+        - {x: 30.5, y: 95}
+        - {x: -48.5, y: 95}
+        - {x: -94.5, y: 79}
+        - {x: -121.5, y: 54}
+        - {x: -127.5, y: 26}
+        - {x: -127.5, y: -18}
+        - {x: -102.5, y: -51}
+        - {x: -61.5, y: -78}
+        - {x: -23.5, y: -82}
+        - {x: 25.5, y: -82}
+        - {x: 42.5, y: -79}
+        - {x: 88.5, y: -60}
+        - {x: 118.5, y: -22}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
