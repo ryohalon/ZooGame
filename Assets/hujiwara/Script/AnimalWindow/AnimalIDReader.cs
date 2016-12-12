@@ -37,7 +37,7 @@ public class AnimalIDReader : MonoBehaviour
                     string data = reader.ReadLine();
                     ID = int.Parse(data);
 
-                    Debug.Log("readID=" + ID);
+                    Debug.Log("readAnimalID=" + ID);
                 }
             }
         }
