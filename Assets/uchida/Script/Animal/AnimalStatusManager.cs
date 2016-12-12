@@ -79,7 +79,7 @@ public class AnimalStatusManager : MonoBehaviour
     {
         float visitors = (float)status.AttractVisitors
             * status.Ratio 
-            * (status.SatietyLevel / 100.0f) 
+            * (status.SatietyLevel / (status.Rarity * 20.0f)) 
             * elapsedTime;
 
         return visitors;
