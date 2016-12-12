@@ -138,6 +138,8 @@ public class TrainingRoot : MonoBehaviour
 
     void Start()
     {
+      //  GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().Read();
+
         selectNum = GameObject.Find("AnimalList").GetComponent<SelectAnimalNum>().SelectNum;
 
         Debug.Log("Select : " + selectNum.ToString());
@@ -150,9 +152,13 @@ public class TrainingRoot : MonoBehaviour
 
         foodList = GameObject.Find("FoodList").GetComponent<FoodList>();
 
+
+        loveLevel = (int)animalStatusManager.status.LoveDegree;
+        satietyLelel = (int)animalStatusManager.status.SatietyLevel;
+
         int rarity = animalStatusManager.status.Rarity;
         maxLoveLevel = rarity * 20;
-        maxSatietyLevel = 10;
+        maxSatietyLevel = rarity * 20;
 
         BrushPos = Brush.GetComponent<RectTransform>().position;
         BrushMoveSpeed = new Vector3(-70, -10, 0);
@@ -167,10 +173,19 @@ public class TrainingRoot : MonoBehaviour
         for (int i = 3; i < 6; ++i)
             VegetableNums[i - 3] = foodList.foodList[i].possessionNumber + 10;
 
-
         SetFoodText();
+        EatManager.Change(satietyLelel, maxSatietyLevel);
+        HeartManager.Change(loveLevel,maxSatietyLevel);
     }
 
+
+    private void Save()
+    {
+     
+
+        GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[selectNum].GetComponent<AnimalStatusManager>().status.SatietyLevel = satietyLelel;
+        GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[selectNum].GetComponent<AnimalStatusManager>().status.LoveDegree = loveLevel;
+    }
 
     void ReadTalkComment()
     {
@@ -357,7 +372,8 @@ public class TrainingRoot : MonoBehaviour
 
     public void PushBackHomeButton()
     {
-
+        Save();
+        GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().Save();
     }
 
     public void PushOfBackEatBoard()
