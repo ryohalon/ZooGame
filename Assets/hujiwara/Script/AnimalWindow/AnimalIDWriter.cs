@@ -11,7 +11,7 @@ public class AnimalIDWriter : MonoBehaviour
 
     void Awake()
     {
-        directory = Application.persistentDataPath + "/";
+        directory = Application.dataPath + "/" + "hujiwara" + "/";
         path = "AnimalIDSave.txt";
     }
 

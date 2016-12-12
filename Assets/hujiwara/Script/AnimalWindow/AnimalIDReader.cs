@@ -16,7 +16,7 @@ public class AnimalIDReader : MonoBehaviour
 
     void Start()
     {
-        directory = Application.persistentDataPath + "/";
+        directory = Application.dataPath + "/" + "hujiwara" + "/";
         path = "AnimalIDSave.txt";
 
         setter = new AnimalIDSetter();
