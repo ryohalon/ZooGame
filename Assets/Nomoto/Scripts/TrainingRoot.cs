@@ -138,6 +138,8 @@ public class TrainingRoot : MonoBehaviour
 
     void Start()
     {
+        Sound.PlayBgm("GameMainBgm");
+
       //  GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().Read();
 
         selectNum = GameObject.Find("AnimalList").GetComponent<SelectAnimalNum>().SelectNum;
@@ -374,6 +376,7 @@ public class TrainingRoot : MonoBehaviour
     {
         Save();
         GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().Save();
+        Sound.StopBgm();
     }
 
     public void PushOfBackEatBoard()
