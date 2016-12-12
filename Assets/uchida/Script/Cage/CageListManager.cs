@@ -68,6 +68,8 @@ public class CageListManager : MonoBehaviour
             if (!cage_.GetComponent<PushDownObject>().isPressed)
                 continue;
 
+
+            Debug.Log("Cage : " + cage_.GetComponent<CageManager>().animalID.ToString());
             animalList.GetComponent<SelectAnimalNum>().SelectNum = cage_.GetComponent<CageManager>().animalID;
             break;
         }
@@ -123,8 +125,6 @@ public class CageListManager : MonoBehaviour
             if (pushDownPbject.isPressed)
             {
                 touchType = TouchType.PRESS;
-                pushDownPbject.isPressed = false;
-                animalList.GetComponent<AnimalStatusCSV>().animals[i].GetComponent<AnimalStatusManager>().IsRaise = true;
             }
         }
     }
