@@ -171,7 +171,7 @@ public class CageListManager : MonoBehaviour
             if (animalID == animalStatus.status.ID)
             {
                 animalStatus.status.CageID = cageID;
-                // アニメーションの変更
+                
                 cageList[cageID].GetComponent<Image>().sprite =
                     animalList.GetComponent<AnimalTextureManager>().animalTextureList[i][0];
                 continue;
