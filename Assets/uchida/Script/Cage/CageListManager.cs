@@ -9,7 +9,9 @@ public class CageListManager : MonoBehaviour
 
     public List<GameObject> cageList = new List<GameObject>();
 
-    private GameObject animalList;
+    private AnimalStatusCSV animalStatusCSV;
+    private SelectAnimalNum selectAnimalNum;
+    private AnimalTextureManager animalTextureManager;
     private CombManager combManager = null;
     [SerializeField]
     private GameObject notActiveAnimals = null;
@@ -33,8 +35,11 @@ public class CageListManager : MonoBehaviour
 
     void Start()
     {
-        animalList = GameObject.Find("AnimalList");
-        combManager = GameObject.Find("ComboManager").GetComponent<CombManager>();
+        var animalList = GameObject.Find("AnimalList");
+        animalStatusCSV = animalList.GetComponent<AnimalStatusCSV>();
+        selectAnimalNum = animalList.GetComponent<SelectAnimalNum>();
+        animalTextureManager = animalList.GetComponent<AnimalTextureManager>();
+        combManager = animalList.GetComponent<CombManager>();
 
         distance.x = 65.0f + cage.GetComponent<RectTransform>().rect.width;
         distance.y = 95.0f + cage.GetComponent<RectTransform>().rect.width;
@@ -62,15 +67,15 @@ public class CageListManager : MonoBehaviour
         if (touchType != TouchType.PRESS)
             return;
 
-        foreach(var cage_ in cageList)
+        foreach (var cage_ in cageList)
         {
-            
+
             if (!cage_.GetComponent<PushDownObject>().isPressed)
                 continue;
 
 
             Debug.Log("Cage : " + cage_.GetComponent<CageManager>().animalID.ToString());
-            animalList.GetComponent<SelectAnimalNum>().SelectNum = cage_.GetComponent<CageManager>().animalID;
+            selectAnimalNum.SelectNum = cage_.GetComponent<CageManager>().animalID;
             break;
         }
 
@@ -94,11 +99,11 @@ public class CageListManager : MonoBehaviour
         touchType = TouchType.NONE;
 
         int[] idList = new int[9];
-        for(int i = 0; i < 9; i++)
+        for (int i = 0; i < 9; i++)
         {
             idList[i] = cageList[i].GetComponent<CageManager>().animalID;
         }
-        
+
         combManager.CheckCombo(idList);
     }
 
@@ -150,11 +155,11 @@ public class CageListManager : MonoBehaviour
     // 檻に動物をセット
     private void SetCageToAnimal()
     {
-        var animalList_ = animalList.GetComponent<AnimalStatusCSV>().animals;
+        var animalList = animalStatusCSV.animals;
 
         for (int i = 0; i < cageList.Count; i++)
         {
-            foreach (var animal in animalList_)
+            foreach (var animal in animalList)
             {
                 var animalStatus = animal.GetComponent<AnimalStatusManager>().status;
                 if (i != animalStatus.CageID)
@@ -162,7 +167,7 @@ public class CageListManager : MonoBehaviour
 
                 cageList[i].GetComponent<CageManager>().animalID = animalStatus.ID;
                 cageList[i].GetComponent<Image>().sprite =
-                    animalList.GetComponent<AnimalTextureManager>().animalTextureList[animalStatus.ID][0];
+                    animalTextureManager.animalTextureList[animalStatus.ID][0];
                 break;
             }
         }
@@ -175,16 +180,16 @@ public class CageListManager : MonoBehaviour
         // 檻に入る動物のIDに変更
         cageList[cageID].GetComponent<CageManager>().animalID = animalID;
 
-        var animalList_ = animalList.GetComponent<AnimalStatusCSV>().animals;
+        var animalList = animalStatusCSV.animals;
         for (int i = 0; i < 13; i++)
         {
-            var animalStatus = animalList_[i].GetComponent<AnimalStatusManager>();
+            var animalStatus = animalList[i].GetComponent<AnimalStatusManager>();
             if (animalID == animalStatus.status.ID)
             {
                 animalStatus.status.CageID = cageID;
                 // アニメーションの変更
                 cageList[cageID].GetComponent<Image>().sprite =
-                    animalList.GetComponent<AnimalTextureManager>().animalTextureList[i][0];
+                    animalTextureManager.animalTextureList[i][0];
                 continue;
             }
 
