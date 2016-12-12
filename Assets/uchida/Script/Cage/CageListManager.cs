@@ -61,6 +61,19 @@ public class CageListManager : MonoBehaviour
     {
         if (touchType != TouchType.PRESS)
             return;
+
+        foreach(var cage_ in cageList)
+        {
+            
+            if (!cage_.GetComponent<PushDownObject>().isPressed)
+                continue;
+
+
+            Debug.Log("Cage : " + cage_.GetComponent<CageManager>().animalID.ToString());
+            animalList.GetComponent<SelectAnimalNum>().SelectNum = cage_.GetComponent<CageManager>().animalID;
+            break;
+        }
+
         GetComponent<SceneChanger>().NextSceneName = "TestTraining";
         GetComponent<SceneChanger>().TouchButton();
     }
@@ -112,8 +125,6 @@ public class CageListManager : MonoBehaviour
             if (pushDownPbject.isPressed)
             {
                 touchType = TouchType.PRESS;
-                pushDownPbject.isPressed = false;
-                animalList.GetComponent<AnimalStatusCSV>().animals[i].GetComponent<AnimalStatusManager>().IsRaise = true;
             }
         }
     }
@@ -171,7 +182,7 @@ public class CageListManager : MonoBehaviour
             if (animalID == animalStatus.status.ID)
             {
                 animalStatus.status.CageID = cageID;
-                
+                // アニメーションの変更
                 cageList[cageID].GetComponent<Image>().sprite =
                     animalList.GetComponent<AnimalTextureManager>().animalTextureList[i][0];
                 continue;
