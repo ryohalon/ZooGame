@@ -8,8 +8,9 @@ using System.IO;
 
 public class TrainingRoot : MonoBehaviour
 {
-    //[SerializeField]
-    //AnimalStatusManager animalStatusManager = null;
+    [SerializeField]
+    Image animalmage = null;
+
     [SerializeField]
     GameObject HomeButton = null;
 
@@ -128,23 +129,28 @@ public class TrainingRoot : MonoBehaviour
     private List<string[]> csvDatas = new List<string[]>(); // CSVの中身を入れるリスト
     private int height = 0; // CSVの行数
     int selectNum;
+
+    [SerializeField]
+    Sprite[] FoodSprite = null;
+
+    [SerializeField]
+    Sprite[] VegetableSprite = null;
+
     void Start()
     {
-        GameObject.Find("AnimalList").GetComponent<SelectAnimalNum>().SelectNum = 0;
         selectNum = GameObject.Find("AnimalList").GetComponent<SelectAnimalNum>().SelectNum;
+
+        Debug.Log("Select : " + selectNum.ToString());
+        animalmage.sprite = GameObject.Find("AnimalList").GetComponent<AnimalTextureManager>().animalTextureList[selectNum][0];
 
         ReadTalkComment();
 
         AnimalStatusManager animalStatusManager
             = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[selectNum].GetComponent<AnimalStatusManager>();
 
-
         foodList = GameObject.Find("FoodList").GetComponent<FoodList>();
 
-        animalStatusManager.status.Rarity = 4;
-        animalStatusManager.status.FoodType = 0;
         int rarity = animalStatusManager.status.Rarity;
-        foodType = animalStatusManager.status.FoodType;
         maxLoveLevel = rarity * 20;
         maxSatietyLevel = 10;
 
@@ -155,11 +161,11 @@ public class TrainingRoot : MonoBehaviour
         moyaSize = Moya.GetComponent<RectTransform>().sizeDelta;
 
         for (int i = 0; i < 3; ++i)
-            MeetNums[i] = foodList.foodList[i].possessionNumber;
+            MeetNums[i] = foodList.foodList[i].possessionNumber + 10;
 
 
         for (int i = 3; i < 6; ++i)
-            VegetableNums[i - 3] = foodList.foodList[i].possessionNumber;
+            VegetableNums[i - 3] = foodList.foodList[i].possessionNumber + 10;
 
 
         SetFoodText();
@@ -365,8 +371,9 @@ public class TrainingRoot : MonoBehaviour
     {
         if (MeetNums[choiseFoodRank] == 0) return;
         --MeetNums[choiseFoodRank];
-
         SetFoodText();
+
+        Food.GetComponent<Image>().sprite = FoodSprite[choiseFoodRank];
 
         if (foodType == 0)
         {
@@ -401,7 +408,7 @@ public class TrainingRoot : MonoBehaviour
         EatManager.Change(satietyLelel, maxSatietyLevel);
         EatBoard.SetActive(false);
         Food.SetActive(true);
-        Food.GetComponent<Image>().sprite = foodImage[0];
+        //Food.GetComponent<Image>().sprite = foodImage[0];
         isAnimation = true;
         animationType = Type.EAT;
     }
@@ -411,6 +418,8 @@ public class TrainingRoot : MonoBehaviour
         if (VegetableNums[choiseFoodRank] == 0) return;
         --VegetableNums[choiseFoodRank];
         SetFoodText();
+
+        Food.GetComponent<Image>().sprite = VegetableSprite[choiseFoodRank];
 
         if (foodType == 1)
         {
@@ -443,7 +452,7 @@ public class TrainingRoot : MonoBehaviour
         EatManager.Change(satietyLelel, maxSatietyLevel);
         EatBoard.SetActive(false);
         Food.SetActive(true);
-        Food.GetComponent<Image>().sprite = foodImage[1];
+        //Food.GetComponent<Image>().sprite = foodImage[1];
         isAnimation = true;
         animationType = Type.EAT;
     }
