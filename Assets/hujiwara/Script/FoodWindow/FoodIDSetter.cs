@@ -20,6 +20,9 @@ public class FoodIDSetter : MonoBehaviour
     public GameObject foodTotalPriceChanger;
     FoodTotalPriceChanger totalPriceChanger = null;
 
+    public GameObject foodImage;
+    FoodImageSetter foodImageSetter;
+
     void Start()
     {
         priceChanger = new FoodPriceChanger();
@@ -36,6 +39,9 @@ public class FoodIDSetter : MonoBehaviour
 
         totalPriceChanger = new FoodTotalPriceChanger();
         totalPriceChanger = foodTotalPriceChanger.GetComponent<FoodTotalPriceChanger>();
+
+        foodImageSetter = new FoodImageSetter();
+        foodImageSetter = foodImage.GetComponent<FoodImageSetter>();
     }
 
     public void SetID(int readID)
@@ -46,6 +52,7 @@ public class FoodIDSetter : MonoBehaviour
         loveDegreeChanger.TextUpdater();
         satietyLevelChanger.TextUpdater();
         totalPriceChanger.TextUpdater();
+        foodImageSetter.ImageUpdater();
     }
 
     public int GetID()

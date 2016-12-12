@@ -17,6 +17,9 @@ public class AnimalIDSetter : MonoBehaviour
     public GameObject animalNameTextChanger;
     AnimalNameChanger nameTextChanger = null;
 
+    public GameObject animalImage;
+    AnimalImageSetter imageSetter;
+
     void Start()
     {
         nameChanger = new AnimalNameChanger();
@@ -30,6 +33,9 @@ public class AnimalIDSetter : MonoBehaviour
 
         nameTextChanger = new AnimalNameChanger();
         nameTextChanger = animalNameTextChanger.GetComponent<AnimalNameChanger>();
+
+        imageSetter = new AnimalImageSetter();
+        imageSetter = animalImage.GetComponent<AnimalImageSetter>();
     }
 
     public void SetID(int readID)
@@ -39,6 +45,7 @@ public class AnimalIDSetter : MonoBehaviour
         purchasePriceChanger.TextUpdater();
         handMoneyChanger.TextUpdater();
         nameTextChanger.TextUpdater();
+        imageSetter.ImageUpdater();
     }
 
     public int GetID()
