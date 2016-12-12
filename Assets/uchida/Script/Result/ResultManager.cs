@@ -109,6 +109,7 @@ public class ResultManager : MonoBehaviour
             return;
 
         timer.SetStartDayTime();
+        player.ResetOneDay();
         GetComponent<SceneChanger>().NextSceneName = "GameMain";
         GetComponent<SceneChanger>().TouchButton();
     }

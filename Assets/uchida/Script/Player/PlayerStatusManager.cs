@@ -12,7 +12,7 @@ public class PlayerStatusManager : MonoBehaviour
     private Timer timer = null;
 
     // 動物の檻のリスト
-    private GameObject animalList = null;
+    private AnimalStatusCSV animalStatusCSV = null;
     private CombManager combManager = null;
 
     static private PlayerStatusManager instance = null;
@@ -129,14 +129,6 @@ public class PlayerStatusManager : MonoBehaviour
         }
     }
 
-    private void DebugStatus()
-    {
-        OneDayFoodCost = 50000;
-        OneDayAnimalPurchaseCost = 2000000;
-        OneDayToyCost = 20000;
-        OneDayVisitors = 560000;
-    }
-
     void Awake()
     {
         if (instance == null)
@@ -152,8 +144,9 @@ public class PlayerStatusManager : MonoBehaviour
         }
 
         timer = GameObject.Find("Timer").GetComponent<Timer>();
-        animalList = GameObject.Find("AnimalList");
-        combManager = GameObject.Find("ComboManager").GetComponent<CombManager>();
+        var animalList = GameObject.Find("AnimalList");
+        animalStatusCSV = animalList.GetComponent<AnimalStatusCSV>();
+        combManager = animalList.GetComponent<CombManager>();
 
         LoadStatus();
     }
@@ -180,10 +173,10 @@ public class PlayerStatusManager : MonoBehaviour
     // 経過時間でやってきたお客さんの総数
     public void GetElapsedTimeVisitors(float elapsedTime)
     {
-        var animalList_ = animalList.GetComponent<AnimalStatusCSV>().animals;
+        var animalList = animalStatusCSV.animals;
 
         float totalVisitors = 0;
-        foreach (var animal in animalList_)
+        foreach (var animal in animalList)
         {
             var animalStatus = animal.GetComponent<AnimalStatusManager>();
             if (animalStatus.status.CageID == -1)
