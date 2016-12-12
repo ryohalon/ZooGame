@@ -25,6 +25,8 @@ public class ImageFadeouter : MonoBehaviour
         imageColor = image.color;
         textColor = missingText.color;
 
+        gameObject.SetActive(false);
+
         isShow = false;
 
         InitAlpha();
