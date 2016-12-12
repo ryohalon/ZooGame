@@ -62,13 +62,13 @@ public class CageListManager : MonoBehaviour
         if (touchType != TouchType.PRESS)
             return;
 
-        foreach(var animal in animalList.GetComponent<AnimalStatusCSV>().animals)
+        foreach(var cage_ in cageList)
         {
-            var animalStatus = animal.GetComponent<AnimalStatusManager>();
-            if (!animalStatus.IsRaise)
+            
+            if (!cage_.GetComponent<PushDownObject>().isPressed)
                 continue;
 
-            animalList.GetComponent<SelectAnimalNum>().SelectNum = animalStatus.status.ID;
+            animalList.GetComponent<SelectAnimalNum>().SelectNum = cage_.GetComponent<CageManager>().animalID;
             break;
         }
 
