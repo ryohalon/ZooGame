@@ -7,6 +7,8 @@ public class ResultSpawnManager : MonoBehaviour
     [SerializeField]
     private GameObject result = null;
 
+    private FadeIn fadeIn = null;
+
     private Timer timer = null;
 
     private bool isEndOfTheDay = false;
@@ -27,6 +29,7 @@ public class ResultSpawnManager : MonoBehaviour
         }
 
         timer = GameObject.Find("Timer").GetComponent<Timer>();
+        fadeIn = GameObject.Find("FadeIn").GetComponent<FadeIn>();
 
         isEndOfTheDay = false;
     }
@@ -43,10 +46,13 @@ public class ResultSpawnManager : MonoBehaviour
             yield return null;
             if (!isEndOfTheDay && resultWindow != null) continue;
 
-            if (timer.isEndDay)
-                isEndOfTheDay = true;
+            if(fadeIn.isFadeInEnd)
+            {
+                if (timer.isEndDay)
+                    isEndOfTheDay = true;
 
-            SpawnResult();
+                SpawnResult();
+            }
         }
     }
 
