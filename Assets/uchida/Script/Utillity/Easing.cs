@@ -5,7 +5,7 @@ public class Easing : MonoBehaviour
 {
     public float DelayTime(float time, float delayTime, float takeTime)
     {
-        float t = Mathf.Min(1.0f, Mathf.Max(0.0f, time -delayTime) / takeTime);
+        float t = Mathf.Min(1.0f, Mathf.Max(0.0f, time - delayTime) / takeTime);
         return t;
     }
 
@@ -87,7 +87,7 @@ public class Easing : MonoBehaviour
         return (e - b) / 2 * (Mathf.Sqrt(1 - t * t) + 1) + b;
     }
 
-    float CubicIn(float t, float b, float e)
+    public float CubicIn(float t, float b, float e)
     {
         return (e - b) * t * t * t + b;
     }
@@ -148,40 +148,40 @@ public class Easing : MonoBehaviour
         return a * Mathf.Pow(2.0f, -10.0f * t) * Mathf.Sin((t - s) * (2.0f * pi) / p) * 0.5f + a + b;
     }
 
-    //float ExpoIn(float t, float b, float e)
-    //{
-    //    return (t == 0) ? b : (e - b) * std::pow(2.f, 10.f * (t - 1.f)) + b;
-    //}
+    public float ExpoIn(float t, float b, float e)
+    {
+        return (t == 0.0f) ? b : (e - b) * Mathf.Pow(2.0f, 10.0f * (t - 1.0f)) + b;
+    }
 
-    //float ExpoOut(float t, float b, float e)
-    //{
-    //    return (t == 1.f) ? e : (e - b) * (-std::pow(2.f, -10.f * t) + 1.f) + b;
-    //}
+    public float ExpoOut(float t, float b, float e)
+    {
+        return (t == 1.0f) ? e : (e - b) * (-Mathf.Pow(2.0f, -10.0f * t) + 1.0f) + b;
+    }
 
-    //float ExpoInOut(float t, float b, float e)
-    //{
-    //    if (t == 0) return b;
-    //    if (t == 1) return e;
-    //    if ((t /= 0.5f) < 1) return (e - b) / 2.f * std::pow(2.f, 10.f * (t - 1.f)) + b;
-    //    return (e - b) / 2.f * (-std::pow(2.f, -10.f * --t) + 2.f) + b;
-    //}
+    public float ExpoInOut(float t, float b, float e)
+    {
+        if (t == 0.0f) return b;
+        if (t == 1.0f) return e;
+        if ((t /= 0.5f) < 1.0f) return (e - b) / 2.0f * Mathf.Pow(2.0f, 10.0f * (t - 1.0f)) + b;
+        return (e - b) / 2.0f * (-Mathf.Pow(2.0f, -10.0f * --t) + 2.0f) + b;
+    }
 
-    //float QuadIn(float t, float b, float e)
-    //{
-    //    return (e - b) * t * t + b;
-    //}
+    public float QuadIn(float t, float b, float e)
+    {
+        return (e - b) * t * t + b;
+    }
 
-    //float QuadOut(float t, float b, float e)
-    //{
-    //    return -(e - b) * t * (t - 2) + b;
-    //}
+    public float QuadOut(float t, float b, float e)
+    {
+        return -(e - b) * t * (t - 2.0f) + b;
+    }
 
-    //float QuadInOut(float t, float b, float e)
-    //{
-    //    if ((t /= 0.5) < 1) return (e - b) / 2 * t * t + b;
-    //    --t;
-    //    return -(e - b) / 2 * (t * (t - 2) - 1) + b;
-    //}
+    public float QuadInOut(float t, float b, float e)
+    {
+        if ((t /= 0.5f) < 1.0f) return (e - b) / 2.0f * t * t + b;
+        --t;
+        return -(e - b) / 2.0f * (t * (t - 2.0f) - 1.0f) + b;
+    }
 
     //float QuartIn(float t, float b, float e)
     //{

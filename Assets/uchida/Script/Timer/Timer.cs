@@ -2,6 +2,7 @@
 using System.Collections;
 using System.IO;
 using System;
+using UnityEngine.SceneManagement;
 
 
 public class Timer : MonoBehaviour
@@ -22,6 +23,8 @@ public class Timer : MonoBehaviour
 
     public float timeOfDay = 6.0f;
     public bool isEndDay = false;
+
+    public bool isBalloonUp = true;
 
     private PlayerStatusManager player = null;
 
@@ -159,6 +162,14 @@ public class Timer : MonoBehaviour
     {
         while (true)
         {
+            if(!isBalloonUp)
+            {
+                if(SceneManager.GetActiveScene().ToString() == "Title")
+                {
+                    isBalloonUp = true;
+                }
+            }
+
             if (!isEndDay)
             {
                 // Debug
