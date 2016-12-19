@@ -5,16 +5,21 @@ using System;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
+
 class Scenario
 {
+    public string Forcused { get; private set; }
+
     public string Name { get; private set; }
 
     public string Message { get; private set; }
 
-    public Scenario(string name, string message)
+    public Scenario(string forcusedmode, string name, string message)
     {
+        Forcused = forcusedmode;
         Name = name;
         Message = message;
+
     }
 
 }
@@ -25,17 +30,20 @@ public class TextController : MonoBehaviour
 
     [SerializeField]
     Text uiText;                  // uiTextへの参照を保つ
-    
+    [SerializeField]
+    Text uiText2;
+    [SerializeField]
+    Transform container;
 
     [SerializeField]
     [Range(0.001f, 0.3f)]
     float intervalForCharacterDisplay = 0.05f;   // 1文字の表示にかかる時間
 
-    private string currentText = string.Empty;   // 現在の文字列
+    //private string currentText = string.Empty;   // 現在の文字列
     private float timeUntilDisplay = 0;          // 表示にかかる時間
     private float timeElapsed = 1;               // 文字列の表示を開始した時間
-    private int currentLine = 0;                 // 現在の行番号
-    private int lastUpdateCharacter = -1;        // 表示中の文字数
+    //private int currentLine = 0;                 // 現在の行番号
+    //private int lastUpdateCharacter = -1;        // 表示中の文字数
 
     // 文字の表示が完了しているかどうか
     public bool IsCompleteDisplayText
@@ -47,15 +55,38 @@ public class TextController : MonoBehaviour
     {
         StartCoroutine(ScenarioIterator());
         //SetNextLine();
+        
     }
 
     private IEnumerator ScenarioIterator()
     {
-        var scenario = LoadScenario();
+        var scenario = LoadScenario(2);
         foreach (var line in scenario)
         {
-            //nameText.text = line.Name;
+            for (int i = 0; i < container.childCount; i++)
+            {
+                var c = container.GetChild(i);
+                //c.gameObject.name;
+                if(c.gameObject.name == line.Forcused)
+                {
+                    //c.gameObject.SetActive(true);
+                    var image = c.gameObject.GetComponent<Image>();
+                    image.color = new Color(1, 1, 1, 1);
+
+                }
+                else
+                {
+
+                    //c.gameObject.SetActive(false);
+                    var image = c.gameObject.GetComponent<Image>();
+                    image.color = new Color(1, 1, 1,0.7f);
+                    
+
+                }
+            }
+            //yield return StartCoroutine(LineIterator(line.Name));
             yield return StartCoroutine(LineIterator(line.Message));             // 一文字ずつの表示
+            //yield return StartCoroutine(LineIterator(line.Name));
             while (!Input.GetMouseButtonDown(0)) { yield return null; }  // 文字を次の行に行かせるためのクリック待ち
         }
 
@@ -69,7 +100,7 @@ public class TextController : MonoBehaviour
             var startTime = Time.time;
             var t = 0F;
             uiText.text = line.Substring(0, i);
-            
+            //uiText2.text = line.Substring(0, i);
 
             yield return null;
 
@@ -80,6 +111,7 @@ public class TextController : MonoBehaviour
                 if (Input.GetMouseButtonDown(0))
                 {
                     uiText.text = line;
+              //      uiText2.text = line;
                     
                     yield break;
                 }
@@ -88,13 +120,18 @@ public class TextController : MonoBehaviour
         }
     }
 
-    private IEnumerable<Scenario> LoadScenario()
+    private IEnumerable<Scenario> LoadScenario(int num)
     {
-        var ta = Resources.Load<TextAsset>("test");
+        var ta = Resources.Load<TextAsset>("scenario" + num.ToString());
         foreach(var line in ta.text.Split('\n'))
         {
+            
             var s = line.Split(',');
-            yield return new Scenario(s[0], s[1]);
+
+            Debug.Log(s[0]);
+
+            uiText2.text = s[1];
+            yield return new Scenario(s[0], s[1],s[2]);
         }
     }
 
