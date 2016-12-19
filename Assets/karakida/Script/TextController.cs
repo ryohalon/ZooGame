@@ -67,7 +67,7 @@ public class TextController : MonoBehaviour
             {
                 var c = container.GetChild(i);
                 //c.gameObject.name;
-                if(c.gameObject.name == line.Forcused)
+                if (c.gameObject.name == line.Forcused)
                 {
                     //c.gameObject.SetActive(true);
                     var image = c.gameObject.GetComponent<Image>();
@@ -79,8 +79,8 @@ public class TextController : MonoBehaviour
 
                     //c.gameObject.SetActive(false);
                     var image = c.gameObject.GetComponent<Image>();
-                    image.color = new Color(1, 1, 1,0.7f);
-                    
+                    image.color = new Color(0f, 0f, 0f, 0.65f);
+
 
                 }
             }
