@@ -3,9 +3,9 @@ using System.Collections;
 
 public class TitleRoot : MonoBehaviour
 {
-
     void Start()
     {
+        //Sound.LoadBgm("ShopBgm", "Shop");
         Sound.PlayBgm("GameMainBgm");
     }
 
@@ -14,5 +14,4 @@ public class TitleRoot : MonoBehaviour
         Sound.StopBgm();
         Sound.PlaySe("Ok");
     }
-
 }
