@@ -16,7 +16,9 @@ public class MoveHeart : MonoBehaviour
     {
         position = GetComponent<RectTransform>().position;
         GetComponent<RectTransform>().position = position;
-        speed = new Vector3(Random.Range(-20.0f, 20.0f), Random.Range(5.0f,8.0f), 0.0f);
+        Vector2 screenSize = new Vector2(Screen.width, Screen.height);
+
+        speed = new Vector3(screenSize.x / 20.0f,screenSize.y / 20.0f, 0.0f);
     }
 
     void Update()
