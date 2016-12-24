@@ -123,12 +123,6 @@ public class PlayerStatusManager : MonoBehaviour
                 TotalVisitors = float.Parse(playerStatus[16]);
                 AnimalNum = int.Parse(playerStatus[17]);
                 MaxLoveDegreeAnimalNum = int.Parse(playerStatus[18]);
-
-
-                foreach (var p in playerStatus)
-                {
-                    Debug.Log(p);
-                }
             }
         }
         catch (Exception e)

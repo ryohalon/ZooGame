@@ -10,6 +10,8 @@ GameObject:
   - 224: {fileID: 22401808}
   - 222: {fileID: 22259112}
   - 114: {fileID: 11449476}
+  - 114: {fileID: 11433198}
+  - 114: {fileID: 11407312}
   m_Layer: 2
   m_Name: People
   m_TagString: Untagged
@@ -17,6 +19,31 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &11407312
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 103118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 262bb51f444b7144da0ddf9fe9350ae4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11433198
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 103118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45ff28ce3518cc44aa17cc94c06ae5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMoveEnd: 0
+  moveTakeTimeList: []
+  movePointList: []
 --- !u!114 &11449476
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -62,8 +89,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 40, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}

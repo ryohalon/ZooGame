@@ -85,8 +85,6 @@ public class CombManager : MonoBehaviour
         {
 
         }
-
-        Debug.Log("combolist : " + comboList.Count);
     }
 
     void Start()
