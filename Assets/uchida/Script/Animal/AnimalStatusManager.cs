@@ -43,6 +43,7 @@ public class AnimalStatusManager : MonoBehaviour
 
         public int MealNums { get; set; }
         public int CommunicationNums { get; set; }
+        public int BurashiNums { get; set; }
     }
     public AnimalStatus status;
 
