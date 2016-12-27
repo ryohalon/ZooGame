@@ -7,6 +7,7 @@ public class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 {
     private Transform canvasTran;
     private GameObject draggingObject;
+    private FadeIn fadeIn = null;
 
     private Vector2 canvasReferenceResolution;
     private Vector2 myRectSize;
@@ -24,6 +25,7 @@ public class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     {
         var canvas = GameObject.Find("Canvas");
         canvasTran = canvas.transform;
+        fadeIn = GameObject.Find("FadeIn").GetComponent<FadeIn>();
         myRectSize = GetComponent<RectTransform>().rect.size;
         Vector2 canvasPixelSize = canvas.GetComponent<Canvas>().pixelRect.size;
         canvasReferenceResolution = canvas.GetComponent<RectTransform>().rect.size;
@@ -35,6 +37,9 @@ public class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
     public void OnBeginDrag(PointerEventData pointerEventData)
     {
+        if (!fadeIn.isFadeInEnd)
+            return;
+
         if (!isDrag)
             return;
 

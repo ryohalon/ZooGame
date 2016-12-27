@@ -3,16 +3,15 @@ using System.Collections;
 using System;
 using UnityEngine.UI;
 
-public class FadeIn : MonoBehaviour
+public class FadeIn2 : MonoBehaviour
 {
     [SerializeField]
-    private GameObject balloon = null;
+    private GameObject balloon2 = null;
     private Timer timer = null;
     public bool isFadeInEnd = false;
     private float fadeTime = 0.0f;
     public float fadeTakeTime = 1.0f;
     public float fadeDelayTime = 0.0f;
-    public int balloonNums = 5;
 
     void Awake()
     {
@@ -26,32 +25,17 @@ public class FadeIn : MonoBehaviour
 
         if (timer.isBalloonUp)
         {
-            if (balloon.name == "Balloon")
-            {
-                for (int i = 0; i < balloonNums; i++)
-                {
-                    var balloon_ = Instantiate(balloon);
-                    balloon_.transform.SetParent(transform.parent);
-                    balloon_.transform.localScale = Vector3.one;
-                    if (i == 0)
-                    {
-                        balloon_.transform.localPosition = new Vector3(0.0f, -100.0f, 0.0f);
-                    }
-                }
-            }
-            else if(balloon.name == "Balloon2")
-            {
-                var balloon2_ = Instantiate(balloon);
-                balloon2_.transform.SetParent(transform.parent);
-                balloon2_.transform.localScale = Vector3.one;
 
-                var balloon2__ = Instantiate(balloon);
-                balloon2__.transform.SetParent(transform.parent);
-                balloon2__.transform.localScale = Vector3.one;
-                var balloonUpper = balloon2__.GetComponent<BalloonUpper2>();
-                balloonUpper.start_pos = new Vector2(400.0f, -200.0f);
-                balloonUpper.end_pos = new Vector2(-300.0f, 500.0f);
-            }
+            var balloon2_ = Instantiate(balloon2);
+            balloon2_.transform.SetParent(transform.parent);
+            balloon2_.transform.localScale = Vector3.one;
+
+            var balloon2__ = Instantiate(balloon2);
+            balloon2__.transform.SetParent(transform.parent);
+            balloon2__.transform.localScale = Vector3.one;
+            var balloonUpper = balloon2__.GetComponent<BalloonUpper2>();
+            balloonUpper.start_pos = new Vector2(400.0f, 0.0f);
+            balloonUpper.end_pos = new Vector2(-300.0f, 700.0f);
 
             StartCoroutine(UpdateFadeIn());
         }

@@ -26,7 +26,7 @@ public class PlayerStatusManager : MonoBehaviour
     // 所持金
     public float HandMoney { get; set; }
     // 目標金額
-    public float TargetMoney { get; set; }
+    public float[] TargetMoney = new float[5];
 
     // その日に稼いだ金額
     public float OneDayEarnedMoney { get; set; }
@@ -60,8 +60,11 @@ public class PlayerStatusManager : MonoBehaviour
     // 目標までの残り金額
     public int GetMoneyToTheTarget()
     {
-        return ((TargetMoney - HandMoney) >= 0) ?
-            (int)(TargetMoney - HandMoney) : 0;
+        if (StoryLevel >= 5)
+            return 0;
+
+        return ((TargetMoney[StoryLevel] - HandMoney) >= 0) ?
+            (int)(TargetMoney[StoryLevel] - HandMoney) : 0;
     }
 
 
@@ -71,7 +74,8 @@ public class PlayerStatusManager : MonoBehaviour
         entranceFee = 20;
         StoryLevel = 1;
         HandMoney = 0;
-        TargetMoney = 0;
+        for (int i = 0; i < 5; i++)
+            TargetMoney[i] = 0;
         ResetOneDay();
         TotalMoney = 0;
         TotalUsedMoney = 0;
@@ -103,24 +107,22 @@ public class PlayerStatusManager : MonoBehaviour
                 ZooName = playerStatus[0];
                 StoryLevel = int.Parse(playerStatus[1]);
                 HandMoney = float.Parse(playerStatus[2]);
-                TargetMoney = float.Parse(playerStatus[3]);
-                OneDayEarnedMoney = float.Parse(playerStatus[4]);
-                OneDayUsedMoney = float.Parse(playerStatus[5]);
-                OneDayVisitors = float.Parse(playerStatus[6]);
-                OneDayFoodCost = float.Parse(playerStatus[7]);
-                OneDayAnimalPurchaseCost = float.Parse(playerStatus[8]);
-                OneDayToyCost = float.Parse(playerStatus[9]);
-                TotalMoney = float.Parse(playerStatus[10]);
-                TotalUsedMoney = float.Parse(playerStatus[11]);
-                TotalVisitors = float.Parse(playerStatus[12]);
-                AnimalNum = int.Parse(playerStatus[13]);
-                MaxLoveDegreeAnimalNum = int.Parse(playerStatus[14]);
-
-
-                foreach(var p in playerStatus)
-                {
-                    Debug.Log(p);
-                }
+                TargetMoney[0] = float.Parse(playerStatus[3]);
+                TargetMoney[1] = float.Parse(playerStatus[4]);
+                TargetMoney[2] = float.Parse(playerStatus[5]);
+                TargetMoney[3] = float.Parse(playerStatus[6]);
+                TargetMoney[4] = float.Parse(playerStatus[7]);
+                OneDayEarnedMoney = float.Parse(playerStatus[8]);
+                OneDayUsedMoney = float.Parse(playerStatus[9]);
+                OneDayVisitors = float.Parse(playerStatus[10]);
+                OneDayFoodCost = float.Parse(playerStatus[11]);
+                OneDayAnimalPurchaseCost = float.Parse(playerStatus[12]);
+                OneDayToyCost = float.Parse(playerStatus[13]);
+                TotalMoney = float.Parse(playerStatus[14]);
+                TotalUsedMoney = float.Parse(playerStatus[15]);
+                TotalVisitors = float.Parse(playerStatus[16]);
+                AnimalNum = int.Parse(playerStatus[17]);
+                MaxLoveDegreeAnimalNum = int.Parse(playerStatus[18]);
             }
         }
         catch (Exception e)
@@ -203,7 +205,11 @@ public class PlayerStatusManager : MonoBehaviour
         sw.WriteLine(ZooName +
             "," + StoryLevel +
             "," + HandMoney +
-            "," + TargetMoney +
+            "," + TargetMoney[0] +
+            "," + TargetMoney[1] +
+            "," + TargetMoney[2] +
+            "," + TargetMoney[3] +
+            "," + TargetMoney[4] +
             "," + OneDayEarnedMoney +
             "," + OneDayUsedMoney +
             "," + OneDayVisitors +
