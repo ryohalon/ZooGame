@@ -365,10 +365,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e20cfa4849b7ea04f912716fc14bab1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  balloon: {fileID: 184684, guid: dabcd27d3e1bd9e45849061c6e6cf37f, type: 2}
+  balloon: {fileID: 136612, guid: d3af4524ffc1c3a47a30c483eb8d6c0e, type: 2}
   isFadeInEnd: 0
   fadeTakeTime: 2
   fadeDelayTime: 1
+  balloonNums: 10
 --- !u!114 &362833198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -402,6 +403,63 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 362833194}
+--- !u!1 &378801407
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 378801408}
+  - 114: {fileID: 378801409}
+  m_Layer: 0
+  m_Name: PeopleManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &378801408
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 378801407}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 492.5783, y: 302.40924, z: -165.77011}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+--- !u!114 &378801409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 378801407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f85e9de8e8f713442872e836e99e6227, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  people: {fileID: 103118, guid: 7667b314c5c5ae245a1bf08d5b077813, type: 2}
+  maxPeopleNums: 5
+  maxIntervalTime: 5
+  minMoveTakeTime: 2
+  maxMoveTakeTime: 5
+  movePointList:
+  - {x: -35, y: 495}
+  - {x: -35, y: 320}
+  - {x: -35, y: 110}
+  - {x: 150, y: 495}
+  - {x: 150, y: 320}
+  - {x: 150, y: 110}
+  - {x: 300, y: 495}
+  - {x: 300, y: 320}
+  - {x: 300, y: 110}
+  - {x: 485, y: 495}
+  - {x: 485, y: 320}
+  - {x: 485, y: 110}
 --- !u!1 &500727338
 GameObject:
   m_ObjectHideFlags: 0
