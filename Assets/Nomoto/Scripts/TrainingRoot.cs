@@ -5,29 +5,13 @@ using UnityEngine.UI;
 using System;
 using System.IO;
 
-
 public class TrainingRoot : MonoBehaviour
 {
     [SerializeField]
     Image animalmage = null;
 
     [SerializeField]
-    GameObject HomeButton = null;
-
-    [SerializeField]
-    GameObject EatButton = null;
-
-    [SerializeField]
     GameObject EatBoard = null;
-
-    [SerializeField]
-    GameObject BrushButton = null;
-
-    [SerializeField]
-    GameObject TalkButton = null;
-
-    [SerializeField]
-    Text NameText = null;
 
     [SerializeField]
     Text TalkText = null;
@@ -92,23 +76,15 @@ public class TrainingRoot : MonoBehaviour
 
     Vector3 BrushPos;
 
-    Vector3 BrushMoveSpeed;
-
-    int BrushCount = 1;
+    int brusPoint = 0;
 
     float BrushTime = 0.0f;
+    Vector3 prevMousePosition = Vector3.zero;
 
     [SerializeField]
     GameObject Food = null;
 
-    [SerializeField]
-    Sprite[] foodImage = null;
-
-    Vector3 FoodPos;
-
     Vector3 FoodSize;
-
-    float FoodTime = 0.0f;
 
     [SerializeField]
     GameObject CommentBoard = null;
@@ -136,11 +112,31 @@ public class TrainingRoot : MonoBehaviour
     [SerializeField]
     Sprite[] VegetableSprite = null;
 
+    [SerializeField]
+    GameObject explanationFoodBoard = null;
+    [SerializeField]
+    Image explanationFoodSprite = null;
+
+    [SerializeField]
+    Text explanationFoodText = null;
+
+    [SerializeField]
+    string[] explanationFoodStr = new string[6];
+
+    private int selectFoodType = 0;
+
+    private float heartMakeTime = 0.0f;
+    int rarity = 0;
     void Start()
     {
-        Sound.PlayBgm("GameMainBgm");
+        explanationFoodStr[0] = "\nみんな大好き\n  赤身ステーキ!!";
+        explanationFoodStr[1] = "いろんなものが\n  したたっている\n  ワイルドなご飯";
+        explanationFoodStr[2] = "\n最高級品を追求した\n  全肉食動物が\n  うっとりする一品";
+        explanationFoodStr[3] = "\nみんな大好き!!\n  赤いリンゴのご飯";
+        explanationFoodStr[4] = "\n南国に行った\n   気分になれる\n  ハッピーなご飯";
+        explanationFoodStr[5] = "\n最高級品を追求した\n  全草食動物が\n  うっとりする一品";
 
-      //  GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().Read();
+        Sound.PlayBgm("GameMainBgm");
 
         selectNum = GameObject.Find("AnimalList").GetComponent<SelectAnimalNum>().SelectNum;
 
@@ -158,13 +154,12 @@ public class TrainingRoot : MonoBehaviour
         loveLevel = (int)animalStatusManager.status.LoveDegree;
         satietyLelel = (int)animalStatusManager.status.SatietyLevel;
 
-        int rarity = animalStatusManager.status.Rarity;
+
+        rarity = animalStatusManager.status.Rarity;
         maxLoveLevel = rarity * 20;
         maxSatietyLevel = rarity * 20;
 
         BrushPos = Brush.GetComponent<RectTransform>().position;
-        BrushMoveSpeed = new Vector3(-70, -10, 0);
-        FoodPos = Food.GetComponent<RectTransform>().position;
         FoodSize = Food.GetComponent<RectTransform>().sizeDelta;
         moyaSize = Moya.GetComponent<RectTransform>().sizeDelta;
 
@@ -177,14 +172,11 @@ public class TrainingRoot : MonoBehaviour
 
         SetFoodText();
         EatManager.Change(satietyLelel, maxSatietyLevel);
-        HeartManager.Change(loveLevel,maxSatietyLevel);
+        HeartManager.Change(loveLevel, maxLoveLevel);
     }
-
 
     private void Save()
     {
-     
-
         GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[selectNum].GetComponent<AnimalStatusManager>().status.SatietyLevel = satietyLelel;
         GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[selectNum].GetComponent<AnimalStatusManager>().status.LoveDegree = loveLevel;
     }
@@ -208,109 +200,139 @@ public class TrainingRoot : MonoBehaviour
 
     }
 
+    void MakeHeart(int makeNum)
+    {
+        for (int i = 0; i < makeNum; ++i)
+        {
+            Vector2 screenSize = new Vector2(Screen.width, Screen.height);
+            Vector3 pos = new Vector3(UnityEngine.Random.Range(-20, 20), UnityEngine.Random.Range(-30, 30), 1);
+            GameObject obj = Instantiate(Heart,
+                                         new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+            obj.transform.SetParent(GameObject.Find("Canvas").transform);
+            Vector3 tempPos = new Vector3(screenSize.x * 3.0f / 4.5f
+                                       + UnityEngine.Random.Range(-screenSize.x / 10.0f, screenSize.x / 10.0f),
+                                       screenSize.y * 6.0f / 10.0f
+                                       + +UnityEngine.Random.Range(-screenSize.x / 10.0f, screenSize.x / 10.0f),
+                                       0);
+            obj.GetComponent<RectTransform>().position = tempPos;
+            obj.GetComponent<RectTransform>().sizeDelta = new Vector2(screenSize.x / 20.0f, screenSize.x / 20.0f);
+            obj.GetComponent<MoveHeart>().Make();
+        }
+    }
+
     void Update()
     {
 
-        if (isAnimation == true)
+        UpdateBrush();
+        UpdateEat();
+        UpdateComment();
+    }
+
+    void UpdateBrush()
+    {
+        if (isAnimation != true) return;
+        if (animationType != Type.BRUSH) return;
+        Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        Vector2 prevMousePos = new Vector2(prevMousePosition.x, prevMousePosition.y);
+        if (Brush.GetComponent<DragMover>().IsDragging == true)
         {
-            if (animationType == Type.BRUSH)
+            if (prevMousePos != mousePosition)
             {
-                Brush.GetComponent<RectTransform>().position += BrushMoveSpeed * Time.deltaTime;
+                RectTransform myTransform = Brush.GetComponent<RectTransform>();
+                Rect rect = new Rect(myTransform.position.x, myTransform.position.y, myTransform.rect.width, myTransform.rect.height);
 
-                if (0.6f * BrushCount < BrushTime)
+                if (rect.position.x <= mousePosition.x && mousePosition.x <= rect.position.x + rect.width &&
+                    rect.position.y <= mousePosition.y && mousePosition.y <= rect.position.y + rect.height)
                 {
-                    BrushMoveSpeed *= -1;
-                    ++BrushCount;
-                }
-
-                BrushTime += Time.deltaTime;
-
-                if (BrushTime > 3.5f)
-                {
-                    animationType = Type.COMMENT;
-                    Brush.GetComponent<RectTransform>().position = BrushPos;
-                    BrushTime = 0.0f;
-                    Brush.SetActive(false);
-                    CommentBoard.SetActive(true);
-
-                    for (int i = 0; i < 10; ++i)
-                    {
-                        Vector3 pos = new Vector3(UnityEngine.Random.Range(-20, 20), UnityEngine.Random.Range(-30, 30), 1);
-                        GameObject obj = Instantiate(Heart,
-                                                     new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
-                        obj.transform.SetParent(GameObject.Find("Canvas").transform);
-                        obj.GetComponent<RectTransform>().position = popPosition.position + pos;
-                        obj.GetComponent<MoveHeart>().Make();
-                    }
-
-                    Brush.GetComponent<RectTransform>().position = BrushPos;
-                    BrushMoveSpeed = new Vector3(-70, -10, 0);
-                    BrushCount = 1;
-                }
-
+                    BrushTime += Time.deltaTime;
+                    prevMousePosition = new Vector3(mousePosition.x, mousePosition.y,0);
+                }   
             }
+        }
+        Debug.Log(BrushTime);
+        if (BrushTime < 3.5f) return;
+        animationType = Type.COMMENT;
+        Brush.GetComponent<RectTransform>().position = BrushPos;
+        BrushTime = 0.0f;
+        Brush.SetActive(false);
+        CommentBoard.SetActive(true);
+        MakeHeart(2);
+        foodCommentType = FoodCommentType.LIKE;
+        Brush.GetComponent<RectTransform>().position = BrushPos;
+        Brush.GetComponent<DragMover>().IsDragging = false;
 
-            else if (animationType == Type.EAT)
+        if (loveLevel + 1 <= maxLoveLevel)
+        {
+            loveLevel += 1;
+            HeartManager.SetAnimation(loveLevel - 1, loveLevel, maxLoveLevel);
+        }
+    }
+
+    void UpdateEat()
+    {
+        if (isAnimation != true) return;
+        if (animationType != Type.EAT) return;
+        animationTime += Time.deltaTime;
+
+        if (Food.GetComponent<RectTransform>().sizeDelta.x > 0)
+        {
+            Food.GetComponent<RectTransform>().sizeDelta -= new Vector2(0.5f, 0.5f);
+        }
+
+        if (animationTime < 2.5f) return;
+        animationTime = 0.0f;
+        animationType = Type.COMMENT;
+        Food.GetComponent<RectTransform>().sizeDelta = FoodSize;
+        Food.SetActive(false);
+        CommentBoard.SetActive(true);
+
+        if (foodCommentType == FoodCommentType.LIKE)
+        {
+            MakeHeart(2);
+        }
+        else if (foodCommentType == FoodCommentType.DONT_LIKE)
+        {
+            Moya.SetActive(true);
+        }
+    }
+
+    void UpdateComment()
+    {
+        if (isAnimation != true) return;
+        if (animationType != Type.COMMENT) return;
+        animationTime += Time.deltaTime;
+
+        if (foodCommentType == FoodCommentType.LIKE)
+        {
+            heartMakeTime += Time.deltaTime;
+            if (heartMakeTime > 0.5f)
             {
-                animationTime += Time.deltaTime;
-
-                if (Food.GetComponent<RectTransform>().sizeDelta.x > 0)
-                {
-                    Food.GetComponent<RectTransform>().sizeDelta -= new Vector2(0.5f, 0.5f);
-                }
-
-                if (animationTime > 2.5f)
-                {
-                    animationTime = 0.0f;
-                    animationType = Type.COMMENT;
-                    Food.GetComponent<RectTransform>().sizeDelta = FoodSize;
-                    Food.SetActive(false);
-                    CommentBoard.SetActive(true);
-
-                    if (foodCommentType == FoodCommentType.LIKE)
-                    {
-                        for (int i = 0; i < 10; ++i)
-                        {
-                            Vector3 pos = new Vector3(UnityEngine.Random.Range(-20, 20), UnityEngine.Random.Range(-30, 30), 1);
-                            GameObject obj = Instantiate(Heart,
-                                                         new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
-                            obj.transform.SetParent(GameObject.Find("Canvas").transform);
-                            obj.GetComponent<RectTransform>().position = popPosition.position + pos;
-                            obj.GetComponent<MoveHeart>().Make();
-                        }
-                    }
-
-                    else if (foodCommentType == FoodCommentType.DONT_LIKE)
-                    {
-                        Moya.SetActive(true);
-                    }
-                }
+                heartMakeTime = 0.0f;
+                MakeHeart(2);
             }
+        }
+        else if (foodCommentType == FoodCommentType.DONT_LIKE)
+        {
+            Moya.GetComponent<RectTransform>().sizeDelta += new Vector2(0, 0.4f);
+        }
 
-            else if (animationType == Type.COMMENT)
-            {
-                animationTime += Time.deltaTime;
+        if (animationTime < 2.5f) return;
+        animationTime = 0.0f;
+        isAnimation = false;
+        animationType = Type.NONE;
+        CommentBoard.SetActive(false);
+        isSelectButton = false;
+        if (foodCommentType == FoodCommentType.DONT_LIKE)
+        {
+            Moya.SetActive(false);
+            Moya.GetComponent<RectTransform>().sizeDelta = moyaSize;
+            foodCommentType = FoodCommentType.NONE;
+        }
 
-                if (foodCommentType == FoodCommentType.DONT_LIKE)
-                {
-                    Moya.GetComponent<RectTransform>().sizeDelta += new Vector2(0, 0.4f);
-                }
-                if (animationTime > 2.5f)
-                {
-                    animationTime = 0.0f;
-                    isAnimation = false;
-                    animationType = Type.NONE;
-                    CommentBoard.SetActive(false);
-                    isSelectButton = false;
-                    SetActiveButton(true);
-                    if (foodCommentType == FoodCommentType.DONT_LIKE)
-                    {
-                        Moya.SetActive(false);
-                        Moya.GetComponent<RectTransform>().sizeDelta = moyaSize;
-                        foodCommentType = FoodCommentType.NONE;
-                    }
-                }
-            }
+        else if (foodCommentType == FoodCommentType.LIKE)
+        {
+            heartMakeTime = 0.0f;
+            foodCommentType = FoodCommentType.NONE;
         }
     }
 
@@ -323,19 +345,10 @@ public class TrainingRoot : MonoBehaviour
         }
     }
 
-    void SetActiveButton(bool active)
-    {
-        //EatButton.SetActive(active);
-        //BrushButton.SetActive(active);
-        //TalkButton.SetActive(active);
-        //HomeButton.SetActive(active);
-    }
-
     public void PushEatButton()
     {
         if (isSelectButton == true) return;
         isSelectButton = true;
-        SetActiveButton(false);
         EatBoard.SetActive(true);
     }
 
@@ -343,11 +356,6 @@ public class TrainingRoot : MonoBehaviour
     {
         if (isSelectButton == true) return;
         isSelectButton = true;
-        SetActiveButton(false);
-
-        if (loveLevel + 1 <= maxLoveLevel)
-            loveLevel += 1;
-        HeartManager.Change(loveLevel, maxLoveLevel);
         TalkText.text = talkComment[0];
 
         isAnimation = true;
@@ -359,12 +367,13 @@ public class TrainingRoot : MonoBehaviour
     {
         if (isSelectButton == true) return;
         isSelectButton = true;
-        SetActiveButton(false);
-        loveLevel += 10;
-
+        int beforeLoveLevel = loveLevel; 
+        loveLevel += rarity;
         if (loveLevel > maxLoveLevel)
             loveLevel = maxLoveLevel;
-        HeartManager.Change(loveLevel, maxLoveLevel);
+        int nowLoveLevel = loveLevel;
+
+        HeartManager.SetAnimation(beforeLoveLevel, nowLoveLevel, maxLoveLevel);
 
         TalkText.text = talkComment[1];
         isAnimation = true;
@@ -382,8 +391,52 @@ public class TrainingRoot : MonoBehaviour
     public void PushOfBackEatBoard()
     {
         isSelectButton = false;
-        SetActiveButton(true);
         EatBoard.SetActive(false);
+    }
+
+
+    public void PushAnswer(int num)
+    {
+        if (num == 0)
+        {
+            switch (selectFoodType)
+            {
+                case 0:
+                    PushMeatType(0);
+                    break;
+                case 1:
+                    PushMeatType(1);
+                    break;
+                case 2:
+                    PushMeatType(2);
+                    break;
+                case 3:
+                    PushVegetableType(0);
+                    break;
+                case 4:
+                    PushVegetableType(1);
+                    break;
+                case 5:
+                    PushVegetableType(2);
+                    break;
+            }
+
+        }
+
+        explanationFoodBoard.SetActive(false);
+    }
+
+    public void PushFoodTypeNum(int num)
+    {
+        selectFoodType = num;
+        explanationFoodText.text = explanationFoodStr[num];
+
+        if (num < 3)
+            explanationFoodSprite.sprite = FoodSprite[num];
+        else
+            explanationFoodSprite.sprite = VegetableSprite[num - 3];
+
+        explanationFoodBoard.SetActive(true);
     }
 
     public void PushMeatType(int choiseFoodRank)
@@ -427,7 +480,6 @@ public class TrainingRoot : MonoBehaviour
         EatManager.Change(satietyLelel, maxSatietyLevel);
         EatBoard.SetActive(false);
         Food.SetActive(true);
-        //Food.GetComponent<Image>().sprite = foodImage[0];
         isAnimation = true;
         animationType = Type.EAT;
     }
@@ -471,10 +523,7 @@ public class TrainingRoot : MonoBehaviour
         EatManager.Change(satietyLelel, maxSatietyLevel);
         EatBoard.SetActive(false);
         Food.SetActive(true);
-        //Food.GetComponent<Image>().sprite = foodImage[1];
         isAnimation = true;
         animationType = Type.EAT;
     }
-
-
 }

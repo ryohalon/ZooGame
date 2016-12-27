@@ -40,6 +40,9 @@ public class AnimalStatusManager : MonoBehaviour
         // 檻の番号
         // 控えは99
         public int CageID { get; set; }
+
+        public int MealNums { get; set; }
+        public int CommunicationNums { get; set; }
     }
     public AnimalStatus status;
 

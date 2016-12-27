@@ -19,6 +19,12 @@ public class DragMover : MonoBehaviour {
     /// </summary>
     bool isDragging = false;
 
+    public bool IsDragging
+    {
+        get { return isDragging; }
+        set { isDragging = value; }
+    }
+
     void Awake()
     {
         myTransform = GetComponent<RectTransform>();
