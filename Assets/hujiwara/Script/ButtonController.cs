@@ -19,19 +19,52 @@ public class ButtonController : MonoBehaviour
     GameObject animalBoardLabel = null;
 
     [SerializeField]
+    GameObject animalBuyWindow = null;
+
+    [SerializeField]
     GameObject foodShelf = null;
 
     [SerializeField]
     GameObject foodShelfLabel = null;
 
+    [SerializeField]
+    GameObject foodBuyWindow = null;
+
+    [SerializeField]
+    GameObject UpperTwine = null;
+
+    [SerializeField]
+    GameObject MiddleTwine = null;
+
+    [SerializeField]
+    GameObject BottomTwine = null;
+    
     public void PushAnimalButton()
     {
         shopLabel.SetActive(false);
         animalButton.SetActive(false);
         foodButton.SetActive(false);
+        MiddleTwine.SetActive(false);
+        BottomTwine.SetActive(false);
 
         animalBoard.SetActive(true);
         animalBoardLabel.SetActive(true);
+    }
+
+    public void PushAnimal()
+    {
+        animalBoard.SetActive(false);
+        UpperTwine.SetActive(false);
+
+        animalBuyWindow.SetActive(true);
+    }
+
+    public void PushAnimalNoButton()
+    {
+        animalBuyWindow.SetActive(false);
+
+        animalBoard.SetActive(true);
+        UpperTwine.SetActive(true);
     }
 
     public void PushFoodButton()
@@ -39,16 +72,38 @@ public class ButtonController : MonoBehaviour
         shopLabel.SetActive(false);
         animalButton.SetActive(false);
         foodButton.SetActive(false);
+        MiddleTwine.SetActive(false);
+        BottomTwine.SetActive(false);
 
         foodShelf.SetActive(true);
         foodShelfLabel.SetActive(true);
     }
+
+    public void PushFood()
+    {
+        foodShelf.SetActive(false);
+        UpperTwine.SetActive(false);
+
+        foodBuyWindow.SetActive(true);
+    }
+
+    public void PushFoodNoButton()
+    {
+        foodBuyWindow.SetActive(false);
+
+        foodShelf.SetActive(true);
+        UpperTwine.SetActive(true);
+    }
+
+
 
     public void CancelAnimalBoard()
     {
         shopLabel.SetActive(true);
         animalButton.SetActive(true);
         foodButton.SetActive(true);
+        MiddleTwine.SetActive(true);
+        BottomTwine.SetActive(true);
 
         animalBoard.SetActive(false);
     }
@@ -58,6 +113,8 @@ public class ButtonController : MonoBehaviour
         shopLabel.SetActive(true);
         animalButton.SetActive(true);
         foodButton.SetActive(true);
+        MiddleTwine.SetActive(true);
+        BottomTwine.SetActive(true);
 
         foodShelf.SetActive(false);
     }
