@@ -86,33 +86,6 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &109088693
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 109088694}
-  m_Layer: 0
-  m_Name: CageList
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &109088694
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 109088693}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.023952646, y: -0.0005860097, z: 0.0016763359}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
 --- !u!1 &202092478
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,7 +267,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
 --- !u!114 &342253584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -430,7 +403,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
 --- !u!114 &378801409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -444,22 +417,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   people: {fileID: 103118, guid: 7667b314c5c5ae245a1bf08d5b077813, type: 2}
   maxPeopleNums: 5
+  ratio: 4
   maxIntervalTime: 5
   minMoveTakeTime: 2
   maxMoveTakeTime: 5
   movePointList:
-  - {x: -35, y: 495}
-  - {x: -35, y: 320}
-  - {x: -35, y: 110}
-  - {x: 150, y: 495}
-  - {x: 150, y: 320}
-  - {x: 150, y: 110}
-  - {x: 300, y: 495}
-  - {x: 300, y: 320}
-  - {x: 300, y: 110}
-  - {x: 485, y: 495}
-  - {x: 485, y: 320}
-  - {x: 485, y: 110}
+  - {x: -35, y: 480}
+  - {x: -35, y: 295}
+  - {x: -35, y: 95}
+  - {x: 150, y: 480}
+  - {x: 150, y: 295}
+  - {x: 150, y: 95}
+  - {x: 300, y: 480}
+  - {x: 300, y: 295}
+  - {x: 300, y: 95}
+  - {x: 485, y: 480}
+  - {x: 485, y: 295}
+  - {x: 485, y: 95}
 --- !u!1 &500727338
 GameObject:
   m_ObjectHideFlags: 0
@@ -560,7 +534,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
 --- !u!1 &691666101
 GameObject:
   m_ObjectHideFlags: 0

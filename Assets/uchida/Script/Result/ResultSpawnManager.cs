@@ -16,9 +16,11 @@ public class ResultSpawnManager : MonoBehaviour
 
     static private ResultSpawnManager instance = null;
 
+    private CageListManager cageListManager = null;
+
     void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             DontDestroyOnLoad(gameObject);
             instance = this;
@@ -30,7 +32,7 @@ public class ResultSpawnManager : MonoBehaviour
 
         timer = GameObject.Find("Timer").GetComponent<Timer>();
         fadeIn = GameObject.Find("FadeIn").GetComponent<FadeIn>();
-
+        Debug.Log(cageListManager);
         isEndOfTheDay = false;
     }
 
@@ -46,7 +48,7 @@ public class ResultSpawnManager : MonoBehaviour
             yield return null;
             if (!isEndOfTheDay && resultWindow != null) continue;
 
-            if(fadeIn.isFadeInEnd)
+            if (fadeIn.isFadeInEnd)
             {
                 if (timer.isEndDay)
                     isEndOfTheDay = true;
@@ -68,5 +70,14 @@ public class ResultSpawnManager : MonoBehaviour
         resultWindow.transform.localScale = Vector3.one;
         resultWindow.transform.localPosition = Vector3.zero;
         isEndOfTheDay = false;
+
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "GameMain")
+        {
+            cageListManager = GameObject.Find("CageListManager").GetComponent<CageListManager>();
+            foreach (var cage in cageListManager.cageList)
+            {
+                cage.GetComponent<AnimalMover>().Stop();
+            }
+        }
     }
 }
