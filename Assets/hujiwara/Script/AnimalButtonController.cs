@@ -3,8 +3,16 @@ using System.Collections;
 
 public class AnimalButtonController : MonoBehaviour
 {
+    [SerializeField]
+    GameObject animalBoard;
+
+    [SerializeField]
+    GameObject animalBuyWindow;
+
     public void AnimalButton()
     {
-        Debug.Log("押しました。");
+        animalBoard.SetActive(false);
+
+        animalBuyWindow.SetActive(true);
     }
 }
