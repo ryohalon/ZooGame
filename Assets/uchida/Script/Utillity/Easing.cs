@@ -92,7 +92,7 @@ public class Easing : MonoBehaviour
         return (e - b) * t * t * t + b;
     }
 
-    float CubicOut(float t, float b, float e)
+    public float CubicOut(float t, float b, float e)
     {
         t -= 1.0f;
         return (e - b) * (t * t * t + 1) + b;
