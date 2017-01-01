@@ -120,8 +120,6 @@ public class FoodStatus : MonoBehaviour
                 }
             }
         }
-
-        Debug.Log("OK");
     }
 
     public bool Load(string _directory, string _path)

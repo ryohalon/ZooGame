@@ -111,6 +111,8 @@ public class FoodButtonController : MonoBehaviour
 
     public void PushFoodYesButton()
     {
+        foodStatus.foodList[ID].possessionNumber += 1;
+        Debug.Log("ID= " + ID + ", " + foodStatus.foodList[ID].possessionNumber);
         foodStatus.Save();
     }
 }
