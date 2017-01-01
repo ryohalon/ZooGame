@@ -5070,6 +5070,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 1301458938}
+  - 114: {fileID: 1301458939}
   m_Layer: 5
   m_Name: AnimalButtonController
   m_TagString: Untagged
@@ -5096,6 +5097,34 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1301458939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1301458937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6c52fe7f7f5935468000f608a6f92ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animalNameText: {fileID: 1083387789}
+  animalImage: {fileID: 628366180}
+  peacockImage: {fileID: 2800000, guid: fc3019833509c554eb4dbfbdcfc7117a, type: 3}
+  flamingoImage: {fileID: 2800000, guid: 68e6c27844c389649b1bc3c3244b6fdf, type: 3}
+  monkeyImage: {fileID: 2800000, guid: 01e59804eb6ea2b4f8daacc8779d3891, type: 3}
+  owlImage: {fileID: 2800000, guid: f4d8110c6fe644f4f89d676b8240a3bf, type: 3}
+  ponyImage: {fileID: 2800000, guid: f6df50020f68e96448002164f3933db5, type: 3}
+  rhinoImage: {fileID: 2800000, guid: 62aeecf1cb8db1141bbd10cefcad96f4, type: 3}
+  elephantImage: {fileID: 2800000, guid: bdae8dd54e4c63d4e960c34d921636eb, type: 3}
+  hawkImage: {fileID: 2800000, guid: f0cacb51a31824140a0f89aa702439a7, type: 3}
+  lesserPandaImage: {fileID: 2800000, guid: 6e259a49be9634b4ab8c7c5ed93c4eb9, type: 3}
+  polarBearImage: {fileID: 2800000, guid: 1890b96d2bc9ac846b7500203118aa47, type: 3}
+  wolfImage: {fileID: 2800000, guid: 57168403b31c2f54791162701716cd21, type: 3}
+  blackLeppardImage: {fileID: 2800000, guid: 10874b0b5565ece4587268084f0f9957, type: 3}
+  giraffeImage: {fileID: 2800000, guid: 98c34a2d61113a840b598814a11ee28a, type: 3}
+  pandaImage: {fileID: 2800000, guid: 384cdb3f0abd5f64b963f0c53f3f4218, type: 3}
+  tigerImage: {fileID: 2800000, guid: 0b9d39fe789d223458d0d2b487a0853b, type: 3}
 --- !u!1 &1316144168
 GameObject:
   m_ObjectHideFlags: 0
