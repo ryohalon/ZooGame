@@ -53,7 +53,8 @@ public class AnimalStatusCSV : MonoBehaviour
 
             animalStatus.status.CageID = int.Parse(csvDatas[i][11]);
             animalStatus.status.MealNums = int.Parse(csvDatas[i][12]);
-            animalStatus.status.CommunicationNums = int.Parse(csvDatas[i][13]);
+            animalStatus.status.BurashiNums = int.Parse(csvDatas[i][13]);
+            animalStatus.status.CommunicationNums = int.Parse(csvDatas[i][14]);
         }
     }
 
@@ -77,7 +78,7 @@ public class AnimalStatusCSV : MonoBehaviour
                           + animalStatus.status.LoveDegree.ToString() + "," + animalStatus.status.SatietyLevel.ToString() + ","
                           + animalStatus.status.IsPurchase.ToString() + "," + animalStatus.status.Ratio.ToString() + ","
                           + sex + "," + animalStatus.status.CageID.ToString() + "," + animalStatus.status.MealNums.ToString() + ","
-                          + animalStatus.status.CommunicationNums.ToString();
+                          + animalStatus.status.BurashiNums.ToString() + "," + animalStatus.status.CommunicationNums.ToString();
 
             sw.WriteLine(temp);
         }
