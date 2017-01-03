@@ -86,9 +86,14 @@ public class PlayerStatusManager : MonoBehaviour
     // 日が変わるときに呼ぶ
     public void ResetOneDay()
     {
+        HandMoney += OneDayEarnedMoney;
+        TotalMoney += OneDayEarnedMoney;
         OneDayEarnedMoney = 0;
         OneDayUsedMoney = 0;
         OneDayVisitors = 0;
+        OneDayFoodCost = 0;
+        OneDayAnimalPurchaseCost = 0;
+        OneDayToyCost = 0;
     }
 
 
@@ -192,8 +197,6 @@ public class PlayerStatusManager : MonoBehaviour
 
         OneDayEarnedMoney += earnedMoney;
         OneDayVisitors += totalVisitors_;
-        TotalMoney += earnedMoney;
-        TotalVisitors += totalVisitors_;
     }
 
 
