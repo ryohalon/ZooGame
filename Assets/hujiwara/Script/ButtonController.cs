@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class ButtonController : MonoBehaviour
 {
+    [SerializeField]
+    GameObject handMoneyText = null;
+
     [SerializeField]
     GameObject animalButton = null;
 
@@ -39,6 +43,11 @@ public class ButtonController : MonoBehaviour
     [SerializeField]
     GameObject BottomTwine = null;
     
+    void Awake()
+    {
+        handMoneyText.GetComponent<Text>().text = gameObject.GetComponent<PlayerStatusManager>().HandMoney.ToString();
+    }
+
     public void PushAnimalButton()
     {
         shopLabel.SetActive(false);

@@ -17,6 +17,12 @@ public class FoodButtonController : MonoBehaviour
     GameObject foodPriceText = null;
 
     [SerializeField]
+    GameObject foodNumberText = null;
+
+    [SerializeField]
+    GameObject totalPriceText = null;
+
+    [SerializeField]
     GameObject foodImage = null;
 
     [SerializeField]
@@ -39,7 +45,9 @@ public class FoodButtonController : MonoBehaviour
 
     FoodStatus foodStatus;
 
-    int ID;
+    int foodNumber;
+
+    int ID = 0;
 
     Image img;
 
@@ -47,6 +55,9 @@ public class FoodButtonController : MonoBehaviour
     {
         foodStatus = gameObject.GetComponent<FoodStatus>();
         img = foodImage.GetComponent<Image>();
+        
+        FoodNumberReset();
+        foodNumberText.GetComponent<Text>().text = foodNumber.ToString();
     }
 
     public void PushMeet1()
@@ -55,6 +66,9 @@ public class FoodButtonController : MonoBehaviour
 
         SetInformation(ID);
         img.material.mainTexture = meet1;
+
+        FoodNumberReset();
+        TotalTextUpdater();
     }
 
     public void PushMeet2()
@@ -63,6 +77,9 @@ public class FoodButtonController : MonoBehaviour
 
         SetInformation(ID);
         img.material.mainTexture = meet2;
+
+        FoodNumberReset();
+        TotalTextUpdater();
     }
 
     public void PushMeet3()
@@ -71,6 +88,9 @@ public class FoodButtonController : MonoBehaviour
 
         SetInformation(ID);
         img.material.mainTexture = meet3;
+
+        FoodNumberReset();
+        TotalTextUpdater();
     }
 
     public void PushVegetable1()
@@ -79,6 +99,9 @@ public class FoodButtonController : MonoBehaviour
 
         SetInformation(ID);
         img.material.mainTexture = vegetable1;
+
+        FoodNumberReset();
+        TotalTextUpdater();
     }
 
     public void PushVegetable2()
@@ -87,6 +110,9 @@ public class FoodButtonController : MonoBehaviour
 
         SetInformation(ID);
         img.material.mainTexture = vegetable2;
+
+        FoodNumberReset();
+        TotalTextUpdater();
     }
 
     public void PushVegetable3()
@@ -95,6 +121,9 @@ public class FoodButtonController : MonoBehaviour
 
         SetInformation(ID);
         img.material.mainTexture = vegetable3;
+
+        FoodNumberReset();
+        TotalTextUpdater();
     }
 
     void SetInformation(int _ID)
@@ -107,6 +136,122 @@ public class FoodButtonController : MonoBehaviour
             foodStatus.foodList[_ID].satietyLevelUpValue.ToString();
         foodPriceText.GetComponent<Text>().text =
             foodStatus.foodList[_ID].purchasePrice.ToString();
+    }
+
+    void FoodNumberReset()
+    {
+        foodNumber = 1;
+        foodNumberText.GetComponent<Text>().text = foodNumber.ToString();
+    }
+
+    void TotalTextUpdater()
+    {
+        int totalPrice = foodStatus.foodList[ID].purchasePrice * foodNumber;
+        totalPriceText.GetComponent<Text>().text = totalPrice.ToString();
+    }
+
+    public void PushPlusOne()
+    {
+        if(!isUpperRimit())
+        {
+            foodNumber += 1;
+        }
+
+        foodNumberText.GetComponent<Text>().text = foodNumber.ToString();
+        TotalTextUpdater();
+    }
+
+    public void PushPlusTen()
+    {
+        if (isPlusTen())
+        {
+            foodNumber = 99;
+        }
+        else
+        {
+            if (!isUpperRimit())
+            {
+                foodNumber += 10;
+            }
+        }
+
+        foodNumberText.GetComponent<Text>().text = foodNumber.ToString();
+        TotalTextUpdater();
+    }
+
+    public void PushMinusOne()
+    {
+        if(!isBottomLimit())
+        {
+            foodNumber -= 1;
+        }
+
+        foodNumberText.GetComponent<Text>().text = foodNumber.ToString();
+        TotalTextUpdater();
+    }
+
+    public void PushMinusTen()
+    {
+        if(isMinusTen())
+        {
+            foodNumber = 1;
+        }
+        else
+        {
+            if(!isBottomLimit())
+            {
+                foodNumber -= 10;
+            }
+        }
+
+        foodNumberText.GetComponent<Text>().text = foodNumber.ToString();
+        TotalTextUpdater();
+    }
+
+    bool isUpperRimit()
+    {
+        if(foodNumber >= 99)
+        {
+            foodNumber = 99;
+            return true;
+        }
+        return false;
+    }
+
+    bool isPlusTen()
+    {
+        if(!isUpperRimit() &&
+            (foodNumber >= 90 &&
+            foodNumber <= 99))
+        {
+            foodNumber += 10;
+            return true;
+        }
+
+        return false;
+    }
+
+    bool isBottomLimit()
+    {
+        if(foodNumber <= 1)
+        {
+            foodNumber = 1;
+            return true;
+        }
+        return false;
+    }
+
+    bool isMinusTen()
+    {
+        if(!isUpperRimit() &&
+            (foodNumber >= 1 &&
+            foodNumber <= 10))
+        {
+            foodNumber -= 10;
+            return true;
+        }
+
+        return false;
     }
 
     public void PushFoodYesButton()
