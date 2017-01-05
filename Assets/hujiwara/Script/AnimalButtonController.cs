@@ -4,31 +4,48 @@ using UnityEngine.UI;
 
 public class AnimalButtonController : MonoBehaviour
 {
+    // 動物一覧画面
     [SerializeField]
     GameObject animalBoard = null;
 
+    // 動物一覧上部看板
     [SerializeField]
     GameObject animalBoardLabel = null;
 
     [SerializeField]
     GameObject upperTwine = null;
 
+    // 購入画面
     [SerializeField]
     GameObject animalBuyWindow = null;
 
     // 購入画面 動物名
     [SerializeField]
-    GameObject animalNameText;
+    GameObject animalNameText = null;
 
     // 購入画面 動物イメージ
     [SerializeField]
-    GameObject animalImage;
+    GameObject animalImage = null;
 
+    // 購入画面 動物値段
     [SerializeField]
-    GameObject animalPriceText;
+    GameObject animalPriceText = null;
 
+    // 所持金不足時表示テキスト
     [SerializeField]
-    GameObject handMoneyMissingTextBoard;
+    GameObject handMoneyMissingTextBoard = null;
+
+    // 所持金
+    [SerializeField]
+    GameObject handMoneyText = null;
+
+    // 購入時表示イラスト
+    [SerializeField]
+    GameObject buyCommentBoard = null;
+
+    // 購入時コメント
+    [SerializeField]
+    GameObject buyCommentText = null;
 
     [SerializeField]
     Texture peacockImage;
@@ -85,13 +102,17 @@ public class AnimalButtonController : MonoBehaviour
     float time;
     bool isShowText;
 
+    bool isFirstComment;
+
     void Awake()
     {
         img = animalImage.GetComponent<Image>();
-        handMoney = 0;
+        handMoney = 1000000;
 
         time = 2;
         isShowText = false;
+
+        isFirstComment = true;
     }
 
     void Update()
@@ -108,6 +129,7 @@ public class AnimalButtonController : MonoBehaviour
         }
     }
 
+    // 購入画面Noボタン
     public void PushNoButton()
     {
         animalBuyWindow.SetActive(false);
@@ -117,16 +139,52 @@ public class AnimalButtonController : MonoBehaviour
         upperTwine.SetActive(true);
     }
 
+    // 購入画面Yesボタン
     public void PushYesButton()
     {
         if(IsInPossessionMoney())
         {
+            handMoney -= animalPrice;
+            handMoneyText.GetComponent<Text>().text = handMoney.ToString();
 
+            CommentChanger();
+            buyCommentBoard.SetActive(true);
         }
         else
         {
             handMoneyMissingTextBoard.SetActive(true);
             isShowText = true;
+        }
+    }
+
+    public void PushNextButton()
+    {
+        if (isFirstComment)
+        {
+            isFirstComment = false;
+        }
+        else
+        {
+            isFirstComment = true;
+        }
+
+        animalBuyWindow.SetActive(false);
+        buyCommentBoard.SetActive(false);
+
+        upperTwine.SetActive(true);
+        animalBoardLabel.SetActive(true);
+        animalBoard.SetActive(true);
+    }
+
+    void CommentChanger()
+    {
+        if (isFirstComment)
+        {
+            buyCommentText.GetComponent<Text>().text = "今日からよろしくね！";
+        }
+        else
+        {
+            buyCommentText.GetComponent<Text>().text = "一緒に頑張ろうね！";
         }
     }
 

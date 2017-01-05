@@ -8,7 +8,7 @@ public class FoodButtonController : MonoBehaviour
     GameObject foodShelf = null;
 
     [SerializeField]
-    GameObject UpperTwine = null;
+    GameObject upperTwine = null;
 
     [SerializeField]
     GameObject foodShelfLabel = null;
@@ -49,6 +49,15 @@ public class FoodButtonController : MonoBehaviour
     GameObject handMoneyMissingTextBoard = null;
 
     [SerializeField]
+    GameObject handMoneyText = null;
+
+    [SerializeField]
+    GameObject buyCommentBoard = null;
+
+    [SerializeField]
+    GameObject buyCommentText = null;
+
+    [SerializeField]
     Texture meet1 = null;
 
     [SerializeField]
@@ -83,14 +92,17 @@ public class FoodButtonController : MonoBehaviour
     // ご飯イメージ用
     Image img;
 
+    bool isFirstComment;
+
     void Awake()
     {
         foodStatus = gameObject.GetComponent<FoodStatus>();
         img = foodImage.GetComponent<Image>();
 
-        handMoney = 0;
+        handMoney = 1000000;
         time = 2;
         isShowText = false;
+        isFirstComment = true;
         
         FoodNumberReset();
         foodNumberText.GetComponent<Text>().text = foodNumber.ToString();
@@ -110,6 +122,7 @@ public class FoodButtonController : MonoBehaviour
         }
     }
 
+    // レア度1肉
     public void PushMeet1()
     {
         ID = foodStatus.foodList[0].ID;
@@ -121,6 +134,7 @@ public class FoodButtonController : MonoBehaviour
         TotalTextUpdater();
     }
 
+    // レア度2肉
     public void PushMeet2()
     {
         ID = foodStatus.foodList[1].ID;
@@ -132,6 +146,7 @@ public class FoodButtonController : MonoBehaviour
         TotalTextUpdater();
     }
 
+    // レア度3肉
     public void PushMeet3()
     {
         ID = foodStatus.foodList[2].ID;
@@ -143,6 +158,7 @@ public class FoodButtonController : MonoBehaviour
         TotalTextUpdater();
     }
 
+    // レア度1野菜
     public void PushVegetable1()
     {
         ID = foodStatus.foodList[3].ID;
@@ -154,6 +170,7 @@ public class FoodButtonController : MonoBehaviour
         TotalTextUpdater();
     }
 
+    // レア度2野菜
     public void PushVegetable2()
     {
         ID = foodStatus.foodList[4].ID;
@@ -165,6 +182,7 @@ public class FoodButtonController : MonoBehaviour
         TotalTextUpdater();
     }
 
+    // レア度3野菜
     public void PushVegetable3()
     {
         ID = foodStatus.foodList[5].ID;
@@ -176,6 +194,7 @@ public class FoodButtonController : MonoBehaviour
         TotalTextUpdater();
     }
 
+    // IDで情報を変える
     void SetInformation(int _ID)
     {
         foodNameText.GetComponent<Text>().text =
@@ -188,18 +207,21 @@ public class FoodButtonController : MonoBehaviour
             foodStatus.foodList[_ID].purchasePrice.ToString() + "z";
     }
 
+    // 個数選択リセット
     void FoodNumberReset()
     {
         foodNumber = 1;
         foodNumberText.GetComponent<Text>().text = foodNumber.ToString();
     }
 
+    // 合計金額更新
     void TotalTextUpdater()
     {
         totalPrice = foodStatus.foodList[ID].purchasePrice * foodNumber;
         totalPriceText.GetComponent<Text>().text = totalPrice.ToString() + "z";
     }
 
+    // 個数選択+1
     public void PushPlusOne()
     {
         if(!isUpperRimit())
@@ -211,6 +233,7 @@ public class FoodButtonController : MonoBehaviour
         TotalTextUpdater();
     }
 
+    // 個数選択+10
     public void PushPlusTen()
     {
         if (isPlusTen())
@@ -229,6 +252,7 @@ public class FoodButtonController : MonoBehaviour
         TotalTextUpdater();
     }
 
+    // 個数選択-1
     public void PushMinusOne()
     {
         if(!isBottomLimit())
@@ -240,6 +264,7 @@ public class FoodButtonController : MonoBehaviour
         TotalTextUpdater();
     }
 
+    // 個数選択-10
     public void PushMinusTen()
     {
         if(isMinusTen())
@@ -258,6 +283,7 @@ public class FoodButtonController : MonoBehaviour
         TotalTextUpdater();
     }
 
+    // 個数選択上限(99)
     bool isUpperRimit()
     {
         if(foodNumber >= 99)
@@ -281,6 +307,7 @@ public class FoodButtonController : MonoBehaviour
         return false;
     }
 
+    // 個数選択下限(1)
     bool isBottomLimit()
     {
         if(foodNumber <= 1)
@@ -304,21 +331,28 @@ public class FoodButtonController : MonoBehaviour
         return false;
     }
 
+    // 購入画面Noボタン
     public void PushNoButton()
     {
         foodBuyWindow.SetActive(false);
 
-        UpperTwine.SetActive(true);
+        upperTwine.SetActive(true);
         foodShelfLabel.SetActive(true);
         foodShelf.SetActive(true);
     }
 
+    // 購入画面Yesボタン
     public void PushYesButton()
     {
         if(IsInPossessionMoney())
         {
             foodStatus.foodList[ID].possessionNumber += foodNumber;
+            handMoney -= totalPrice;
+            handMoneyText.GetComponent<Text>().text = handMoney.ToString();
             foodStatus.Save();
+
+            CommentChanger();
+            buyCommentBoard.SetActive(true);
         }
         else
         {
@@ -326,6 +360,37 @@ public class FoodButtonController : MonoBehaviour
             isShowText = true;
         }
         
+    }
+
+    public void PushNextButton()
+    {
+        if(isFirstComment)
+        {
+            isFirstComment = false;
+        }
+        else
+        {
+            isFirstComment = true;
+        }
+
+        foodBuyWindow.SetActive(false);
+        buyCommentBoard.SetActive(false);
+
+        upperTwine.SetActive(true);
+        foodShelfLabel.SetActive(true);
+        foodShelf.SetActive(true); 
+    }
+
+    void CommentChanger()
+    {
+        if(isFirstComment)
+        {
+            buyCommentText.GetComponent<Text>().text = "いい買物した～！";
+        }
+        else
+        {
+            buyCommentText.GetComponent<Text>().text = "皆の喜ぶ顔が早く見たい！";
+        }
     }
 
     // 所持金内か

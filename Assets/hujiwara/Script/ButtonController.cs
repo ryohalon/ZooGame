@@ -47,7 +47,7 @@ public class ButtonController : MonoBehaviour
     
     void Awake()
     {
-        handMoney = 0;
+        handMoney = 1000000;
         handMoneyText.GetComponent<Text>().text = handMoney.ToString();
     }
 
