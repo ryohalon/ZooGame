@@ -42,10 +42,13 @@ public class ButtonController : MonoBehaviour
 
     [SerializeField]
     GameObject BottomTwine = null;
+
+    int handMoney;
     
     void Awake()
     {
-        handMoneyText.GetComponent<Text>().text = gameObject.GetComponent<PlayerStatusManager>().HandMoney.ToString();
+        handMoney = 0;
+        handMoneyText.GetComponent<Text>().text = handMoney.ToString();
     }
 
     public void PushAnimalButton()
@@ -95,16 +98,6 @@ public class ButtonController : MonoBehaviour
 
         foodBuyWindow.SetActive(true);
     }
-
-    public void PushFoodNoButton()
-    {
-        foodBuyWindow.SetActive(false);
-
-        foodShelf.SetActive(true);
-        UpperTwine.SetActive(true);
-    }
-
-
 
     public void CancelAnimalBoard()
     {
