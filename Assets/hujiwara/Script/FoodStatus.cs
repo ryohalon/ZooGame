@@ -45,6 +45,7 @@ public class FoodStatus : MonoBehaviour
             }
         }
         
+        //Debug
         for(int i = 0; i < 6; ++i)
         {
             Debug.Log("ID: " + foodList[i].ID + "," +

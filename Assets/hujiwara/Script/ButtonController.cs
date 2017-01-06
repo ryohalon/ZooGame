@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class ButtonController : MonoBehaviour
 {
+    [SerializeField]
+    GameObject handMoneyText = null;
+
     [SerializeField]
     GameObject animalButton = null;
 
@@ -38,7 +42,15 @@ public class ButtonController : MonoBehaviour
 
     [SerializeField]
     GameObject BottomTwine = null;
+
+    int handMoney;
     
+    void Awake()
+    {
+        handMoney = 1000000;
+        handMoneyText.GetComponent<Text>().text = handMoney.ToString();
+    }
+
     public void PushAnimalButton()
     {
         shopLabel.SetActive(false);
@@ -86,16 +98,6 @@ public class ButtonController : MonoBehaviour
 
         foodBuyWindow.SetActive(true);
     }
-
-    public void PushFoodNoButton()
-    {
-        foodBuyWindow.SetActive(false);
-
-        foodShelf.SetActive(true);
-        UpperTwine.SetActive(true);
-    }
-
-
 
     public void CancelAnimalBoard()
     {
