@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 using System;
 
 public class ResultSpawnManager : MonoBehaviour
@@ -12,6 +13,9 @@ public class ResultSpawnManager : MonoBehaviour
     private Timer timer = null;
 
     private PlayerStatusManager player = null;
+
+    [SerializeField]
+    private GameObject colorFade = null;
 
     private bool isEndOfTheDay = false;
     private GameObject resultWindow = null;
@@ -53,8 +57,11 @@ public class ResultSpawnManager : MonoBehaviour
                 if(player.StoryLevel == 0)
                 {
                     player.StoryLevel++;
-                    GetComponent<SceneChanger>().NextSceneName = "karakida";
-                    GetComponent<SceneChanger>().TouchButton();
+                    var colorFade_ = Instantiate(colorFade);
+                    colorFade_.transform.SetParent(GameObject.Find("Canvas").transform);
+                    colorFade_.GetComponent<RectTransform>().localPosition = Vector3.zero;
+                    colorFade_.GetComponent<RectTransform>().localScale = Vector3.one;
+                    colorFade_.GetComponent<Image>().color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
                 }
 
                 if (timer.isEndDay)
