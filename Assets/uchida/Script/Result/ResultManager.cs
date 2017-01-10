@@ -110,7 +110,17 @@ public class ResultManager : MonoBehaviour
 
         timer.SetStartDayTime();
         player.ResetOneDay();
-        GetComponent<SceneChanger>().NextSceneName = "GameMain";
+
+        if(player.GetMoneyToTheTarget() == 0)
+        {
+            player.StoryLevel++;
+            GetComponent<SceneChanger>().NextSceneName = "karakida";
+        }
+        else
+        {
+            GetComponent<SceneChanger>().NextSceneName = "GameMain";
+        }
+
         GetComponent<SceneChanger>().TouchButton();
     }
 
