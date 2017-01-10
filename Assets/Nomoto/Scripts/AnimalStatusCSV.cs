@@ -32,7 +32,7 @@ public class AnimalStatusCSV : MonoBehaviour
         }
 
 
-        for (int i = 0; i < 13; ++i)
+        for (int i = 0; i < 17; ++i)
         {
             AnimalStatusManager animalStatus = animals[i].GetComponent<AnimalStatusManager>();
             animalStatus.status.ID = int.Parse(csvDatas[i][0]);
@@ -62,7 +62,7 @@ public class AnimalStatusCSV : MonoBehaviour
     {
         StreamWriter sw = new StreamWriter(Application.dataPath + "/Resources/" + "AnimalStatusCSV.csv", false);
 
-        for (int i = 0; i < 13; ++i)
+        for (int i = 0; i < 17; ++i)
         {
             AnimalStatusManager animalStatus = animals[i].GetComponent<AnimalStatusManager>();
 

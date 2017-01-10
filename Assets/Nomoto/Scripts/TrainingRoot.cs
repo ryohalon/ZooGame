@@ -96,7 +96,7 @@ public class TrainingRoot : MonoBehaviour
 
     Vector2 moyaSize;
 
-    private FoodList foodList = null;
+    private FoodStatus foodStatus = null;
 
 
     private string[] talkComment = new string[5];
@@ -154,7 +154,7 @@ public class TrainingRoot : MonoBehaviour
         AnimalStatusManager animalStatusManager
             = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[selectNum].GetComponent<AnimalStatusManager>();
 
-        foodList = GameObject.Find("FoodList").GetComponent<FoodList>();
+        foodStatus = GameObject.Find("FoodList").GetComponent<FoodStatus>();
 
 
         loveLevel = (int)animalStatusManager.status.LoveDegree;
@@ -173,11 +173,11 @@ public class TrainingRoot : MonoBehaviour
         moyaSize = Moya.GetComponent<RectTransform>().sizeDelta;
 
         for (int i = 0; i < 3; ++i)
-            MeetNums[i] = foodList.foodList[i].possessionNumber + 10;
+            MeetNums[i] = foodStatus.foodList[i].possessionNumber + 10;
 
 
         for (int i = 3; i < 6; ++i)
-            VegetableNums[i - 3] = foodList.foodList[i].possessionNumber + 10;
+            VegetableNums[i - 3] = foodStatus.foodList[i].possessionNumber + 10;
 
         SetFoodText();
         EatManager.Change(satietyLelel, maxSatietyLevel);
@@ -272,7 +272,7 @@ public class TrainingRoot : MonoBehaviour
             }
         }
         Debug.Log(BrushTime);
-        if (BrushTime < 3.5f) return;
+        if (BrushTime < 1.5f) return;
         animationType = Type.COMMENT;
         Brush.GetComponent<RectTransform>().position = BrushPos;
         BrushTime = 0.0f;
