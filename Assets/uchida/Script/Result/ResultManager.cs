@@ -121,7 +121,7 @@ public class ResultManager : MonoBehaviour
         timer.SetStartDayTime();
         player.ResetOneDay();
 
-        if(player.GetMoneyToTheTarget() == 0)
+        if(player.GetMoneyToTheTarget() == 0 && player.StoryLevel < 6)
         {
             player.StoryLevel++;
             var colorFade_ = Instantiate(colorFade);
