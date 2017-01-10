@@ -142,11 +142,12 @@ public class TrainingRoot : MonoBehaviour
         explanationFoodStr[4] = "\n南国に行った\n   気分になれる\n  ハッピーなご飯";
         explanationFoodStr[5] = "\n最高級品を追求した\n  全草食動物が\n  うっとりする一品";
 
-        Sound.PlayBgm("GameMainBgm");
+        //Sound.PlayBgm("GameMainBgm");
 
         selectNum = GameObject.Find("AnimalList").GetComponent<SelectAnimalNum>().SelectNum;
 
         Debug.Log("Select : " + selectNum.ToString());
+
         animalmage.sprite = GameObject.Find("AnimalList").GetComponent<AnimalTextureManager>().animalTextureList[selectNum][0];
 
         ReadTalkComment();
@@ -167,6 +168,9 @@ public class TrainingRoot : MonoBehaviour
         rarity = animalStatusManager.status.Rarity;
         maxLoveLevel = rarity * 20;
         maxSatietyLevel = rarity * 20;
+
+        if(loveLevel >= maxLoveLevel)
+            animalmage.sprite = GameObject.Find("AnimalList").GetComponent<AnimalTextureManager>().animalTextureList[selectNum][1];
 
         BrushPos = Brush.GetComponent<RectTransform>().position;
         FoodSize = Food.GetComponent<RectTransform>().sizeDelta;
@@ -261,6 +265,7 @@ public class TrainingRoot : MonoBehaviour
         {
             if (prevMousePos != mousePosition)
             {
+                Sound.PlaySe("brush");
                 RectTransform myTransform = Brush.GetComponent<RectTransform>();
                 Rect rect = new Rect(myTransform.position.x, myTransform.position.y, myTransform.rect.width, myTransform.rect.height);
 
@@ -287,6 +292,7 @@ public class TrainingRoot : MonoBehaviour
         if (loveLevel + 1 <= maxLoveLevel)
         {
             loveLevel += 1;
+            Sound.PlaySe("loveup");
             HeartManager.SetAnimation(loveLevel - 1, loveLevel, maxLoveLevel);
         }
     }
@@ -308,13 +314,16 @@ public class TrainingRoot : MonoBehaviour
         Food.GetComponent<RectTransform>().sizeDelta = FoodSize;
         Food.SetActive(false);
         CommentBoard.SetActive(true);
+        Sound.PlaySe("bite");
 
         if (foodCommentType == FoodCommentType.LIKE)
         {
+            Sound.PlaySe("like");
             MakeHeart(2);
         }
         else if (foodCommentType == FoodCommentType.DONT_LIKE)
         {
+            Sound.PlaySe("dontLike");
             Moya.SetActive(true);
         }
     }
@@ -400,7 +409,7 @@ public class TrainingRoot : MonoBehaviour
         if (loveLevel > maxLoveLevel)
             loveLevel = maxLoveLevel;
         int nowLoveLevel = loveLevel;
-
+        Sound.PlaySe("loveup");
         HeartManager.SetAnimation(beforeLoveLevel, nowLoveLevel, maxLoveLevel);
         if (nowLoveLevel == maxLoveLevel)
             TalkText.text = talkComment[4];
@@ -424,11 +433,8 @@ public class TrainingRoot : MonoBehaviour
         EatBoard.SetActive(false);
     }
 
-
     public void PushAnswer(int num)
     {
-        canEatNum -= 1;
-
         if (num == 0)
         {
             switch (selectFoodType)
@@ -474,6 +480,7 @@ public class TrainingRoot : MonoBehaviour
     public void PushMeatType(int choiseFoodRank)
     {
         if (MeetNums[choiseFoodRank] == 0) return;
+        canEatNum -= 1;
         --MeetNums[choiseFoodRank];
         SetFoodText();
 
@@ -482,7 +489,6 @@ public class TrainingRoot : MonoBehaviour
         if (foodType == 0)
         {
             foodCommentType = FoodCommentType.LIKE;
-
             TalkText.text = talkComment[0];
             switch (choiseFoodRank)
             {
@@ -519,6 +525,7 @@ public class TrainingRoot : MonoBehaviour
     public void PushVegetableType(int choiseFoodRank)
     {
         if (VegetableNums[choiseFoodRank] == 0) return;
+        canEatNum -= 1;
         --VegetableNums[choiseFoodRank];
         SetFoodText();
 
