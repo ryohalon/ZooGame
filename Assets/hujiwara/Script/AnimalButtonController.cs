@@ -135,6 +135,8 @@ public class AnimalButtonController : MonoBehaviour
     // 購入画面Noボタン
     public void PushNoButton()
     {
+        Sound.PlaySe("Close");
+
         animalBuyWindow.SetActive(false);
 
         animalBoard.SetActive(true);
