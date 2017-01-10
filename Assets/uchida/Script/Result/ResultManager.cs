@@ -10,6 +10,8 @@ public class ResultManager : MonoBehaviour
     private PlayerStatusManager player = null;
     private GameObject coin = null;
     private GameObject coinBox = null;
+    [SerializeField]
+    private GameObject colorFade = null;
 
     private int totalFoodCost = 0;
     private int totalAnimalPurchaseCost = 0;
@@ -122,14 +124,18 @@ public class ResultManager : MonoBehaviour
         if(player.GetMoneyToTheTarget() == 0)
         {
             player.StoryLevel++;
-            GetComponent<SceneChanger>().NextSceneName = "karakida";
+            var colorFade_ = Instantiate(colorFade);
+            colorFade_.transform.SetParent(GameObject.Find("Canvas").transform);
+            colorFade_.GetComponent<RectTransform>().localPosition = Vector3.zero;
+            colorFade_.GetComponent<RectTransform>().localScale = Vector3.one;
+            colorFade_.GetComponent<Image>().color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
+            Destroy(gameObject);
         }
         else
         {
             GetComponent<SceneChanger>().NextSceneName = "GameMain";
+            GetComponent<SceneChanger>().TouchButton();
         }
-
-        GetComponent<SceneChanger>().TouchButton();
     }
 
     private void UpdateEasing()
