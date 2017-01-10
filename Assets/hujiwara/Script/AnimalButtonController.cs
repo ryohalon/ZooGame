@@ -204,194 +204,194 @@ public class AnimalButtonController : MonoBehaviour
     {
         img.material.mainTexture = peacockImage;
 
-        //ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[0].GetComponent<AnimalStatusManager>().status.ID;
-        //SetInformation(ID);
+        ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[0].GetComponent<AnimalStatusManager>().status.ID;
+        SetInformation(ID);
 
-        animalNameText.GetComponent<Text>().text = "クジャク";
+        //animalNameText.GetComponent<Text>().text = "クジャク";
 
-        animalPrice = 50000;
-        animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
+        //animalPrice = 50000;
+        //animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
     }
 
     public void PushMonkey()
     {
         img.material.mainTexture = monkeyImage;
 
-        //ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[3].GetComponent<AnimalStatusManager>().status.ID;
-        //SetInformation(ID);
+        ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[3].GetComponent<AnimalStatusManager>().status.ID;
+        SetInformation(ID);
 
-        animalNameText.GetComponent<Text>().text = "サル";
+        //animalNameText.GetComponent<Text>().text = "サル";
 
-        animalPrice = 80000;
-        animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
+        //animalPrice = 80000;
+        //animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
     }
 
     public void PushOwl()
     {
         img.material.mainTexture = owlImage;
 
-        //ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[4].GetComponent<AnimalStatusManager>().status.ID;
-        //SetInformation(ID);
+        ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[4].GetComponent<AnimalStatusManager>().status.ID;
+        SetInformation(ID);
 
-        animalNameText.GetComponent<Text>().text = "フクロウ";
+        //animalNameText.GetComponent<Text>().text = "フクロウ";
 
-        animalPrice = 80000;
-        animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
+        //animalPrice = 80000;
+        //animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
     }
 
     public void PushRhino()
     {
         img.material.mainTexture = rhinoImage;
 
-        //ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[5].GetComponent<AnimalStatusManager>().status.ID;
-        //SetInformation(ID);
+        ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[5].GetComponent<AnimalStatusManager>().status.ID;
+        SetInformation(ID);
 
-        animalNameText.GetComponent<Text>().text = "サイ";
+        //animalNameText.GetComponent<Text>().text = "サイ";
 
-        animalPrice = 80000;
-        animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
+        //animalPrice = 80000;
+        //animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
     }
 
     public void PushPony()
     {
         img.material.mainTexture = ponyImage;
 
-        //ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[6].GetComponent<AnimalStatusManager>().status.ID;
-        //SetInformation(ID);
+        ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[6].GetComponent<AnimalStatusManager>().status.ID;
+        SetInformation(ID);
 
-        animalNameText.GetComponent<Text>().text = "ポニー";
+        //animalNameText.GetComponent<Text>().text = "ポニー";
 
-        animalPrice = 80000;
-        animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
+        //animalPrice = 80000;
+        //animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
     }
 
     public void PushFlamingo()
     {
         img.material.mainTexture = flamingoImage;
 
-        //ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[7].GetComponent<AnimalStatusManager>().status.ID;
-        //SetInformation(ID);
+        ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[7].GetComponent<AnimalStatusManager>().status.ID;
+        SetInformation(ID);
 
-        animalNameText.GetComponent<Text>().text = "フラミンゴ";
+        //animalNameText.GetComponent<Text>().text = "フラミンゴ";
 
-        animalPrice = 80000;
-        animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
+        //animalPrice = 80000;
+        //animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
     }
 
     public void PushWolf()
     {
         img.material.mainTexture = wolfImage;
 
-        //ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[8].GetComponent<AnimalStatusManager>().status.ID;
-        //SetInformation(ID);
+        ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[8].GetComponent<AnimalStatusManager>().status.ID;
+        SetInformation(ID);
 
-        animalNameText.GetComponent<Text>().text = "オオカミ";
+        //animalNameText.GetComponent<Text>().text = "オオカミ";
 
-        animalPrice = 150000;
-        animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
+        //animalPrice = 150000;
+        //animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
     }
 
     public void PushElephant()
     {
         img.material.mainTexture = elephantImage;
 
-        //ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[9].GetComponent<AnimalStatusManager>().status.ID;
-        //SetInformation(ID);
+        ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[9].GetComponent<AnimalStatusManager>().status.ID;
+        SetInformation(ID);
 
-        animalNameText.GetComponent<Text>().text = "ゾウ";
+        //animalNameText.GetComponent<Text>().text = "ゾウ";
 
-        animalPrice = 150000;
-        animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
+        //animalPrice = 150000;
+        //animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
     }
 
     public void PushHawk()
     {
         img.material.mainTexture = hawkImage;
 
-        //ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[10].GetComponent<AnimalStatusManager>().status.ID;
-        //SetInformation(ID);
+        ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[10].GetComponent<AnimalStatusManager>().status.ID;
+        SetInformation(ID);
 
-        animalNameText.GetComponent<Text>().text = "タカ";
+        //animalNameText.GetComponent<Text>().text = "タカ";
 
-        animalPrice = 150000;
-        animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
+        //animalPrice = 150000;
+        //animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
     }
 
     public void PushPolarBear()
     {
         img.material.mainTexture = polarBearImage;
 
-        //ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[11].GetComponent<AnimalStatusManager>().status.ID;
-        //SetInformation(ID);
+        ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[11].GetComponent<AnimalStatusManager>().status.ID;
+        SetInformation(ID);
 
-        animalNameText.GetComponent<Text>().text = "ホッキョクグマ";
+        //animalNameText.GetComponent<Text>().text = "ホッキョクグマ";
 
-        animalPrice = 150000;
-        animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
+        //animalPrice = 150000;
+        //animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
     }
 
     public void PushLesserPanda()
     {
         img.material.mainTexture = lesserPandaImage;
 
-        //ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[12].GetComponent<AnimalStatusManager>().status.ID;
-        //SetInformation(ID);
+        ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[12].GetComponent<AnimalStatusManager>().status.ID;
+        SetInformation(ID);
 
-        animalNameText.GetComponent<Text>().text = "レッサーパンダ";
+        //animalNameText.GetComponent<Text>().text = "レッサーパンダ";
 
-        animalPrice = 150000;
-        animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
+        //animalPrice = 150000;
+        //animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
     }
 
     public void PushGiraffe()
     {
         img.material.mainTexture = giraffeImage;
 
-        //ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[13].GetComponent<AnimalStatusManager>().status.ID;
-        //SetInformation(ID);
+        ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[13].GetComponent<AnimalStatusManager>().status.ID;
+        SetInformation(ID);
 
-        animalNameText.GetComponent<Text>().text = "キリン";
+        //animalNameText.GetComponent<Text>().text = "キリン";
 
-        animalPrice = 200000;
-        animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
+        //animalPrice = 200000;
+        //animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
     }
     public void PushBlackLeopard()
     {
         img.material.mainTexture = blackLeppardImage;
 
-        //ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[14].GetComponent<AnimalStatusManager>().status.ID;
-        //SetInformation(ID);
+        ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[14].GetComponent<AnimalStatusManager>().status.ID;
+        SetInformation(ID);
 
-        animalNameText.GetComponent<Text>().text = "クロヒョウ";
+        //animalNameText.GetComponent<Text>().text = "クロヒョウ";
 
-        animalPrice = 200000;
-        animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
+        //animalPrice = 200000;
+        //animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
     }
 
     public void PushTiger()
     {
         img.material.mainTexture = tigerImage;
 
-        //ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[15].GetComponent<AnimalStatusManager>().status.ID;
-        //SetInformation(ID);
+        ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[15].GetComponent<AnimalStatusManager>().status.ID;
+        SetInformation(ID);
 
-        animalNameText.GetComponent<Text>().text = "トラ";
+        //animalNameText.GetComponent<Text>().text = "トラ";
 
-        animalPrice = 200000;
-        animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
+        //animalPrice = 200000;
+        //animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
     }
 
     public void PushPanda()
     {
         img.material.mainTexture = pandaImage;
 
-        //ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[16].GetComponent<AnimalStatusManager>().status.ID;
-        //SetInformation(ID);
+        ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[16].GetComponent<AnimalStatusManager>().status.ID;
+        SetInformation(ID);
 
-        animalNameText.GetComponent<Text>().text = "パンダ";
+        //animalNameText.GetComponent<Text>().text = "パンダ";
 
-        animalPrice = 200000;
-        animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
+        //animalPrice = 200000;
+        //animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
     }
 
     void SetInformation(int _ID)
