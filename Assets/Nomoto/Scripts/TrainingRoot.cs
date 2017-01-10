@@ -191,6 +191,7 @@ public class TrainingRoot : MonoBehaviour
         GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[selectNum].GetComponent<AnimalStatusManager>().status.MealNums = canEatNum;
         GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[selectNum].GetComponent<AnimalStatusManager>().status.BurashiNums = canBrushNum;
         GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[selectNum].GetComponent<AnimalStatusManager>().status.CommunicationNums = canTalkNum;
+        GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().Save();
     }
 
     void ReadTalkComment()
