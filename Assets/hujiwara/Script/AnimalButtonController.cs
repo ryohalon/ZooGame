@@ -48,49 +48,49 @@ public class AnimalButtonController : MonoBehaviour
     GameObject buyCommentText = null;
 
     [SerializeField]
-    Texture peacockImage;
+    GameObject peacockBought = null;
 
     [SerializeField]
-    Texture flamingoImage;
+    GameObject monkeyBought = null;
 
     [SerializeField]
-    Texture monkeyImage;
+    GameObject owlBought = null;
 
     [SerializeField]
-    Texture owlImage;
+    GameObject rhinoBought = null;
 
     [SerializeField]
-    Texture ponyImage;
+    GameObject ponyBought = null;
 
     [SerializeField]
-    Texture rhinoImage;
+    GameObject flamingoBought = null;
 
     [SerializeField]
-    Texture elephantImage;
+    GameObject wolfBought = null;
 
     [SerializeField]
-    Texture hawkImage;
+    GameObject elephantBought = null;
 
     [SerializeField]
-    Texture lesserPandaImage;
+    GameObject hawkBought = null;
 
     [SerializeField]
-    Texture polarBearImage;
+    GameObject polarBearBought = null;
 
     [SerializeField]
-    Texture wolfImage;
+    GameObject lesserPandaBought = null;
 
     [SerializeField]
-    Texture blackLeppardImage;
+    GameObject giraffeBought = null;
 
     [SerializeField]
-    Texture giraffeImage;
+    GameObject blackLeopardBought = null;
 
     [SerializeField]
-    Texture pandaImage;
+    GameObject tigerBought = null;
 
     [SerializeField]
-    Texture tigerImage;
+    GameObject pandaBought = null;
 
     // 動物イメージ用
     Image img;
@@ -115,6 +115,7 @@ public class AnimalButtonController : MonoBehaviour
         isShowText = false;
 
         isFirstComment = true;
+        
     }
 
     void Update()
@@ -148,6 +149,8 @@ public class AnimalButtonController : MonoBehaviour
         {
             handMoney -= animalPrice;
             handMoneyText.GetComponent<Text>().text = handMoney.ToString();
+            GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[ID].GetComponent<AnimalStatusManager>().status.IsPurchase = true;
+            Boughter();
 
             CommentChanger();
             buyCommentBoard.SetActive(true);
@@ -202,10 +205,11 @@ public class AnimalButtonController : MonoBehaviour
 
     public void PushPeacock()
     {
-        img.material.mainTexture = peacockImage;
+        img.sprite = GameObject.Find("AnimalList").GetComponent<AnimalTextureManager>().animalTextureList[0][0];
 
         ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[0].GetComponent<AnimalStatusManager>().status.ID;
         SetInformation(ID);
+        Debug.Log("animalID=" + ID);
 
         //animalNameText.GetComponent<Text>().text = "クジャク";
 
@@ -215,10 +219,11 @@ public class AnimalButtonController : MonoBehaviour
 
     public void PushMonkey()
     {
-        img.material.mainTexture = monkeyImage;
+        img.sprite = GameObject.Find("AnimalList").GetComponent<AnimalTextureManager>().animalTextureList[3][0];
 
         ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[3].GetComponent<AnimalStatusManager>().status.ID;
         SetInformation(ID);
+        Debug.Log("animalID=" + ID);
 
         //animalNameText.GetComponent<Text>().text = "サル";
 
@@ -228,10 +233,11 @@ public class AnimalButtonController : MonoBehaviour
 
     public void PushOwl()
     {
-        img.material.mainTexture = owlImage;
+        img.sprite = GameObject.Find("AnimalList").GetComponent<AnimalTextureManager>().animalTextureList[4][0];
 
         ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[4].GetComponent<AnimalStatusManager>().status.ID;
         SetInformation(ID);
+        Debug.Log("animalID=" + ID);
 
         //animalNameText.GetComponent<Text>().text = "フクロウ";
 
@@ -241,10 +247,11 @@ public class AnimalButtonController : MonoBehaviour
 
     public void PushRhino()
     {
-        img.material.mainTexture = rhinoImage;
+        img.sprite = GameObject.Find("AnimalList").GetComponent<AnimalTextureManager>().animalTextureList[5][0];
 
         ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[5].GetComponent<AnimalStatusManager>().status.ID;
         SetInformation(ID);
+        Debug.Log("animalID=" + ID);
 
         //animalNameText.GetComponent<Text>().text = "サイ";
 
@@ -254,10 +261,11 @@ public class AnimalButtonController : MonoBehaviour
 
     public void PushPony()
     {
-        img.material.mainTexture = ponyImage;
+        img.sprite = GameObject.Find("AnimalList").GetComponent<AnimalTextureManager>().animalTextureList[6][0];
 
         ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[6].GetComponent<AnimalStatusManager>().status.ID;
         SetInformation(ID);
+        Debug.Log("animalID=" + ID);
 
         //animalNameText.GetComponent<Text>().text = "ポニー";
 
@@ -267,10 +275,11 @@ public class AnimalButtonController : MonoBehaviour
 
     public void PushFlamingo()
     {
-        img.material.mainTexture = flamingoImage;
+        img.sprite = GameObject.Find("AnimalList").GetComponent<AnimalTextureManager>().animalTextureList[7][0];
 
         ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[7].GetComponent<AnimalStatusManager>().status.ID;
         SetInformation(ID);
+        Debug.Log("animalID=" + ID);
 
         //animalNameText.GetComponent<Text>().text = "フラミンゴ";
 
@@ -280,10 +289,11 @@ public class AnimalButtonController : MonoBehaviour
 
     public void PushWolf()
     {
-        img.material.mainTexture = wolfImage;
+        img.sprite = GameObject.Find("AnimalList").GetComponent<AnimalTextureManager>().animalTextureList[8][0];
 
         ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[8].GetComponent<AnimalStatusManager>().status.ID;
         SetInformation(ID);
+        Debug.Log("animalID=" + ID);
 
         //animalNameText.GetComponent<Text>().text = "オオカミ";
 
@@ -293,10 +303,11 @@ public class AnimalButtonController : MonoBehaviour
 
     public void PushElephant()
     {
-        img.material.mainTexture = elephantImage;
+        img.sprite = GameObject.Find("AnimalList").GetComponent<AnimalTextureManager>().animalTextureList[9][0];
 
         ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[9].GetComponent<AnimalStatusManager>().status.ID;
         SetInformation(ID);
+        Debug.Log("animalID=" + ID);
 
         //animalNameText.GetComponent<Text>().text = "ゾウ";
 
@@ -306,10 +317,11 @@ public class AnimalButtonController : MonoBehaviour
 
     public void PushHawk()
     {
-        img.material.mainTexture = hawkImage;
+        img.sprite = GameObject.Find("AnimalList").GetComponent<AnimalTextureManager>().animalTextureList[10][0];
 
         ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[10].GetComponent<AnimalStatusManager>().status.ID;
         SetInformation(ID);
+        Debug.Log("animalID=" + ID);
 
         //animalNameText.GetComponent<Text>().text = "タカ";
 
@@ -319,10 +331,11 @@ public class AnimalButtonController : MonoBehaviour
 
     public void PushPolarBear()
     {
-        img.material.mainTexture = polarBearImage;
+        img.sprite = GameObject.Find("AnimalList").GetComponent<AnimalTextureManager>().animalTextureList[11][0];
 
         ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[11].GetComponent<AnimalStatusManager>().status.ID;
         SetInformation(ID);
+        Debug.Log("animalID=" + ID);
 
         //animalNameText.GetComponent<Text>().text = "ホッキョクグマ";
 
@@ -332,10 +345,11 @@ public class AnimalButtonController : MonoBehaviour
 
     public void PushLesserPanda()
     {
-        img.material.mainTexture = lesserPandaImage;
+        img.sprite = GameObject.Find("AnimalList").GetComponent<AnimalTextureManager>().animalTextureList[12][0];
 
         ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[12].GetComponent<AnimalStatusManager>().status.ID;
         SetInformation(ID);
+        Debug.Log("animalID=" + ID);
 
         //animalNameText.GetComponent<Text>().text = "レッサーパンダ";
 
@@ -345,10 +359,11 @@ public class AnimalButtonController : MonoBehaviour
 
     public void PushGiraffe()
     {
-        img.material.mainTexture = giraffeImage;
+        img.sprite = GameObject.Find("AnimalList").GetComponent<AnimalTextureManager>().animalTextureList[13][0];
 
         ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[13].GetComponent<AnimalStatusManager>().status.ID;
         SetInformation(ID);
+        Debug.Log("animalID=" + ID);
 
         //animalNameText.GetComponent<Text>().text = "キリン";
 
@@ -357,10 +372,11 @@ public class AnimalButtonController : MonoBehaviour
     }
     public void PushBlackLeopard()
     {
-        img.material.mainTexture = blackLeppardImage;
+        img.sprite = GameObject.Find("AnimalList").GetComponent<AnimalTextureManager>().animalTextureList[14][0];
 
         ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[14].GetComponent<AnimalStatusManager>().status.ID;
         SetInformation(ID);
+        Debug.Log("animalID=" + ID);
 
         //animalNameText.GetComponent<Text>().text = "クロヒョウ";
 
@@ -370,10 +386,11 @@ public class AnimalButtonController : MonoBehaviour
 
     public void PushTiger()
     {
-        img.material.mainTexture = tigerImage;
+        img.sprite = GameObject.Find("AnimalList").GetComponent<AnimalTextureManager>().animalTextureList[15][0];
 
         ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[15].GetComponent<AnimalStatusManager>().status.ID;
         SetInformation(ID);
+        Debug.Log("animalID=" + ID);
 
         //animalNameText.GetComponent<Text>().text = "トラ";
 
@@ -383,10 +400,11 @@ public class AnimalButtonController : MonoBehaviour
 
     public void PushPanda()
     {
-        img.material.mainTexture = pandaImage;
+        img.sprite = GameObject.Find("AnimalList").GetComponent<AnimalTextureManager>().animalTextureList[16][0];
 
         ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[16].GetComponent<AnimalStatusManager>().status.ID;
         SetInformation(ID);
+        Debug.Log("animalID=" + ID);
 
         //animalNameText.GetComponent<Text>().text = "パンダ";
 
@@ -401,5 +419,83 @@ public class AnimalButtonController : MonoBehaviour
 
         animalPrice = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[_ID].GetComponent<AnimalStatusManager>().status.PurchasePrice;
         animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
+    }
+
+    void Boughter()
+    {
+        if(GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[0].GetComponent<AnimalStatusManager>().status.IsPurchase == true)
+        {
+            peacockBought.SetActive(true);
+        }
+
+        if (GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[3].GetComponent<AnimalStatusManager>().status.IsPurchase == true)
+        {
+            monkeyBought.SetActive(true);
+        }
+
+        if (GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[4].GetComponent<AnimalStatusManager>().status.IsPurchase == true)
+        {
+            owlBought.SetActive(true);
+        }
+
+        if (GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[5].GetComponent<AnimalStatusManager>().status.IsPurchase == true)
+        {
+            rhinoBought.SetActive(true);
+        }
+
+        if (GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[6].GetComponent<AnimalStatusManager>().status.IsPurchase == true)
+        {
+            ponyBought.SetActive(true);
+        }
+
+        if (GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[7].GetComponent<AnimalStatusManager>().status.IsPurchase == true)
+        {
+            flamingoBought.SetActive(true);
+        }
+
+        if (GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[8].GetComponent<AnimalStatusManager>().status.IsPurchase == true)
+        {
+            wolfBought.SetActive(true);
+        }
+
+        if (GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[9].GetComponent<AnimalStatusManager>().status.IsPurchase == true)
+        {
+            elephantBought.SetActive(true);
+        }
+
+        if (GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[10].GetComponent<AnimalStatusManager>().status.IsPurchase == true)
+        {
+            hawkBought.SetActive(true);
+        }
+
+        if (GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[11].GetComponent<AnimalStatusManager>().status.IsPurchase == true)
+        {
+            polarBearBought.SetActive(true);
+        }
+
+        if (GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[12].GetComponent<AnimalStatusManager>().status.IsPurchase == true)
+        {
+            lesserPandaBought.SetActive(true);
+        }
+
+        if (GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[13].GetComponent<AnimalStatusManager>().status.IsPurchase == true)
+        {
+            giraffeBought.SetActive(true);
+        }
+
+        if (GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[14].GetComponent<AnimalStatusManager>().status.IsPurchase == true)
+        {
+            blackLeopardBought.SetActive(true);
+        }
+
+        if (GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[15].GetComponent<AnimalStatusManager>().status.IsPurchase == true)
+        {
+            tigerBought.SetActive(true);
+        }
+
+        if (GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[16].GetComponent<AnimalStatusManager>().status.IsPurchase == true)
+        {
+            pandaBought.SetActive(true);
+        }
     }
 }
