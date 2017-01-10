@@ -594,7 +594,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6e4d8ffc2025434fa0c92b612367523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NextSceneName: Shop
+  NextSceneName: DebugShop
 --- !u!114 &11454316
 MonoBehaviour:
   m_ObjectHideFlags: 1
