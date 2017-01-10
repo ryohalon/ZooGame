@@ -115,7 +115,6 @@ public class AnimalButtonController : MonoBehaviour
         isShowText = false;
 
         isFirstComment = true;
-        
     }
 
     void Update()
@@ -153,6 +152,7 @@ public class AnimalButtonController : MonoBehaviour
             handMoneyText.GetComponent<Text>().text = handMoney.ToString();
             GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[ID].GetComponent<AnimalStatusManager>().status.IsPurchase = true;
             GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().Save();
+            Debug.Log("ID:" + ID + "→IsPurchase= " + GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[ID].GetComponent<AnimalStatusManager>().status.IsPurchase);
             Boughter();
 
             CommentChanger();
@@ -430,75 +430,135 @@ public class AnimalButtonController : MonoBehaviour
         {
             peacockBought.SetActive(true);
         }
+        else
+        {
+            peacockBought.SetActive(false);
+        }
 
         if (GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[3].GetComponent<AnimalStatusManager>().status.IsPurchase == true)
         {
             monkeyBought.SetActive(true);
+        }
+        else
+        {
+            monkeyBought.SetActive(false);
         }
 
         if (GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[4].GetComponent<AnimalStatusManager>().status.IsPurchase == true)
         {
             owlBought.SetActive(true);
         }
+        else
+        {
+            owlBought.SetActive(false);
+        }
 
         if (GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[5].GetComponent<AnimalStatusManager>().status.IsPurchase == true)
         {
             rhinoBought.SetActive(true);
+        }
+        else
+        {
+            rhinoBought.SetActive(false);
         }
 
         if (GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[6].GetComponent<AnimalStatusManager>().status.IsPurchase == true)
         {
             ponyBought.SetActive(true);
         }
+        else
+        {
+            ponyBought.SetActive(false);
+        }
 
         if (GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[7].GetComponent<AnimalStatusManager>().status.IsPurchase == true)
         {
             flamingoBought.SetActive(true);
+        }
+        else
+        {
+            flamingoBought.SetActive(false);
         }
 
         if (GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[8].GetComponent<AnimalStatusManager>().status.IsPurchase == true)
         {
             wolfBought.SetActive(true);
         }
+        else
+        {
+            wolfBought.SetActive(false);
+        }
 
         if (GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[9].GetComponent<AnimalStatusManager>().status.IsPurchase == true)
         {
             elephantBought.SetActive(true);
+        }
+        else
+        {
+            elephantBought.SetActive(false);
         }
 
         if (GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[10].GetComponent<AnimalStatusManager>().status.IsPurchase == true)
         {
             hawkBought.SetActive(true);
         }
+        else
+        {
+            hawkBought.SetActive(false);
+        }
 
         if (GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[11].GetComponent<AnimalStatusManager>().status.IsPurchase == true)
         {
             polarBearBought.SetActive(true);
+        }
+        else
+        {
+            polarBearBought.SetActive(false);
         }
 
         if (GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[12].GetComponent<AnimalStatusManager>().status.IsPurchase == true)
         {
             lesserPandaBought.SetActive(true);
         }
+        else
+        {
+            lesserPandaBought.SetActive(false);
+        }
 
         if (GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[13].GetComponent<AnimalStatusManager>().status.IsPurchase == true)
         {
             giraffeBought.SetActive(true);
+        }
+        else
+        {
+            giraffeBought.SetActive(false);
         }
 
         if (GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[14].GetComponent<AnimalStatusManager>().status.IsPurchase == true)
         {
             blackLeopardBought.SetActive(true);
         }
+        else
+        {
+            blackLeopardBought.SetActive(false);
+        }
 
         if (GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[15].GetComponent<AnimalStatusManager>().status.IsPurchase == true)
         {
             tigerBought.SetActive(true);
         }
+        else
+        {
+            tigerBought.SetActive(false);
+        }
 
         if (GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[16].GetComponent<AnimalStatusManager>().status.IsPurchase == true)
         {
             pandaBought.SetActive(true);
+        }
+        else
+        {
+            pandaBought.SetActive(false);
         }
     }
 }
