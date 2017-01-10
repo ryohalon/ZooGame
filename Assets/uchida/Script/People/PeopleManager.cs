@@ -11,7 +11,7 @@ public class PeopleManager : MonoBehaviour
     private GameObject canvas = null;
     private FadeIn fadeIn = null;
 
-    private List<GameObject> peopleList = new List<GameObject>();
+    public List<GameObject> peopleList = new List<GameObject>();
     public int maxPeopleNums = 0;
     public int ratio = 2;
 
@@ -99,7 +99,10 @@ public class PeopleManager : MonoBehaviour
         {
             yield return null;
             if (!fadeIn.isFadeInEnd)
+            {
+                PeopleDelete();
                 continue;
+            }
 
             ChangePeopleNums();
 
@@ -165,6 +168,15 @@ public class PeopleManager : MonoBehaviour
                 Destroy(peopleList[i]);
                 peopleList.RemoveAt(i);
             }
+        }
+    }
+
+    public void PeopleDelete()
+    {
+        for(int i = 0; i < peopleList.Count; i++)
+        {
+            Destroy(peopleList[i]);
+            peopleList.RemoveAt(i);
         }
     }
 }
