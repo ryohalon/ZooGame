@@ -21,6 +21,14 @@ public class SoundMaker : MonoBehaviour
         Sound.LoadBgm("GameMainNightBgm", "GameMainNight");
         Sound.LoadSe("Ok","Ok");
         Sound.LoadSe("Close","Close");
-        //Sound.PlayBgm("GameMainBgm");
+        Sound.LoadSe("brush", "TraningSE/Rear_brush");
+        Sound.LoadSe("bite", "TraningSE/Rear_bite");
+        Sound.LoadSe("loveup", "TraningSE/Rear_loveup");
+        Sound.LoadSe("dontLike", "TraningSE/Rear_hatefood");
+        Sound.LoadSe("like", "TraningSE/Rear_like");
+        Sound.LoadSe("cash", "ShopSE/Shop_cash");
+        Sound.LoadSe("wood", "GameMainSE/Main_wood");
+        Sound.LoadSe("put", "GameMainSE/Main_put");
+        Sound.LoadSe("swipe", "GameMainSE/Main_swipe");
     }
 }
