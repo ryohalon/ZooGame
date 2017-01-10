@@ -51,6 +51,7 @@ public class AnimalStatusCSV : MonoBehaviour
                 animalStatus.status.Sexuality = AnimalStatusManager.Sexuality.FEMALE;
 
             animalStatus.status.CageID = int.Parse(csvDatas[i][11]);
+            Debug.Log(animalStatus.status.CageID);
             animalStatus.status.MealNums = int.Parse(csvDatas[i][12]);
             animalStatus.status.BurashiNums = int.Parse(csvDatas[i][13]);
             animalStatus.status.CommunicationNums = int.Parse(csvDatas[i][14]);
