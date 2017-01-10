@@ -4,6 +4,8 @@ using System.Collections;
 
 public class ColorFade : MonoBehaviour
 {
+    public bool isFadeEnd = false;
+
     public enum FadeType
     {
         FADEIN,
@@ -23,6 +25,9 @@ public class ColorFade : MonoBehaviour
 
     void Update()
     {
+        if (isFadeEnd)
+            return;
+
         time += Time.deltaTime;
         float alpha = 1.0f;
         if (fadeType == FadeType.FADEIN)
@@ -32,10 +37,7 @@ public class ColorFade : MonoBehaviour
 
         GetComponent<Image>().color = new Color(fadeColor.r, fadeColor.g, fadeColor.b, alpha);
 
-        if(time >= takeTime)
-        {
-            GetComponent<SceneChanger>().NextSceneName = "karakida";
-            GetComponent<SceneChanger>().TouchButton();
-        }
+        if (time >= takeTime)
+            isFadeEnd = true;
     }
 }
