@@ -150,6 +150,7 @@ public class AnimalButtonController : MonoBehaviour
             handMoney -= animalPrice;
             handMoneyText.GetComponent<Text>().text = handMoney.ToString();
             GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[ID].GetComponent<AnimalStatusManager>().status.IsPurchase = true;
+            GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().Save();
             Boughter();
 
             CommentChanger();
@@ -421,7 +422,7 @@ public class AnimalButtonController : MonoBehaviour
         animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
     }
 
-    void Boughter()
+    public void Boughter()
     {
         if(GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[0].GetComponent<AnimalStatusManager>().status.IsPurchase == true)
         {
