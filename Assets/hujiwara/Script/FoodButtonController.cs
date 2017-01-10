@@ -99,7 +99,7 @@ public class FoodButtonController : MonoBehaviour
         foodStatus = gameObject.GetComponent<FoodStatus>();
         img = foodImage.GetComponent<Image>();
 
-        handMoney = 1000000;
+        handMoney = 10000;
         time = 2;
         isShowText = false;
         isFirstComment = true;

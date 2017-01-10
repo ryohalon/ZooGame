@@ -47,8 +47,8 @@ public class ButtonController : MonoBehaviour
     
     void Awake()
     {
-        handMoney = 1000000;
-        handMoneyText.GetComponent<Text>().text = handMoney.ToString();
+        handMoney = 10000;
+        handMoneyText.GetComponent<Text>().text = handMoney.ToString() + "z";
     }
 
     public void PushAnimalButton()

@@ -638,10 +638,10 @@ RectTransform:
   - {fileID: 1793697702}
   m_Father: {fileID: 1268321517}
   m_RootOrder: 1
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000015258789, y: 48.999935}
-  m_SizeDelta: {x: 750, y: 950}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -0.000015258789, y: 48.99994}
+  m_SizeDelta: {x: 650, y: 850}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &91647561
 MonoBehaviour:
@@ -1040,10 +1040,10 @@ RectTransform:
   - {fileID: 594752074}
   m_Father: {fileID: 416709949}
   m_RootOrder: 8
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 137, y: -621}
-  m_SizeDelta: {x: 500, y: 150}
+  m_SizeDelta: {x: -300, y: -1272}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &149814888
 MonoBehaviour:
@@ -2391,6 +2391,7 @@ GameObject:
   - 4: {fileID: 480215856}
   - 114: {fileID: 480215855}
   - 114: {fileID: 480215857}
+  - 114: {fileID: 480215858}
   m_Layer: 0
   m_Name: ButtonController
   m_TagString: Untagged
@@ -2447,6 +2448,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodList: []
+--- !u!114 &480215858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 480215854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6e4d8ffc2025434fa0c92b612367523, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NextSceneName: GameMain
 --- !u!1 &495571868
 GameObject:
   m_ObjectHideFlags: 0
@@ -3800,10 +3813,10 @@ RectTransform:
   - {fileID: 654364168}
   m_Father: {fileID: 1301458938}
   m_RootOrder: 0
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 800, y: 850}
+  m_SizeDelta: {x: 700, y: 750}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &777914292
 MonoBehaviour:
@@ -3971,10 +3984,10 @@ RectTransform:
   - {fileID: 1345239060}
   m_Father: {fileID: 1301458938}
   m_RootOrder: 2
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -0.000015258789, y: -1.9999695}
-  m_SizeDelta: {x: 800, y: 950}
+  m_SizeDelta: {x: 700, y: 850}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &894265325
 MonoBehaviour:
@@ -4040,10 +4053,10 @@ RectTransform:
   - {fileID: 845672948}
   m_Father: {fileID: 1268321517}
   m_RootOrder: 2
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 47}
-  m_SizeDelta: {x: 800, y: 950}
+  m_SizeDelta: {x: 700, y: 850}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &919915945
 MonoBehaviour:
@@ -4483,10 +4496,10 @@ RectTransform:
   - {fileID: 193063747}
   m_Father: {fileID: 1268321517}
   m_RootOrder: 0
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -0.000034332275}
-  m_SizeDelta: {x: 700, y: 950}
+  m_SizeDelta: {x: 600, y: 850}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &974359995
 GameObject:
@@ -4943,8 +4956,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 49, y: 0}
-  m_SizeDelta: {x: 200, y: 100}
+  m_AnchoredPosition: {x: -96, y: 0}
+  m_SizeDelta: {x: 500, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1023070241
 MonoBehaviour:
@@ -5621,10 +5634,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 416709949}
   m_RootOrder: 3
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -308, y: 622}
-  m_SizeDelta: {x: 150, y: 150}
+  m_SizeDelta: {x: -650, y: -1272}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1163839369
 MonoBehaviour:
@@ -5664,7 +5677,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1163839370}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 480215858}
+        m_MethodName: TouchButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1163839370
@@ -7419,7 +7443,7 @@ RectTransform:
   m_Father: {fileID: 819691765}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.246875, y: 1}
+  m_AnchorMax: {x: 0.24687499, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -9951,10 +9975,10 @@ RectTransform:
   - {fileID: 961956581}
   m_Father: {fileID: 416709949}
   m_RootOrder: 11
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -7, y: -24}
-  m_SizeDelta: {x: 650, y: 120}
+  m_SizeDelta: {x: -150, y: -1302}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1911658909
 MonoBehaviour:
@@ -11534,10 +11558,10 @@ RectTransform:
   - {fileID: 540553568}
   m_Father: {fileID: 1301458938}
   m_RootOrder: 1
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 750, y: 950}
+  m_SizeDelta: {x: 650, y: 850}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2121837123
 MonoBehaviour:
