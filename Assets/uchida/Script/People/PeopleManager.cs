@@ -11,6 +11,9 @@ public class PeopleManager : MonoBehaviour
     private GameObject canvas = null;
     private FadeIn fadeIn = null;
 
+    [SerializeField]
+    private GameObject PeopleList = null;
+
     public List<GameObject> peopleList = new List<GameObject>();
     public int maxPeopleNums = 0;
     public int ratio = 2;
@@ -143,7 +146,7 @@ public class PeopleManager : MonoBehaviour
         for (int i = 0; i <= (maxPeopleNums - peopleList.Count); i++)
         {
             var people_ = Instantiate(people);
-            people_.transform.SetParent(canvas.transform);
+            people_.transform.SetParent(PeopleList.transform);
             people_.transform.localScale = Vector3.one;
             people_.transform.localPosition = Vector3.zero;
             var peopleMover = people_.GetComponent<PeopleMover>();

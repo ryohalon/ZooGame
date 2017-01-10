@@ -17,9 +17,9 @@ public class PeopleMover : MonoBehaviour
 
     void Start()
     {
-        canvasSize = transform.parent.GetComponent<RectTransform>().rect.size / 2;
-        var pixelSize = transform.parent.GetComponent<Canvas>().pixelRect.size;
-        var referenceResolution = transform.parent.GetComponent<RectTransform>().rect.size;
+        canvasSize = transform.parent.parent.GetComponent<RectTransform>().rect.size / 2;
+        var pixelSize = transform.parent.parent.GetComponent<Canvas>().pixelRect.size;
+        var referenceResolution = transform.parent.parent.GetComponent<RectTransform>().rect.size;
         Vector2 differenceRatio;
         differenceRatio.x = referenceResolution.x / pixelSize.x;
         differenceRatio.y = referenceResolution.y / pixelSize.y;
@@ -27,8 +27,6 @@ public class PeopleMover : MonoBehaviour
         for(int i = 0; i < movePointList.Count; i++)
         {
             movePointList[i] = new
-                //Vector2(movePointList[i].x - canvasSize.x * differenceRatio.x,
-                //movePointList[i].y - canvasSize.y * differenceRatio.y);
                 Vector2(movePointList[i].x - canvasSize.x,
                 movePointList[i].y - canvasSize.y);
         }
