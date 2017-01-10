@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
-
 class Scenario
 {
     public string Forcused { get; private set; }
@@ -60,7 +59,7 @@ public class TextController : MonoBehaviour
 
     private IEnumerator ScenarioIterator()
     {
-        var scenario = LoadScenario(2);
+        var scenario = LoadScenario();
         foreach (var line in scenario)
         {
             for (int i = 0; i < container.childCount; i++)
@@ -90,7 +89,7 @@ public class TextController : MonoBehaviour
             while (!Input.GetMouseButtonDown(0)) { yield return null; }  // 文字を次の行に行かせるためのクリック待ち
         }
 
-        SceneManager.LoadScene("Test");     // scenarioが最後の行まで行ったら移動先のシーンに移動
+        SceneManager.LoadScene("GameMain");     // scenarioが最後の行まで行ったら移動先のシーンに移動
     }
 
     private IEnumerator LineIterator(string line)
@@ -120,8 +119,10 @@ public class TextController : MonoBehaviour
         }
     }
 
-    private IEnumerable<Scenario> LoadScenario(int num)
+    private IEnumerable<Scenario> LoadScenario()
     {
+        int num = GameObject.Find("Player").GetComponent<PlayerStatusManager>().StoryLevel;
+
         var ta = Resources.Load<TextAsset>("scenario" + num.ToString());
         foreach(var line in ta.text.Split('\n'))
         {
