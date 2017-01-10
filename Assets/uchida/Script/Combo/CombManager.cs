@@ -124,6 +124,6 @@ public class CombManager : MonoBehaviour
         }
 
 
-        Debug.Log(totalComboRate);
+        Debug.Log("comb : " + totalComboRate);
     }
 }

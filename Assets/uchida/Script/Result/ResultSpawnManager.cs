@@ -11,12 +11,12 @@ public class ResultSpawnManager : MonoBehaviour
 
     private Timer timer = null;
 
+    private PlayerStatusManager player = null;
+
     private bool isEndOfTheDay = false;
     private GameObject resultWindow = null;
 
     static private ResultSpawnManager instance = null;
-
-    private CageListManager cageListManager = null;
 
     void Awake()
     {
@@ -32,7 +32,7 @@ public class ResultSpawnManager : MonoBehaviour
 
         timer = GameObject.Find("Timer").GetComponent<Timer>();
         fadeIn = GameObject.Find("FadeIn").GetComponent<FadeIn>();
-        Debug.Log(cageListManager);
+        player = GameObject.Find("Player").GetComponent<PlayerStatusManager>();
         isEndOfTheDay = false;
     }
 
@@ -50,6 +50,13 @@ public class ResultSpawnManager : MonoBehaviour
 
             if (fadeIn.isFadeInEnd)
             {
+                if(player.StoryLevel == 0)
+                {
+                    player.StoryLevel++;
+                    GetComponent<SceneChanger>().NextSceneName = "karakida";
+                    GetComponent<SceneChanger>().TouchButton();
+                }
+
                 if (timer.isEndDay)
                     isEndOfTheDay = true;
 
@@ -73,11 +80,14 @@ public class ResultSpawnManager : MonoBehaviour
 
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "GameMain")
         {
-            cageListManager = GameObject.Find("CageListManager").GetComponent<CageListManager>();
+            var cageListManager = GameObject.Find("CageListManager").GetComponent<CageListManager>();
             foreach (var cage in cageListManager.cageList)
             {
                 cage.GetComponent<AnimalMover>().Stop();
             }
+
+            var peopleManager = GameObject.Find("PeopleManager").GetComponent<PeopleManager>();
+            peopleManager.PeopleDelete();
         }
     }
 }

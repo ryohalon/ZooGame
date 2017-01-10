@@ -67,17 +67,24 @@ public class CageListManager : MonoBehaviour
         if (touchType != TouchType.PRESS)
             return;
 
+
+        bool flag = false;
         foreach (var cage_ in cageList)
         {
+
+            if (cage_.GetComponent<CageManager>().animalID == 99)
+                continue;
 
             if (!cage_.GetComponent<PushDownObject>().isPressed)
                 continue;
 
-
-            Debug.Log("Cage : " + cage_.GetComponent<CageManager>().animalID.ToString());
+            flag = true;
             selectAnimalNum.SelectNum = cage_.GetComponent<CageManager>().animalID;
             break;
         }
+
+        if (!flag)
+            return;
 
         GetComponent<SceneChanger>().NextSceneName = "TestTraining";
         GetComponent<SceneChanger>().TouchButton();
