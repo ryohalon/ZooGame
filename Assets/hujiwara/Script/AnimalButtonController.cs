@@ -109,7 +109,7 @@ public class AnimalButtonController : MonoBehaviour
     void Awake()
     {
         img = animalImage.GetComponent<Image>();
-        handMoney = 10000;
+        handMoney = GameObject.Find("ButtonController").GetComponent<ButtonController>().handMoney;
 
         time = 2;
         isShowText = false;
