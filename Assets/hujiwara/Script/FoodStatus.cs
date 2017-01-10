@@ -24,6 +24,26 @@ public class FoodStatus : MonoBehaviour
         Read();
     }
 
+    public void ResetPossession()
+    {
+        for(int i = 0;i < 6; ++i)
+        {
+            foodList[i].possessionNumber = 0;
+        }
+        Save();
+
+        for (int i = 0; i < 6; ++i)
+        {
+            Debug.Log("ID: " + foodList[i].ID + "," +
+                "Name: " + foodList[i].Name + "," +
+                "値段: " + foodList[i].purchasePrice + "," +
+                "愛情度上昇値: " + foodList[i].loveDegreeUpValue + "," +
+                "満腹度上昇値: " + foodList[i].satietyLevelUpValue + "," +
+                "種類: " + foodList[i].foodType + "," +
+                "所持数: " + foodList[i].possessionNumber);
+        }
+    }
+
     public void Read()
     {
         for(int i = 0; i < 6; ++i)
