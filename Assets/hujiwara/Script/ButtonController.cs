@@ -54,6 +54,8 @@ public class ButtonController : MonoBehaviour
 
     public void PushAnimalButton()
     {
+        GameObject.Find("AnimalButtonController").GetComponent<AnimalButtonController>().Boughter();
+
         shopLabel.SetActive(false);
         animalButton.SetActive(false);
         foodButton.SetActive(false);
