@@ -15,7 +15,6 @@ public class AnimalStatusCSV : MonoBehaviour
 
     void Awake()
     {
-
         Read();
     }
 
