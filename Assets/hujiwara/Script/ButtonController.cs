@@ -43,12 +43,13 @@ public class ButtonController : MonoBehaviour
     [SerializeField]
     GameObject BottomTwine = null;
 
-    int handMoney;
+    public float handMoney;
     
     void Awake()
     {
-        handMoney = 10000;
+        handMoney = GameObject.Find("Player").GetComponent<PlayerStatusManager>().HandMoney;
         handMoneyText.GetComponent<Text>().text = handMoney.ToString() + "z";
+        Sound.PlayBgm("ShopBgm");
     }
 
     public void PushAnimalButton()
@@ -112,6 +113,7 @@ public class ButtonController : MonoBehaviour
 
     public void CancelFoodShelf()
     {
+        Sound.PlaySe("Close");
         shopLabel.SetActive(true);
         animalButton.SetActive(true);
         foodButton.SetActive(true);
