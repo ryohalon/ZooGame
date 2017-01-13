@@ -10,6 +10,8 @@ public class ResultManager : MonoBehaviour
     private PlayerStatusManager player = null;
     private GameObject coin = null;
     private GameObject coinBox = null;
+    [SerializeField]
+    private GameObject colorFade = null;
 
     private int totalFoodCost = 0;
     private int totalAnimalPurchaseCost = 0;
@@ -108,10 +110,32 @@ public class ResultManager : MonoBehaviour
         if (!Input.GetMouseButtonDown(0))
             return;
 
+        var animalCSV = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals;
+        foreach(var animal in animalCSV)
+        {
+            animal.GetComponent<AnimalStatusManager>().status.CommunicationNums = 1;
+            animal.GetComponent<AnimalStatusManager>().status.MealNums = 1;
+            animal.GetComponent<AnimalStatusManager>().status.BurashiNums = 1;
+        }
+
         timer.SetStartDayTime();
         player.ResetOneDay();
-        GetComponent<SceneChanger>().NextSceneName = "GameMain";
-        GetComponent<SceneChanger>().TouchButton();
+
+        if(player.GetMoneyToTheTarget() == 0 && player.StoryLevel < 6)
+        {
+            player.StoryLevel++;
+            var colorFade_ = Instantiate(colorFade);
+            colorFade_.transform.SetParent(GameObject.Find("Canvas").transform);
+            colorFade_.GetComponent<RectTransform>().localPosition = Vector3.zero;
+            colorFade_.GetComponent<RectTransform>().localScale = Vector3.one;
+            colorFade_.GetComponent<Image>().color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
+            Destroy(gameObject);
+        }
+        else
+        {
+            GetComponent<SceneChanger>().NextSceneName = "GameMain";
+            GetComponent<SceneChanger>().TouchButton();
+        }
     }
 
     private void UpdateEasing()

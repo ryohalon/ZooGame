@@ -96,10 +96,10 @@ public class TrainingRoot : MonoBehaviour
 
     Vector2 moyaSize;
 
-    private FoodList foodList = null;
+    private FoodStatus foodStatus = null;
 
 
-    private string[] talkComment = new string[4];
+    private string[] talkComment = new string[5];
 
     private TextAsset csvFile; // CSVファイル
     private List<string[]> csvDatas = new List<string[]>(); // CSVの中身を入れるリスト
@@ -126,7 +126,13 @@ public class TrainingRoot : MonoBehaviour
     private int selectFoodType = 0;
 
     private float heartMakeTime = 0.0f;
+    string tempComment;
     int rarity = 0;
+
+    int canBrushNum = 0;
+    int canTalkNum = 0;
+    int canEatNum = 0;
+
     void Start()
     {
         explanationFoodStr[0] = "\nみんな大好き\n  赤身ステーキ!!";
@@ -136,11 +142,12 @@ public class TrainingRoot : MonoBehaviour
         explanationFoodStr[4] = "\n南国に行った\n   気分になれる\n  ハッピーなご飯";
         explanationFoodStr[5] = "\n最高級品を追求した\n  全草食動物が\n  うっとりする一品";
 
-        Sound.PlayBgm("GameMainBgm");
+        //Sound.PlayBgm("GameMainBgm");
 
         selectNum = GameObject.Find("AnimalList").GetComponent<SelectAnimalNum>().SelectNum;
 
         Debug.Log("Select : " + selectNum.ToString());
+
         animalmage.sprite = GameObject.Find("AnimalList").GetComponent<AnimalTextureManager>().animalTextureList[selectNum][0];
 
         ReadTalkComment();
@@ -148,27 +155,33 @@ public class TrainingRoot : MonoBehaviour
         AnimalStatusManager animalStatusManager
             = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[selectNum].GetComponent<AnimalStatusManager>();
 
-        foodList = GameObject.Find("FoodList").GetComponent<FoodList>();
+        foodStatus = GameObject.Find("FoodList").GetComponent<FoodStatus>();
 
 
         loveLevel = (int)animalStatusManager.status.LoveDegree;
         satietyLelel = (int)animalStatusManager.status.SatietyLevel;
-
+        canEatNum = animalStatusManager.status.MealNums;
+        canBrushNum = animalStatusManager.status.BurashiNums;
+        canTalkNum = animalStatusManager.status.CommunicationNums;
+        foodType = animalStatusManager.status.FoodType;
 
         rarity = animalStatusManager.status.Rarity;
         maxLoveLevel = rarity * 20;
         maxSatietyLevel = rarity * 20;
+
+        if(loveLevel >= maxLoveLevel)
+            animalmage.sprite = GameObject.Find("AnimalList").GetComponent<AnimalTextureManager>().animalTextureList[selectNum][1];
 
         BrushPos = Brush.GetComponent<RectTransform>().position;
         FoodSize = Food.GetComponent<RectTransform>().sizeDelta;
         moyaSize = Moya.GetComponent<RectTransform>().sizeDelta;
 
         for (int i = 0; i < 3; ++i)
-            MeetNums[i] = foodList.foodList[i].possessionNumber + 10;
+            MeetNums[i] = foodStatus.foodList[i].possessionNumber + 10;
 
 
         for (int i = 3; i < 6; ++i)
-            VegetableNums[i - 3] = foodList.foodList[i].possessionNumber + 10;
+            VegetableNums[i - 3] = foodStatus.foodList[i].possessionNumber + 10;
 
         SetFoodText();
         EatManager.Change(satietyLelel, maxSatietyLevel);
@@ -179,11 +192,15 @@ public class TrainingRoot : MonoBehaviour
     {
         GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[selectNum].GetComponent<AnimalStatusManager>().status.SatietyLevel = satietyLelel;
         GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[selectNum].GetComponent<AnimalStatusManager>().status.LoveDegree = loveLevel;
+        GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[selectNum].GetComponent<AnimalStatusManager>().status.MealNums = canEatNum;
+        GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[selectNum].GetComponent<AnimalStatusManager>().status.BurashiNums = canBrushNum;
+        GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[selectNum].GetComponent<AnimalStatusManager>().status.CommunicationNums = canTalkNum;
+        GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().Save();
     }
 
     void ReadTalkComment()
     {
-        csvFile = Resources.Load("AnimalComment/AnimalTalk" + selectNum.ToString()) as TextAsset; /* Resouces/CSV下のCSV読み込み */
+        csvFile = Resources.Load("AnimalComment") as TextAsset; /* Resouces/CSV下のCSV読み込み */
         StringReader reader = new StringReader(csvFile.text);
 
         while (reader.Peek() > -1)
@@ -193,9 +210,19 @@ public class TrainingRoot : MonoBehaviour
             height++; // 行数加算
         }
 
-        for (int i = 0; i < 4; ++i)
+        for (int i = 0; i < 5; ++i)
         {
-            talkComment[i] = csvDatas[0][i];
+            tempComment = "";
+            string str = csvDatas[selectNum][i];
+
+            for (int j = 0; j < str.Length; ++j)
+            {
+                if (str[j] == '|')
+                    tempComment += "\n";
+                else
+                    tempComment += str[j];
+            }
+            talkComment[i] = tempComment;
         }
 
     }
@@ -238,6 +265,7 @@ public class TrainingRoot : MonoBehaviour
         {
             if (prevMousePos != mousePosition)
             {
+                Sound.PlaySe("brush");
                 RectTransform myTransform = Brush.GetComponent<RectTransform>();
                 Rect rect = new Rect(myTransform.position.x, myTransform.position.y, myTransform.rect.width, myTransform.rect.height);
 
@@ -245,12 +273,12 @@ public class TrainingRoot : MonoBehaviour
                     rect.position.y <= mousePosition.y && mousePosition.y <= rect.position.y + rect.height)
                 {
                     BrushTime += Time.deltaTime;
-                    prevMousePosition = new Vector3(mousePosition.x, mousePosition.y,0);
-                }   
+                    prevMousePosition = new Vector3(mousePosition.x, mousePosition.y, 0);
+                }
             }
         }
         Debug.Log(BrushTime);
-        if (BrushTime < 3.5f) return;
+        if (BrushTime < 1.5f) return;
         animationType = Type.COMMENT;
         Brush.GetComponent<RectTransform>().position = BrushPos;
         BrushTime = 0.0f;
@@ -264,6 +292,7 @@ public class TrainingRoot : MonoBehaviour
         if (loveLevel + 1 <= maxLoveLevel)
         {
             loveLevel += 1;
+            Sound.PlaySe("loveup");
             HeartManager.SetAnimation(loveLevel - 1, loveLevel, maxLoveLevel);
         }
     }
@@ -285,13 +314,16 @@ public class TrainingRoot : MonoBehaviour
         Food.GetComponent<RectTransform>().sizeDelta = FoodSize;
         Food.SetActive(false);
         CommentBoard.SetActive(true);
+        Sound.PlaySe("bite");
 
         if (foodCommentType == FoodCommentType.LIKE)
         {
+            Sound.PlaySe("like");
             MakeHeart(2);
         }
         else if (foodCommentType == FoodCommentType.DONT_LIKE)
         {
+            Sound.PlaySe("dontLike");
             Moya.SetActive(true);
         }
     }
@@ -348,6 +380,7 @@ public class TrainingRoot : MonoBehaviour
     public void PushEatButton()
     {
         if (isSelectButton == true) return;
+        if (canEatNum == 0) return;
         isSelectButton = true;
         EatBoard.SetActive(true);
     }
@@ -355,8 +388,10 @@ public class TrainingRoot : MonoBehaviour
     public void PushBrushButton()
     {
         if (isSelectButton == true) return;
+        if (canBrushNum == 0) return;
+        canBrushNum -= 1;
         isSelectButton = true;
-        TalkText.text = talkComment[0];
+        TalkText.text = talkComment[2];
 
         isAnimation = true;
         animationType = Type.BRUSH;
@@ -366,16 +401,20 @@ public class TrainingRoot : MonoBehaviour
     public void PushTalkButton()
     {
         if (isSelectButton == true) return;
+        if (canTalkNum == 0) return;
+        canTalkNum -= 1;
         isSelectButton = true;
-        int beforeLoveLevel = loveLevel; 
+        int beforeLoveLevel = loveLevel;
         loveLevel += rarity;
         if (loveLevel > maxLoveLevel)
             loveLevel = maxLoveLevel;
         int nowLoveLevel = loveLevel;
-
+        Sound.PlaySe("loveup");
         HeartManager.SetAnimation(beforeLoveLevel, nowLoveLevel, maxLoveLevel);
-
-        TalkText.text = talkComment[1];
+        if (nowLoveLevel == maxLoveLevel)
+            TalkText.text = talkComment[4];
+        else
+            TalkText.text = talkComment[3];
         isAnimation = true;
         animationType = Type.COMMENT;
         CommentBoard.SetActive(true);
@@ -393,7 +432,6 @@ public class TrainingRoot : MonoBehaviour
         isSelectButton = false;
         EatBoard.SetActive(false);
     }
-
 
     public void PushAnswer(int num)
     {
@@ -442,6 +480,7 @@ public class TrainingRoot : MonoBehaviour
     public void PushMeatType(int choiseFoodRank)
     {
         if (MeetNums[choiseFoodRank] == 0) return;
+        canEatNum -= 1;
         --MeetNums[choiseFoodRank];
         SetFoodText();
 
@@ -450,8 +489,7 @@ public class TrainingRoot : MonoBehaviour
         if (foodType == 0)
         {
             foodCommentType = FoodCommentType.LIKE;
-
-            TalkText.text = talkComment[2];
+            TalkText.text = talkComment[0];
             switch (choiseFoodRank)
             {
                 case 0:
@@ -471,7 +509,7 @@ public class TrainingRoot : MonoBehaviour
         else
         {
             foodCommentType = FoodCommentType.DONT_LIKE;
-            TalkText.text = talkComment[3];
+            TalkText.text = talkComment[1];
         }
         if (satietyLelel > maxSatietyLevel)
             satietyLelel = maxSatietyLevel;
@@ -487,6 +525,7 @@ public class TrainingRoot : MonoBehaviour
     public void PushVegetableType(int choiseFoodRank)
     {
         if (VegetableNums[choiseFoodRank] == 0) return;
+        canEatNum -= 1;
         --VegetableNums[choiseFoodRank];
         SetFoodText();
 
@@ -495,7 +534,7 @@ public class TrainingRoot : MonoBehaviour
         if (foodType == 1)
         {
             foodCommentType = FoodCommentType.LIKE;
-            TalkText.text = talkComment[2];
+            TalkText.text = talkComment[0];
             switch (choiseFoodRank)
             {
                 case 0:
@@ -514,7 +553,7 @@ public class TrainingRoot : MonoBehaviour
         else
         {
             foodCommentType = FoodCommentType.DONT_LIKE;
-            TalkText.text = talkComment[3];
+            TalkText.text = talkComment[1];
         }
         if (satietyLelel > maxSatietyLevel)
             satietyLelel = maxSatietyLevel;

@@ -15,7 +15,6 @@ public class AnimalStatusCSV : MonoBehaviour
 
     void Awake()
     {
-
         Read();
     }
 
@@ -32,7 +31,7 @@ public class AnimalStatusCSV : MonoBehaviour
         }
 
 
-        for (int i = 0; i < 13; ++i)
+        for (int i = 0; i < 17; ++i)
         {
             AnimalStatusManager animalStatus = animals[i].GetComponent<AnimalStatusManager>();
             animalStatus.status.ID = int.Parse(csvDatas[i][0]);
@@ -52,8 +51,10 @@ public class AnimalStatusCSV : MonoBehaviour
                 animalStatus.status.Sexuality = AnimalStatusManager.Sexuality.FEMALE;
 
             animalStatus.status.CageID = int.Parse(csvDatas[i][11]);
+            Debug.Log(animalStatus.status.CageID);
             animalStatus.status.MealNums = int.Parse(csvDatas[i][12]);
-            animalStatus.status.CommunicationNums = int.Parse(csvDatas[i][13]);
+            animalStatus.status.BurashiNums = int.Parse(csvDatas[i][13]);
+            animalStatus.status.CommunicationNums = int.Parse(csvDatas[i][14]);
         }
     }
 
@@ -61,7 +62,7 @@ public class AnimalStatusCSV : MonoBehaviour
     {
         StreamWriter sw = new StreamWriter(Application.dataPath + "/Resources/" + "AnimalStatusCSV.csv", false);
 
-        for (int i = 0; i < 13; ++i)
+        for (int i = 0; i < 17; ++i)
         {
             AnimalStatusManager animalStatus = animals[i].GetComponent<AnimalStatusManager>();
 
@@ -77,7 +78,7 @@ public class AnimalStatusCSV : MonoBehaviour
                           + animalStatus.status.LoveDegree.ToString() + "," + animalStatus.status.SatietyLevel.ToString() + ","
                           + animalStatus.status.IsPurchase.ToString() + "," + animalStatus.status.Ratio.ToString() + ","
                           + sex + "," + animalStatus.status.CageID.ToString() + "," + animalStatus.status.MealNums.ToString() + ","
-                          + animalStatus.status.CommunicationNums.ToString();
+                          + animalStatus.status.BurashiNums.ToString() + "," + animalStatus.status.CommunicationNums.ToString();
 
             sw.WriteLine(temp);
         }

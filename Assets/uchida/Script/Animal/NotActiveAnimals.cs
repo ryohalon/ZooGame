@@ -58,6 +58,7 @@ public class NotActiveAnimals : MonoBehaviour
                 new Vector3(distance * (i % 3 - 1),
                 distance * (-i / 3 + 1) + 25.0f,
                 22.0f);
+            cageList[i].GetComponent<AnimalMover>().isNotMove = true;
         }
     }
 
