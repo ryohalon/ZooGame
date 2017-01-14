@@ -78,6 +78,8 @@ public class ResultSpawnManager : MonoBehaviour
             return;
         if (resultWindow != null)
             return;
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().ToString() != "GameMain")
+            return;
 
         resultWindow = Instantiate(result);
         resultWindow.transform.SetParent(GameObject.Find("Canvas").transform);
