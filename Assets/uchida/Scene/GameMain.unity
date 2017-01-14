@@ -553,6 +553,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   result: {fileID: 109192, guid: e70de3b3f3c84444b8c6d3b2b8832bc3, type: 2}
+  colorFade: {fileID: 179362, guid: e42116f2b8ab166448c14189d2cf192d, type: 2}
 --- !u!4 &656210387
 Transform:
   m_ObjectHideFlags: 0
