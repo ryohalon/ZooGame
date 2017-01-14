@@ -224,7 +224,9 @@ public class FoodButtonController : MonoBehaviour
     // 個数選択+1
     public void PushPlusOne()
     {
-        if(!isUpperRimit())
+        Sound.PlaySe("Ok");
+
+        if (!isUpperRimit())
         {
             foodNumber += 1;
         }
@@ -236,6 +238,8 @@ public class FoodButtonController : MonoBehaviour
     // 個数選択+10
     public void PushPlusTen()
     {
+        Sound.PlaySe("Ok");
+
         if (isPlusTen())
         {
             foodNumber = 99;
@@ -255,7 +259,9 @@ public class FoodButtonController : MonoBehaviour
     // 個数選択-1
     public void PushMinusOne()
     {
-        if(!isBottomLimit())
+        Sound.PlaySe("Ok");
+
+        if (!isBottomLimit())
         {
             foodNumber -= 1;
         }
@@ -267,7 +273,9 @@ public class FoodButtonController : MonoBehaviour
     // 個数選択-10
     public void PushMinusTen()
     {
-        if(isMinusTen())
+        Sound.PlaySe("Ok");
+
+        if (isMinusTen())
         {
             foodNumber = 1;
         }
@@ -334,6 +342,8 @@ public class FoodButtonController : MonoBehaviour
     // 購入画面Noボタン
     public void PushNoButton()
     {
+        Sound.PlaySe("Close");
+
         foodBuyWindow.SetActive(false);
 
         upperTwine.SetActive(true);
@@ -346,6 +356,8 @@ public class FoodButtonController : MonoBehaviour
     {
         if(IsInPossessionMoney())
         {
+            Sound.PlaySe("cash");
+
             foodStatus.foodList[ID].possessionNumber += foodNumber;
             handMoney -= totalPrice;
             handMoneyText.GetComponent<Text>().text = handMoney.ToString();
@@ -364,6 +376,8 @@ public class FoodButtonController : MonoBehaviour
 
     public void PushNextButton()
     {
+        Sound.PlaySe("Ok");
+
         if(isFirstComment)
         {
             isFirstComment = false;

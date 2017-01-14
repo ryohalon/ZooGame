@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ButtonController : MonoBehaviour
 {
@@ -52,8 +53,24 @@ public class ButtonController : MonoBehaviour
         Sound.PlayBgm("ShopBgm");
     }
 
+    public void PushHome()
+    {
+        Sound.PlaySe("Ok");
+        SceneManager.LoadScene("GameMain");
+    }
+
+    public void PurchaseResetAnimal()
+    {
+        for (int i = 0; i < 17; ++i)
+        {
+            GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[i].GetComponent<AnimalStatusManager>().status.IsPurchase = false;
+        }
+    }
+
     public void PushAnimalButton()
     {
+        Sound.PlaySe("Ok");
+
         GameObject.Find("AnimalButtonController").GetComponent<AnimalButtonController>().Boughter();
 
         shopLabel.SetActive(false);
@@ -68,22 +85,18 @@ public class ButtonController : MonoBehaviour
 
     public void PushAnimal()
     {
+        Sound.PlaySe("Ok");
+
         animalBoard.SetActive(false);
         UpperTwine.SetActive(false);
 
         animalBuyWindow.SetActive(true);
     }
 
-    public void PushAnimalNoButton()
-    {
-        animalBuyWindow.SetActive(false);
-
-        animalBoard.SetActive(true);
-        UpperTwine.SetActive(true);
-    }
-
     public void PushFoodButton()
     {
+        Sound.PlaySe("Ok");
+
         shopLabel.SetActive(false);
         animalButton.SetActive(false);
         foodButton.SetActive(false);
@@ -96,6 +109,8 @@ public class ButtonController : MonoBehaviour
 
     public void PushFood()
     {
+        Sound.PlaySe("Ok");
+
         foodShelf.SetActive(false);
         UpperTwine.SetActive(false);
 
@@ -104,6 +119,8 @@ public class ButtonController : MonoBehaviour
 
     public void CancelAnimalBoard()
     {
+        Sound.PlaySe("Close");
+
         shopLabel.SetActive(true);
         animalButton.SetActive(true);
         foodButton.SetActive(true);
@@ -116,6 +133,7 @@ public class ButtonController : MonoBehaviour
     public void CancelFoodShelf()
     {
         Sound.PlaySe("Close");
+
         shopLabel.SetActive(true);
         animalButton.SetActive(true);
         foodButton.SetActive(true);
