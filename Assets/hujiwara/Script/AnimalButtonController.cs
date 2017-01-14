@@ -148,6 +148,8 @@ public class AnimalButtonController : MonoBehaviour
     {
         if(IsInPossessionMoney())
         {
+            Sound.PlaySe("cash");
+
             handMoney -= animalPrice;
             handMoneyText.GetComponent<Text>().text = handMoney.ToString();
             GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[ID].GetComponent<AnimalStatusManager>().status.IsPurchase = true;
@@ -167,6 +169,8 @@ public class AnimalButtonController : MonoBehaviour
 
     public void PushNextButton()
     {
+        Sound.PlaySe("Ok");
+
         if (isFirstComment)
         {
             isFirstComment = false;
@@ -417,6 +421,8 @@ public class AnimalButtonController : MonoBehaviour
 
     void SetInformation(int _ID)
     {
+        Sound.PlaySe("Ok");
+
         animalNameText.GetComponent<Text>().text =
             GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[_ID].GetComponent<AnimalStatusManager>().status.Name;
 
