@@ -20,6 +20,7 @@ public class SignBoardmanager : MonoBehaviour
         {
             int oneDayVisitors = (int)playerStatus.OneDayVisitors;
 
+            
             var visiNumText = GetComponent<Text>();
             if (oneDayVisitors < 1000)
                 visiNumText.text = oneDayVisitors.ToString();

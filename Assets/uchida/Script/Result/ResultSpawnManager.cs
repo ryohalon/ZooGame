@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
 public class ResultSpawnManager : MonoBehaviour
 {
@@ -49,6 +50,9 @@ public class ResultSpawnManager : MonoBehaviour
     {
         while (true)
         {
+            if (fadeIn.isFadeInEnd)
+                SpawnResult();
+
             yield return null;
             if (!isEndOfTheDay && resultWindow != null) continue;
 
@@ -66,8 +70,6 @@ public class ResultSpawnManager : MonoBehaviour
 
                 if (timer.isEndDay)
                     isEndOfTheDay = true;
-
-                SpawnResult();
             }
         }
     }
@@ -78,7 +80,9 @@ public class ResultSpawnManager : MonoBehaviour
             return;
         if (resultWindow != null)
             return;
-
+        if (SceneManager.GetActiveScene().name != "GameMain")
+            return;
+        
         resultWindow = Instantiate(result);
         resultWindow.transform.SetParent(GameObject.Find("Canvas").transform);
         resultWindow.transform.localScale = Vector3.one;
