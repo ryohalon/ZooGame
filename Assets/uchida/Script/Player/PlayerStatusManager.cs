@@ -86,8 +86,8 @@ public class PlayerStatusManager : MonoBehaviour
     // 日が変わるときに呼ぶ
     public void ResetOneDay()
     {
-        HandMoney += OneDayEarnedMoney;
-        TotalMoney += OneDayEarnedMoney;
+        HandMoney += entranceFee * OneDayVisitors;
+        TotalMoney += entranceFee * OneDayVisitors;
         OneDayEarnedMoney = 0;
         OneDayUsedMoney = 0;
         OneDayVisitors = 0;
@@ -193,9 +193,7 @@ public class PlayerStatusManager : MonoBehaviour
         }
 
         float totalVisitors_ = totalVisitors * combManager.totalComboRate;
-        float earnedMoney = entranceFee * totalVisitors_;
 
-        OneDayEarnedMoney += earnedMoney;
         OneDayVisitors += totalVisitors_;
     }
 
