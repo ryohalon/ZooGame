@@ -10,7 +10,7 @@ public class TitleRoot : MonoBehaviour
 
     public void PushButton()
     {
-        Sound.StopBgm();
-        Sound.PlaySe("Ok");
+        SoundManager.Instance.PlaySE((int)SEList.OK);
+        SoundManager.Instance.StopBGM();
     }
 }
