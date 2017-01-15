@@ -86,6 +86,8 @@ public class CageListManager : MonoBehaviour
         if (!flag)
             return;
 
+        SoundManager.Instance.StopBGM();
+        SoundManager.Instance.PlaySE((int)SEList.OK);
         GetComponent<SceneChanger>().NextSceneName = "TestTraining";
         GetComponent<SceneChanger>().TouchButton();
     }
@@ -124,6 +126,7 @@ public class CageListManager : MonoBehaviour
             var pushDownPbject = cageList[i].GetComponent<PushDownObject>();
             if (pushDownPbject.isPushed)
             {
+                SoundManager.Instance.PlaySE((int)SEList.OK);
                 changeCageID = i;
                 touchType = TouchType.TOUCH;
                 pushDownPbject.isPushed = false;
@@ -136,6 +139,7 @@ public class CageListManager : MonoBehaviour
 
             if (pushDownPbject.isPressed)
             {
+                
                 touchType = TouchType.PRESS;
             }
         }
@@ -193,6 +197,7 @@ public class CageListManager : MonoBehaviour
             var animalStatus = animalList[i].GetComponent<AnimalStatusManager>();
             if (animalID == animalStatus.status.ID)
             {
+                SoundManager.Instance.PlaySE((int)SEList.MAIN_PUT);
                 animalStatus.status.CageID = cageID;
                 // アニメーションの変更
                 cageList[cageID].GetComponent<Image>().sprite =

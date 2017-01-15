@@ -34,14 +34,14 @@ public class TimeZoneManager : MonoBehaviour
 
         if (timer.NowTime() < 3)
         {
-            Sound.PlayBgm("GameMainBgm");
+            SoundManager.Instance.PlayBGM((int)BGMList.GAME_MAIN);
             GetComponent<Image>().sprite = sun;
             canvas.GetComponent<Image>().sprite = morningScene;
         }
             
         else
         {
-            Sound.PlayBgm("GameMainNightBgm");
+            SoundManager.Instance.PlayBGM((int)BGMList.GAME_MAIN_NIGHT);
             GetComponent<Image>().sprite = moon;
             canvas.GetComponent<Image>().sprite = nightScene;
             isTimeZoneChange = true;
@@ -76,7 +76,7 @@ public class TimeZoneManager : MonoBehaviour
 
         if (transform.eulerAngles.y >= 90.0f && transform.eulerAngles.y < 90.0f + rotateSpeed * 1.5f)
         {
-            Sound.PlayBgm("GameMainNightBgm");
+            SoundManager.Instance.PlayBGM((int)BGMList.GAME_MAIN_NIGHT);
             canvas.GetComponent<Image>().sprite = nightScene;
             GetComponent<Image>().sprite = moon;
         }

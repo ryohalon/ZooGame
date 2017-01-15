@@ -53,14 +53,15 @@ public class Timer : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
             instance = this;
-            LoadLastApplicationEndTime();
-            LoadNowTime();
         }
-        if(instance != this)
+        if (instance != this)
         {
             Destroy(gameObject);
             return;
         }
+
+        LoadLastApplicationEndTime();
+        LoadNowTime();
     }
 
     private void MoneyEarnedWhenNotActivated()
@@ -162,9 +163,9 @@ public class Timer : MonoBehaviour
     {
         while (true)
         {
-            if(!isBalloonUp)
+            if (!isBalloonUp)
             {
-                if(SceneManager.GetActiveScene().ToString() == "Title")
+                if (SceneManager.GetActiveScene().ToString() == "Title")
                 {
                     isBalloonUp = true;
                 }
@@ -178,7 +179,7 @@ public class Timer : MonoBehaviour
                     if (Input.GetKey(KeyCode.B))
                     {
                         if (Input.GetKeyDown(KeyCode.C))
-                                isEndDay = true;
+                            isEndDay = true;
                     }
                 }
 

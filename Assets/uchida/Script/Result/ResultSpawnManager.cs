@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
 public class ResultSpawnManager : MonoBehaviour
 {
@@ -49,6 +50,9 @@ public class ResultSpawnManager : MonoBehaviour
     {
         while (true)
         {
+            if (fadeIn.isFadeInEnd)
+                SpawnResult();
+
             yield return null;
             if (!isEndOfTheDay && resultWindow != null) continue;
 
@@ -66,8 +70,6 @@ public class ResultSpawnManager : MonoBehaviour
 
                 if (timer.isEndDay)
                     isEndOfTheDay = true;
-
-                SpawnResult();
             }
         }
     }
@@ -78,8 +80,10 @@ public class ResultSpawnManager : MonoBehaviour
             return;
         if (resultWindow != null)
             return;
-        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().ToString() != "GameMain")
+        if (SceneManager.GetActiveScene().name != "GameMain")
             return;
+
+        SoundManager.Instance.PlaySE((int)SEList.READ_PAGE);
 
         resultWindow = Instantiate(result);
         resultWindow.transform.SetParent(GameObject.Find("Canvas").transform);

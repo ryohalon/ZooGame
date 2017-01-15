@@ -90,7 +90,10 @@ public class NotActiveAnimals : MonoBehaviour
 
         var backPushDownOject = transform.GetChild(0).gameObject.GetComponent<PushDownObject>();
         if (backPushDownOject.isPushed)
+        {
+            SoundManager.Instance.PlaySE((int)SEList.CLOSE);
             is_select = true;
+        }
 
         if (is_select)
         {

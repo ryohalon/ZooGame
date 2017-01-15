@@ -5,13 +5,12 @@ public class TitleRoot : MonoBehaviour
 {
     void Start()
     {
-        //Sound.LoadBgm("ShopBgm", "Shop");
-        Sound.PlayBgm("GameMainBgm");
+        SoundManager.Instance.PlayBGM((int)BGMList.SHOP);
     }
 
     public void PushButton()
     {
-        Sound.StopBgm();
-        Sound.PlaySe("Ok");
+        SoundManager.Instance.PlaySE((int)SEList.OK);
+        SoundManager.Instance.StopBGM();
     }
 }

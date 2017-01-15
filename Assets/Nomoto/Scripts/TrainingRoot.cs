@@ -142,7 +142,7 @@ public class TrainingRoot : MonoBehaviour
         explanationFoodStr[4] = "\n南国に行った\n   気分になれる\n  ハッピーなご飯";
         explanationFoodStr[5] = "\n最高級品を追求した\n  全草食動物が\n  うっとりする一品";
 
-        //Sound.PlayBgm("GameMainBgm");
+        SoundManager.Instance.PlayBGM((int)BGMList.ITEM_LIST);
 
         selectNum = GameObject.Find("AnimalList").GetComponent<SelectAnimalNum>().SelectNum;
 
@@ -169,7 +169,7 @@ public class TrainingRoot : MonoBehaviour
         maxLoveLevel = rarity * 20;
         maxSatietyLevel = rarity * 20;
 
-        if(loveLevel >= maxLoveLevel)
+        if (loveLevel >= maxLoveLevel)
             animalmage.sprite = GameObject.Find("AnimalList").GetComponent<AnimalTextureManager>().animalTextureList[selectNum][1];
 
         BrushPos = Brush.GetComponent<RectTransform>().position;
@@ -177,11 +177,11 @@ public class TrainingRoot : MonoBehaviour
         moyaSize = Moya.GetComponent<RectTransform>().sizeDelta;
 
         for (int i = 0; i < 3; ++i)
-            MeetNums[i] = foodStatus.foodList[i].possessionNumber + 10;
+            MeetNums[i] = foodStatus.foodList[i].possessionNumber;
 
 
         for (int i = 3; i < 6; ++i)
-            VegetableNums[i - 3] = foodStatus.foodList[i].possessionNumber + 10;
+            VegetableNums[i - 3] = foodStatus.foodList[i].possessionNumber;
 
         SetFoodText();
         EatManager.Change(satietyLelel, maxSatietyLevel);
@@ -265,7 +265,7 @@ public class TrainingRoot : MonoBehaviour
         {
             if (prevMousePos != mousePosition)
             {
-                Sound.PlaySe("brush");
+                SoundManager.Instance.PlaySE((int)SEList.BRUSH);
                 RectTransform myTransform = Brush.GetComponent<RectTransform>();
                 Rect rect = new Rect(myTransform.position.x, myTransform.position.y, myTransform.rect.width, myTransform.rect.height);
 
@@ -292,7 +292,7 @@ public class TrainingRoot : MonoBehaviour
         if (loveLevel + 1 <= maxLoveLevel)
         {
             loveLevel += 1;
-            Sound.PlaySe("loveup");
+            SoundManager.Instance.PlaySE((int)SEList.LOVE_UP);
             HeartManager.SetAnimation(loveLevel - 1, loveLevel, maxLoveLevel);
         }
     }
@@ -314,16 +314,16 @@ public class TrainingRoot : MonoBehaviour
         Food.GetComponent<RectTransform>().sizeDelta = FoodSize;
         Food.SetActive(false);
         CommentBoard.SetActive(true);
-        Sound.PlaySe("bite");
+        SoundManager.Instance.PlaySE((int)SEList.EAT);
 
         if (foodCommentType == FoodCommentType.LIKE)
         {
-            Sound.PlaySe("like");
+            SoundManager.Instance.PlaySE((int)SEList.LIKE_FOOD);
             MakeHeart(2);
         }
         else if (foodCommentType == FoodCommentType.DONT_LIKE)
         {
-            Sound.PlaySe("dontLike");
+            SoundManager.Instance.PlaySE((int)SEList.DONT_LIKE_FOOD);
             Moya.SetActive(true);
         }
     }
@@ -383,6 +383,7 @@ public class TrainingRoot : MonoBehaviour
         if (canEatNum == 0) return;
         isSelectButton = true;
         EatBoard.SetActive(true);
+        SoundManager.Instance.PlaySE((int)SEList.OK);
     }
 
     public void PushBrushButton()
@@ -396,6 +397,7 @@ public class TrainingRoot : MonoBehaviour
         isAnimation = true;
         animationType = Type.BRUSH;
         Brush.SetActive(true);
+        SoundManager.Instance.PlaySE((int)SEList.OK);
     }
 
     public void PushTalkButton()
@@ -409,7 +411,7 @@ public class TrainingRoot : MonoBehaviour
         if (loveLevel > maxLoveLevel)
             loveLevel = maxLoveLevel;
         int nowLoveLevel = loveLevel;
-        Sound.PlaySe("loveup");
+        SoundManager.Instance.PlaySE((int)SEList.LOVE_UP);
         HeartManager.SetAnimation(beforeLoveLevel, nowLoveLevel, maxLoveLevel);
         if (nowLoveLevel == maxLoveLevel)
             TalkText.text = talkComment[4];
@@ -418,19 +420,22 @@ public class TrainingRoot : MonoBehaviour
         isAnimation = true;
         animationType = Type.COMMENT;
         CommentBoard.SetActive(true);
+        SoundManager.Instance.PlaySE((int)SEList.OK);
     }
 
     public void PushBackHomeButton()
     {
+        SoundManager.Instance.PlaySE((int)SEList.CLOSE);
         Save();
         GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().Save();
-        Sound.StopBgm();
+        SoundManager.Instance.StopBGM();
     }
 
     public void PushOfBackEatBoard()
     {
         isSelectButton = false;
         EatBoard.SetActive(false);
+        SoundManager.Instance.PlaySE((int)SEList.OK);
     }
 
     public void PushAnswer(int num)
@@ -460,7 +465,7 @@ public class TrainingRoot : MonoBehaviour
             }
 
         }
-
+        SoundManager.Instance.PlaySE((int)SEList.OK);
         explanationFoodBoard.SetActive(false);
     }
 
@@ -479,7 +484,11 @@ public class TrainingRoot : MonoBehaviour
 
     public void PushMeatType(int choiseFoodRank)
     {
-        if (MeetNums[choiseFoodRank] == 0) return;
+        if (MeetNums[choiseFoodRank] == 0)
+        {
+            SoundManager.Instance.PlaySE((int)SEList.CLOSE);
+            return;
+        }
         canEatNum -= 1;
         --MeetNums[choiseFoodRank];
         SetFoodText();
@@ -524,7 +533,12 @@ public class TrainingRoot : MonoBehaviour
 
     public void PushVegetableType(int choiseFoodRank)
     {
-        if (VegetableNums[choiseFoodRank] == 0) return;
+        if (VegetableNums[choiseFoodRank] == 0)
+        {
+            SoundManager.Instance.PlaySE((int)SEList.CLOSE);
+            return;
+        }
+
         canEatNum -= 1;
         --VegetableNums[choiseFoodRank];
         SetFoodText();
