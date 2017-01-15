@@ -23,7 +23,8 @@ public enum SEList
     CASH,
     MAIN_PUT,
     MAIN_SWIPE,
-    MAIN_WOOD
+    MAIN_WOOD,
+    READ_PAGE
 }
 
 
