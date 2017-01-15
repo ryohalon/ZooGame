@@ -117,7 +117,6 @@ public class PlayerStatusManager : MonoBehaviour
                 TargetMoney[2] = float.Parse(playerStatus[5]);
                 TargetMoney[3] = float.Parse(playerStatus[6]);
                 TargetMoney[4] = float.Parse(playerStatus[7]);
-                OneDayEarnedMoney = float.Parse(playerStatus[8]);
                 OneDayUsedMoney = float.Parse(playerStatus[9]);
                 OneDayVisitors = float.Parse(playerStatus[10]);
                 OneDayFoodCost = float.Parse(playerStatus[11]);
@@ -195,6 +194,8 @@ public class PlayerStatusManager : MonoBehaviour
         float totalVisitors_ = totalVisitors * combManager.totalComboRate;
 
         OneDayVisitors += totalVisitors_;
+
+        Debug.Log("お客 : " + OneDayVisitors);
     }
 
 
