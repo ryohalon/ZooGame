@@ -134,7 +134,7 @@ public class AnimalButtonController : MonoBehaviour
     // 購入画面Noボタン
     public void PushNoButton()
     {
-        Sound.PlaySe("Close");
+        SoundManager.Instance.PlaySE((int)SEList.CLOSE);
 
         animalBuyWindow.SetActive(false);
 
@@ -148,13 +148,13 @@ public class AnimalButtonController : MonoBehaviour
     {
         if(IsInPossessionMoney())
         {
-            Sound.PlaySe("cash");
+            SoundManager.Instance.PlaySE((int)SEList.CASH);
 
             handMoney -= animalPrice;
             handMoneyText.GetComponent<Text>().text = handMoney.ToString();
             GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[ID].GetComponent<AnimalStatusManager>().status.IsPurchase = true;
             GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().Save();
-            Debug.Log("ID:" + ID + "→IsPurchase= " + GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[ID].GetComponent<AnimalStatusManager>().status.IsPurchase);
+            
             Boughter();
 
             CommentChanger();
@@ -162,6 +162,8 @@ public class AnimalButtonController : MonoBehaviour
         }
         else
         {
+            SoundManager.Instance.PlaySE((int)SEList.CLOSE);
+
             handMoneyMissingTextBoard.SetActive(true);
             isShowText = true;
         }
@@ -169,7 +171,7 @@ public class AnimalButtonController : MonoBehaviour
 
     public void PushNextButton()
     {
-        Sound.PlaySe("Ok");
+        SoundManager.Instance.PlaySE((int)SEList.OK);
 
         if (isFirstComment)
         {
@@ -216,12 +218,6 @@ public class AnimalButtonController : MonoBehaviour
 
         ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[0].GetComponent<AnimalStatusManager>().status.ID;
         SetInformation(ID);
-        Debug.Log("animalID=" + ID);
-
-        //animalNameText.GetComponent<Text>().text = "クジャク";
-
-        //animalPrice = 50000;
-        //animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
     }
 
     public void PushMonkey()
@@ -230,12 +226,6 @@ public class AnimalButtonController : MonoBehaviour
 
         ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[3].GetComponent<AnimalStatusManager>().status.ID;
         SetInformation(ID);
-        Debug.Log("animalID=" + ID);
-
-        //animalNameText.GetComponent<Text>().text = "サル";
-
-        //animalPrice = 80000;
-        //animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
     }
 
     public void PushOwl()
@@ -244,12 +234,6 @@ public class AnimalButtonController : MonoBehaviour
 
         ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[4].GetComponent<AnimalStatusManager>().status.ID;
         SetInformation(ID);
-        Debug.Log("animalID=" + ID);
-
-        //animalNameText.GetComponent<Text>().text = "フクロウ";
-
-        //animalPrice = 80000;
-        //animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
     }
 
     public void PushRhino()
@@ -258,12 +242,6 @@ public class AnimalButtonController : MonoBehaviour
 
         ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[5].GetComponent<AnimalStatusManager>().status.ID;
         SetInformation(ID);
-        Debug.Log("animalID=" + ID);
-
-        //animalNameText.GetComponent<Text>().text = "サイ";
-
-        //animalPrice = 80000;
-        //animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
     }
 
     public void PushPony()
@@ -272,12 +250,6 @@ public class AnimalButtonController : MonoBehaviour
 
         ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[6].GetComponent<AnimalStatusManager>().status.ID;
         SetInformation(ID);
-        Debug.Log("animalID=" + ID);
-
-        //animalNameText.GetComponent<Text>().text = "ポニー";
-
-        //animalPrice = 80000;
-        //animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
     }
 
     public void PushFlamingo()
@@ -286,12 +258,6 @@ public class AnimalButtonController : MonoBehaviour
 
         ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[7].GetComponent<AnimalStatusManager>().status.ID;
         SetInformation(ID);
-        Debug.Log("animalID=" + ID);
-
-        //animalNameText.GetComponent<Text>().text = "フラミンゴ";
-
-        //animalPrice = 80000;
-        //animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
     }
 
     public void PushWolf()
@@ -300,12 +266,6 @@ public class AnimalButtonController : MonoBehaviour
 
         ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[8].GetComponent<AnimalStatusManager>().status.ID;
         SetInformation(ID);
-        Debug.Log("animalID=" + ID);
-
-        //animalNameText.GetComponent<Text>().text = "オオカミ";
-
-        //animalPrice = 150000;
-        //animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
     }
 
     public void PushElephant()
@@ -314,12 +274,6 @@ public class AnimalButtonController : MonoBehaviour
 
         ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[9].GetComponent<AnimalStatusManager>().status.ID;
         SetInformation(ID);
-        Debug.Log("animalID=" + ID);
-
-        //animalNameText.GetComponent<Text>().text = "ゾウ";
-
-        //animalPrice = 150000;
-        //animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
     }
 
     public void PushHawk()
@@ -328,12 +282,6 @@ public class AnimalButtonController : MonoBehaviour
 
         ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[10].GetComponent<AnimalStatusManager>().status.ID;
         SetInformation(ID);
-        Debug.Log("animalID=" + ID);
-
-        //animalNameText.GetComponent<Text>().text = "タカ";
-
-        //animalPrice = 150000;
-        //animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
     }
 
     public void PushPolarBear()
@@ -342,12 +290,6 @@ public class AnimalButtonController : MonoBehaviour
 
         ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[11].GetComponent<AnimalStatusManager>().status.ID;
         SetInformation(ID);
-        Debug.Log("animalID=" + ID);
-
-        //animalNameText.GetComponent<Text>().text = "ホッキョクグマ";
-
-        //animalPrice = 150000;
-        //animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
     }
 
     public void PushLesserPanda()
@@ -356,12 +298,6 @@ public class AnimalButtonController : MonoBehaviour
 
         ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[12].GetComponent<AnimalStatusManager>().status.ID;
         SetInformation(ID);
-        Debug.Log("animalID=" + ID);
-
-        //animalNameText.GetComponent<Text>().text = "レッサーパンダ";
-
-        //animalPrice = 150000;
-        //animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
     }
 
     public void PushGiraffe()
@@ -370,25 +306,14 @@ public class AnimalButtonController : MonoBehaviour
 
         ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[13].GetComponent<AnimalStatusManager>().status.ID;
         SetInformation(ID);
-        Debug.Log("animalID=" + ID);
-
-        //animalNameText.GetComponent<Text>().text = "キリン";
-
-        //animalPrice = 200000;
-        //animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
     }
+
     public void PushBlackLeopard()
     {
         img.sprite = GameObject.Find("AnimalList").GetComponent<AnimalTextureManager>().animalTextureList[14][0];
 
         ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[14].GetComponent<AnimalStatusManager>().status.ID;
         SetInformation(ID);
-        Debug.Log("animalID=" + ID);
-
-        //animalNameText.GetComponent<Text>().text = "クロヒョウ";
-
-        //animalPrice = 200000;
-        //animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
     }
 
     public void PushTiger()
@@ -397,12 +322,6 @@ public class AnimalButtonController : MonoBehaviour
 
         ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[15].GetComponent<AnimalStatusManager>().status.ID;
         SetInformation(ID);
-        Debug.Log("animalID=" + ID);
-
-        //animalNameText.GetComponent<Text>().text = "トラ";
-
-        //animalPrice = 200000;
-        //animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
     }
 
     public void PushPanda()
@@ -411,17 +330,11 @@ public class AnimalButtonController : MonoBehaviour
 
         ID = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[16].GetComponent<AnimalStatusManager>().status.ID;
         SetInformation(ID);
-        Debug.Log("animalID=" + ID);
-
-        //animalNameText.GetComponent<Text>().text = "パンダ";
-
-        //animalPrice = 200000;
-        //animalPriceText.GetComponent<Text>().text = animalPrice.ToString() + "z";
     }
 
     void SetInformation(int _ID)
     {
-        Sound.PlaySe("Ok");
+        SoundManager.Instance.PlaySE((int)SEList.OK);
 
         animalNameText.GetComponent<Text>().text =
             GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[_ID].GetComponent<AnimalStatusManager>().status.Name;
