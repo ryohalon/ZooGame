@@ -265,7 +265,6 @@ public class TrainingRoot : MonoBehaviour
         {
             if (prevMousePos != mousePosition)
             {
-                SoundManager.Instance.PlaySE((int)SEList.BRUSH);
                 RectTransform myTransform = Brush.GetComponent<RectTransform>();
                 Rect rect = new Rect(myTransform.position.x, myTransform.position.y, myTransform.rect.width, myTransform.rect.height);
 
@@ -273,6 +272,7 @@ public class TrainingRoot : MonoBehaviour
                     rect.position.y <= mousePosition.y && mousePosition.y <= rect.position.y + rect.height)
                 {
                     BrushTime += Time.deltaTime;
+                    SoundManager.Instance.PlaySE((int)SEList.BRUSH);
                     prevMousePosition = new Vector3(mousePosition.x, mousePosition.y, 0);
                 }
             }
