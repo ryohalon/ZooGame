@@ -110,6 +110,8 @@ public class ResultManager : MonoBehaviour
         if (!Input.GetMouseButtonDown(0))
             return;
 
+        SoundManager.Instance.PlaySE((int)SEList.CLOSE);
+
         var animalCSV = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals;
         foreach(var animal in animalCSV)
         {

@@ -29,6 +29,8 @@ public class DropObject : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
         if (!isDrop)
             return;
 
+        SoundManager.Instance.PlaySE((int)SEList.MAIN_SWIPE);
+
         var dragObject = pointerEventData.pointerDrag;
 
         var animalId = dragObject.GetComponent<CageManager>().animalID;

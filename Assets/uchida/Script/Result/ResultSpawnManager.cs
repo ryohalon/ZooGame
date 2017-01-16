@@ -82,7 +82,9 @@ public class ResultSpawnManager : MonoBehaviour
             return;
         if (SceneManager.GetActiveScene().name != "GameMain")
             return;
-        
+
+        SoundManager.Instance.PlaySE((int)SEList.READ_PAGE);
+
         resultWindow = Instantiate(result);
         resultWindow.transform.SetParent(GameObject.Find("Canvas").transform);
         resultWindow.transform.localScale = Vector3.one;

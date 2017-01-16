@@ -9,12 +9,16 @@ public class OnClickEvent : MonoBehaviour
     public void DeleteWindow()
     {
         Destroy(GameObject.Find(window.name));
+        SoundManager.Instance.PlaySE((int)SEList.CLOSE);
     }
 
     public void CreateWindow()
     {
         if (GameObject.Find(window.name + "(Clone)") != null)
             return;
+
+        SoundManager.Instance.PlaySE((int)SEList.OK);
+
         Instantiate(window);
     }
 }
