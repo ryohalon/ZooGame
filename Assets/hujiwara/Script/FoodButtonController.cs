@@ -197,6 +197,8 @@ public class FoodButtonController : MonoBehaviour
     // IDで情報を変える
     void SetInformation(int _ID)
     {
+        SoundManager.Instance.PlaySE((int)SEList.OK);
+
         foodNameText.GetComponent<Text>().text =
             foodStatus.foodList[_ID].Name;
         loveDegreeUpValueText.GetComponent<Text>().text =
@@ -224,7 +226,7 @@ public class FoodButtonController : MonoBehaviour
     // 個数選択+1
     public void PushPlusOne()
     {
-        Sound.PlaySe("Ok");
+        SoundManager.Instance.PlaySE((int)SEList.OK);
 
         if (!isUpperRimit())
         {
@@ -238,7 +240,7 @@ public class FoodButtonController : MonoBehaviour
     // 個数選択+10
     public void PushPlusTen()
     {
-        Sound.PlaySe("Ok");
+        SoundManager.Instance.PlaySE((int)SEList.OK);
 
         if (isPlusTen())
         {
@@ -259,7 +261,7 @@ public class FoodButtonController : MonoBehaviour
     // 個数選択-1
     public void PushMinusOne()
     {
-        Sound.PlaySe("Ok");
+        SoundManager.Instance.PlaySE((int)SEList.OK);
 
         if (!isBottomLimit())
         {
@@ -273,7 +275,7 @@ public class FoodButtonController : MonoBehaviour
     // 個数選択-10
     public void PushMinusTen()
     {
-        Sound.PlaySe("Ok");
+        SoundManager.Instance.PlaySE((int)SEList.OK);
 
         if (isMinusTen())
         {
@@ -342,7 +344,7 @@ public class FoodButtonController : MonoBehaviour
     // 購入画面Noボタン
     public void PushNoButton()
     {
-        Sound.PlaySe("Close");
+        SoundManager.Instance.PlaySE((int)SEList.CLOSE);
 
         foodBuyWindow.SetActive(false);
 
@@ -356,7 +358,7 @@ public class FoodButtonController : MonoBehaviour
     {
         if(IsInPossessionMoney())
         {
-            Sound.PlaySe("cash");
+            SoundManager.Instance.PlaySE((int)SEList.CASH);
 
             foodStatus.foodList[ID].possessionNumber += foodNumber;
             handMoney -= totalPrice;
@@ -368,6 +370,8 @@ public class FoodButtonController : MonoBehaviour
         }
         else
         {
+            SoundManager.Instance.PlaySE((int)SEList.CLOSE);
+
             handMoneyMissingTextBoard.SetActive(true);
             isShowText = true;
         }
@@ -376,7 +380,7 @@ public class FoodButtonController : MonoBehaviour
 
     public void PushNextButton()
     {
-        Sound.PlaySe("Ok");
+        SoundManager.Instance.PlaySE((int)SEList.OK);
 
         if(isFirstComment)
         {
