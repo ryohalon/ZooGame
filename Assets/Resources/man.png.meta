@@ -1,9 +1,12 @@
 fileFormatVersion: 2
 guid: c201c425e472cc54f9fc5d9fb20ec818
-timeCreated: 1484537595
+timeCreated: 1484541699
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: man_0
+    21300002: man_1
+    21300004: man_2
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -30,26 +33,82 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 16
     mipBias: -1
-    wrapMode: -1
-  nPOTScale: 1
+    wrapMode: 1
+  nPOTScale: 0
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
   allowsAlphaSplitting: 0
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
-  alphaIsTransparency: 0
-  textureType: -1
+  alphaIsTransparency: 1
+  textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: man_0
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 0
+        width: 213
+        height: 162
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -75.5, y: 81}
+        - {x: -75.5, y: 80}
+        - {x: -86.5, y: 75}
+        - {x: -86.5, y: -8}
+        - {x: -83.5, y: -16}
+        - {x: -37.5, y: -16}
+        - {x: -14.5, y: 37}
+        - {x: -14.5, y: 60}
+        - {x: -22.5, y: 81}
+    - name: man_1
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 54
+        width: 115
+        height: 165
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -13.5, y: -71.5}
+        - {x: 17.5, y: -71.5}
+        - {x: 40.5, y: -36.5}
+        - {x: 40.5, y: 81.5}
+        - {x: -31.5, y: 81.5}
+        - {x: -31.5, y: -38.5}
+    - name: man_2
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 56
+        width: 81
+        height: 163
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 23.5, y: 80.5}
+        - {x: -17.5, y: 80.5}
+        - {x: -36.5, y: 58.5}
+        - {x: -36.5, y: -26.5}
+        - {x: -8.5, y: -72.5}
+        - {x: 23.5, y: -72.5}
+        - {x: 35.5, y: -22.5}
+        - {x: 35.5, y: 71.5}
     outline: []
   spritePackingTag: 
   userData: 

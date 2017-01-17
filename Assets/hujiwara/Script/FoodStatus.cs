@@ -6,6 +6,8 @@ using System.Text;
 
 public class FoodStatus : MonoBehaviour
 {
+    //static private FoodStatus instance = null;
+
     string directory;
     string path;
 
@@ -17,6 +19,18 @@ public class FoodStatus : MonoBehaviour
 
     void Awake()
     {
+        //if (instance == null)
+        //{
+        //    DontDestroyOnLoad(gameObject);
+        //    instance = this;
+        //}
+
+        //if (instance != this)
+        //{
+        //    Destroy(gameObject);
+        //    return;
+        //}
+
         directory = Application.dataPath + "/" + "hujiwara" + "/";
         path = "FoodStatus.csv";
 
@@ -31,17 +45,6 @@ public class FoodStatus : MonoBehaviour
             foodList[i].possessionNumber = 0;
         }
         Save();
-
-        for (int i = 0; i < 6; ++i)
-        {
-            Debug.Log("ID: " + foodList[i].ID + "," +
-                "Name: " + foodList[i].Name + "," +
-                "値段: " + foodList[i].purchasePrice + "," +
-                "愛情度上昇値: " + foodList[i].loveDegreeUpValue + "," +
-                "満腹度上昇値: " + foodList[i].satietyLevelUpValue + "," +
-                "種類: " + foodList[i].foodType + "," +
-                "所持数: " + foodList[i].possessionNumber);
-        }
     }
 
     public void Read()
@@ -63,18 +66,6 @@ public class FoodStatus : MonoBehaviour
                 foodList[i].foodType = GetInt(i, 5);
                 foodList[i].possessionNumber = GetInt(i, 6);
             }
-        }
-        
-        //Debug
-        for(int i = 0; i < 6; ++i)
-        {
-            Debug.Log("ID: " + foodList[i].ID + "," +
-                "Name: " + foodList[i].Name + "," +
-                "値段: " + foodList[i].purchasePrice + "," +
-                "愛情度上昇値: " + foodList[i].loveDegreeUpValue + "," +
-                "満腹度上昇値: " + foodList[i].satietyLevelUpValue + "," +
-                "種類: " + foodList[i].foodType + "," +
-                "所持数: " + foodList[i].possessionNumber);
         }
     }
 
@@ -171,7 +162,6 @@ public class FoodStatus : MonoBehaviour
             counter++;
         }
         reader.Close();
-        Debug.Log(m_data[0][0]);
         return true;
     }
 

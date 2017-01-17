@@ -50,26 +50,43 @@ public class ButtonController : MonoBehaviour
     {
         handMoney = GameObject.Find("Player").GetComponent<PlayerStatusManager>().HandMoney;
         handMoneyText.GetComponent<Text>().text = handMoney.ToString() + "z";
-        Sound.PlayBgm("ShopBgm");
+        
+        SoundManager.Instance.PlayBGM((int)BGMList.SHOP);
     }
 
+    // ホームボタン
     public void PushHome()
     {
-        Sound.PlaySe("Ok");
+        SoundManager.Instance.PlaySE((int)SEList.OK);
+        SoundManager.Instance.StopBGM();
+        
         SceneManager.LoadScene("GameMain");
     }
 
+    //Debug
+    public void FoodPossessionReset()
+    {
+        for(int i = 0; i < 6; ++i)
+        {
+            gameObject.GetComponent<FoodStatus>().foodList[i].possessionNumber = 0;
+        }
+        gameObject.GetComponent<FoodStatus>().Save();
+    }
+
+    // Debug
     public void PurchaseResetAnimal()
     {
         for (int i = 0; i < 17; ++i)
         {
             GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[i].GetComponent<AnimalStatusManager>().status.IsPurchase = false;
         }
+        GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().Save();
     }
 
+    // エントランスの動物一覧ボタン
     public void PushAnimalButton()
     {
-        Sound.PlaySe("Ok");
+        SoundManager.Instance.PlaySE((int)SEList.OK);
 
         GameObject.Find("AnimalButtonController").GetComponent<AnimalButtonController>().Boughter();
 
@@ -83,9 +100,10 @@ public class ButtonController : MonoBehaviour
         animalBoardLabel.SetActive(true);
     }
 
+    // 動物一覧画面の動物ボタン
     public void PushAnimal()
     {
-        Sound.PlaySe("Ok");
+        SoundManager.Instance.PlaySE((int)SEList.OK);
 
         animalBoard.SetActive(false);
         UpperTwine.SetActive(false);
@@ -93,9 +111,10 @@ public class ButtonController : MonoBehaviour
         animalBuyWindow.SetActive(true);
     }
 
+    // エントランスのご飯一覧ボタン
     public void PushFoodButton()
     {
-        Sound.PlaySe("Ok");
+        SoundManager.Instance.PlaySE((int)SEList.OK);
 
         shopLabel.SetActive(false);
         animalButton.SetActive(false);
@@ -107,9 +126,10 @@ public class ButtonController : MonoBehaviour
         foodShelfLabel.SetActive(true);
     }
 
+    // ご飯一覧画面のご飯ボタン
     public void PushFood()
     {
-        Sound.PlaySe("Ok");
+        SoundManager.Instance.PlaySE((int)SEList.OK);
 
         foodShelf.SetActive(false);
         UpperTwine.SetActive(false);
@@ -117,9 +137,10 @@ public class ButtonController : MonoBehaviour
         foodBuyWindow.SetActive(true);
     }
 
+    // 動物一覧画面のバツボタン
     public void CancelAnimalBoard()
     {
-        Sound.PlaySe("Close");
+        SoundManager.Instance.PlaySE((int)SEList.CLOSE);
 
         shopLabel.SetActive(true);
         animalButton.SetActive(true);
@@ -130,9 +151,10 @@ public class ButtonController : MonoBehaviour
         animalBoard.SetActive(false);
     }
 
+    // ご飯一覧画面のバツボタン
     public void CancelFoodShelf()
     {
-        Sound.PlaySe("Close");
+        SoundManager.Instance.PlaySE((int)SEList.CLOSE);
 
         shopLabel.SetActive(true);
         animalButton.SetActive(true);
