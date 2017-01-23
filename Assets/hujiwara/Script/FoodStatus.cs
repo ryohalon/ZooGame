@@ -6,7 +6,7 @@ using System.Text;
 
 public class FoodStatus : MonoBehaviour
 {
-    //static private FoodStatus instance = null;
+    static private FoodStatus instance = null;
 
     string directory;
     string path;
@@ -19,17 +19,17 @@ public class FoodStatus : MonoBehaviour
 
     void Awake()
     {
-        //if (instance == null)
-        //{
-        //    DontDestroyOnLoad(gameObject);
-        //    instance = this;
-        //}
+        if (instance == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            instance = this;
+        }
 
-        //if (instance != this)
-        //{
-        //    Destroy(gameObject);
-        //    return;
-        //}
+        if (instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
         directory = Application.dataPath + "/" + "hujiwara" + "/";
         path = "FoodStatus.csv";

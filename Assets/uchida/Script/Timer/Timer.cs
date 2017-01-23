@@ -118,36 +118,24 @@ public class Timer : MonoBehaviour
 
     private void LoadLastApplicationEndTime()
     {
-        string txt = "";
+        TextAsset csvFile = Resources.Load("Data/LastDate") as TextAsset;
+        StringReader reader = new StringReader(csvFile.text);
 
-        FileInfo fi = new FileInfo(Application.dataPath + "/uchida/resource/Text/LastDate.csv");
-        try
-        {
-            using (StreamReader sr = new StreamReader(fi.Open(FileMode.Open, FileAccess.Read)))
-            {
-                txt += sr.ReadToEnd();
+        string line = reader.ReadLine();
+        string[] timeData = line.Split(',');
 
-                sr.Close();
-            }
-        }
-        catch (Exception e)
-        {
-
-        }
-
-        string[] lastDate_ = txt.Split(',');
-        startDayDate.year = int.Parse(lastDate_[0]);
-        startDayDate.month = int.Parse(lastDate_[1]);
-        startDayDate.day = int.Parse(lastDate_[2]);
-        startDayDate.hour = int.Parse(lastDate_[3]);
-        startDayDate.minute = int.Parse(lastDate_[4]);
-        startDayDate.second = int.Parse(lastDate_[5]);
-        lastDate.year = int.Parse(lastDate_[6]);
-        lastDate.month = int.Parse(lastDate_[7]);
-        lastDate.day = int.Parse(lastDate_[8]);
-        lastDate.hour = int.Parse(lastDate_[9]);
-        lastDate.minute = int.Parse(lastDate_[10]);
-        lastDate.second = float.Parse(lastDate_[11]);
+        startDayDate.year = int.Parse(timeData[0]);
+        startDayDate.month = int.Parse(timeData[1]);
+        startDayDate.day = int.Parse(timeData[2]);
+        startDayDate.hour = int.Parse(timeData[3]);
+        startDayDate.minute = int.Parse(timeData[4]);
+        startDayDate.second = int.Parse(timeData[5]);
+        lastDate.year = int.Parse(timeData[6]);
+        lastDate.month = int.Parse(timeData[7]);
+        lastDate.day = int.Parse(timeData[8]);
+        lastDate.hour = int.Parse(timeData[9]);
+        lastDate.minute = int.Parse(timeData[10]);
+        lastDate.second = float.Parse(timeData[11]);
     }
 
     void Start()
@@ -219,7 +207,7 @@ public class Timer : MonoBehaviour
     public void OnApplicationQuit()
     {
         StreamWriter writer;
-        writer = new StreamWriter(Application.dataPath + "/uchida/resource/Text/LastDate.csv", false);
+        writer = new StreamWriter(Application.dataPath + "/Resources/Data/LastDate.csv", false);
         writer.WriteLine(startDayDate.year +
             "," + startDayDate.month +
             "," + startDayDate.day +

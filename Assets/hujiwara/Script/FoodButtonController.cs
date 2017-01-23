@@ -96,7 +96,6 @@ public class FoodButtonController : MonoBehaviour
 
     void Awake()
     {
-        foodStatus = gameObject.GetComponent<FoodStatus>();
         img = foodImage.GetComponent<Image>();
 
         handMoney = GameObject.Find("ButtonController").GetComponent<ButtonController>().handMoney;
@@ -106,6 +105,11 @@ public class FoodButtonController : MonoBehaviour
         
         FoodNumberReset();
         foodNumberText.GetComponent<Text>().text = foodNumber.ToString();
+    }
+
+    void Start()
+    {
+        foodStatus = GameObject.Find("FoodList").GetComponent<FoodStatus>();
     }
 
     void Update()
@@ -125,7 +129,7 @@ public class FoodButtonController : MonoBehaviour
     // レア度1肉
     public void PushMeet1()
     {
-        ID = foodStatus.foodList[0].ID;
+        ID = GameObject.Find("FoodList").GetComponent<FoodStatus>().foodList[0].ID;
 
         SetInformation(ID);
         img.material.mainTexture = meet1;
@@ -161,7 +165,12 @@ public class FoodButtonController : MonoBehaviour
     // レア度1野菜
     public void PushVegetable1()
     {
-        ID = foodStatus.foodList[3].ID;
+        foodShelf.SetActive(false);
+        upperTwine.SetActive(false);
+
+        foodBuyWindow.SetActive(true);
+
+        ID = 3;
 
         SetInformation(ID);
         img.material.mainTexture = vegetable1;
