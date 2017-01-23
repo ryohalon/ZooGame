@@ -207,7 +207,7 @@ public class Timer : MonoBehaviour
     public void OnApplicationQuit()
     {
         StreamWriter writer;
-        writer = new StreamWriter(Application.dataPath + "/uchida/resource/Text/LastDate.csv", false);
+        writer = new StreamWriter(Application.dataPath + "/Resources/Data/LastDate.csv", false);
         writer.WriteLine(startDayDate.year +
             "," + startDayDate.month +
             "," + startDayDate.day +

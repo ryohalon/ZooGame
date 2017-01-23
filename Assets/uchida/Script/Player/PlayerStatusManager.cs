@@ -54,9 +54,6 @@ public class PlayerStatusManager : MonoBehaviour
 
 
 
-    FileInfo playerFile = null;
-
-
     // 目標までの残り金額
     public int GetMoneyToTheTarget()
     {
@@ -193,7 +190,7 @@ public class PlayerStatusManager : MonoBehaviour
 
     public void OnApplicationQuit()
     {
-        StreamWriter sw = new StreamWriter(playerFile.Open(FileMode.Open, FileAccess.Write));
+        StreamWriter sw = new StreamWriter(Application.dataPath + "/Resources/Data/playerStatus.csv", false);
 
         sw.WriteLine(ZooName +
             "," + StoryLevel +
