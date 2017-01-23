@@ -44,12 +44,16 @@ public class ButtonController : MonoBehaviour
     [SerializeField]
     GameObject BottomTwine = null;
 
+    FoodStatus foodStatus;
+
     public float handMoney;
     
     void Awake()
     {
         handMoney = GameObject.Find("Player").GetComponent<PlayerStatusManager>().HandMoney;
         handMoneyText.GetComponent<Text>().text = handMoney.ToString() + "z";
+
+        foodStatus = GameObject.Find("FoodList").GetComponent<FoodStatus>();
         
         SoundManager.Instance.PlayBGM((int)BGMList.SHOP);
     }
@@ -68,9 +72,9 @@ public class ButtonController : MonoBehaviour
     {
         for(int i = 0; i < 6; ++i)
         {
-            gameObject.GetComponent<FoodStatus>().foodList[i].possessionNumber = 0;
+            foodStatus.foodList[i].possessionNumber = 0;
         }
-        gameObject.GetComponent<FoodStatus>().Save();
+        foodStatus.Save();
     }
 
     // Debug
