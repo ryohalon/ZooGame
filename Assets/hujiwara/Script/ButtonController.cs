@@ -70,11 +70,7 @@ public class ButtonController : MonoBehaviour
     //Debug
     public void FoodPossessionReset()
     {
-        for(int i = 0; i < 6; ++i)
-        {
-            foodStatus.foodList[i].possessionNumber = 0;
-        }
-        foodStatus.Save();
+        foodStatus.ResetPossession();
     }
 
     // Debug
