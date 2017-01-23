@@ -31,59 +31,31 @@ public class CombManager : MonoBehaviour
 
     private void LoadComboRate()
     {
-        FileInfo comboRateFile = new FileInfo(Application.dataPath + "/uchida/resource/Text/comboRate.csv");
-        try
-        {
-            using (StreamReader sr = new StreamReader(comboRateFile.Open(FileMode.Open, FileAccess.Read)))
-            {
-                string txt = sr.ReadToEnd();
+        TextAsset csvFile = Resources.Load("Data/comboRate") as TextAsset;
+        StringReader reader = new StringReader(csvFile.text);
 
-                string[] comboRate = txt.Split(',');
-                foreach(var comboRate_ in comboRate)
-                {
-                    if (comboRate_ == "\n")
-                        continue;
+        string line = reader.ReadLine();
+        string[] comboRate = line.Split(',');
 
-                    comboRateList.Add(float.Parse(comboRate_) / 100.0f);
-                }
-
-                sr.Close();
-            }
-        }
-        catch(Exception e)
-        {
-
-        }
+        foreach(var rate in comboRate)
+            comboRateList.Add(float.Parse(rate) / 100.0f);
     }
 
     private void LoadCombo()
     {
-        FileInfo comboFile = new FileInfo(Application.dataPath + "/uchida/resource/Text/combo.csv");
-        try
+        TextAsset csvFile = Resources.Load("Data/combo") as TextAsset;
+        StringReader reader = new StringReader(csvFile.text);
+
+        while(reader.Peek() > -1)
         {
-            using (StreamReader sr = new StreamReader(comboFile.Open(FileMode.Open, FileAccess.Read)))
-            {
-                string txt = sr.ReadToEnd();
+            string line = reader.ReadLine();
+            string[] combo = line.Split(',');
+            List<int> comboList_ = new List<int>();
 
-                string[] combo = txt.Split('\n');
-                foreach (var combo_ in combo)
-                {
-                    string[] com = combo_.Split(',');
-                    List<int> comboList_ = new List<int>();
-                    foreach (var com_ in com)
-                    {
-                        comboList_.Add(int.Parse(com_));
-                    }
+            foreach (var combo_ in combo)
+                comboList_.Add(int.Parse(combo_));
 
-                    comboList.Add(comboList_);
-                }
-
-                sr.Close();   
-            }
-        }
-        catch (Exception e)
-        {
-
+            comboList.Add(comboList_);
         }
     }
 
