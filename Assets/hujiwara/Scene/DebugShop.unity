@@ -2667,8 +2667,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 480215856}
   - 114: {fileID: 480215855}
-  - 114: {fileID: 480215857}
-  - 114: {fileID: 480215858}
   m_Layer: 0
   m_Name: ButtonController
   m_TagString: Untagged
@@ -2714,30 +2712,6 @@ Transform:
   - {fileID: 416709949}
   m_Father: {fileID: 0}
   m_RootOrder: 2
---- !u!114 &480215857
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 480215854}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 233c5f41d9d6dec41b31b77e3f03a02d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  foodList: []
---- !u!114 &480215858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 480215854}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6e4d8ffc2025434fa0c92b612367523, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  NextSceneName: GameMain
 --- !u!1 &495571868
 GameObject:
   m_ObjectHideFlags: 0
@@ -7328,8 +7302,6 @@ GameObject:
   m_Component:
   - 224: {fileID: 1268321517}
   - 114: {fileID: 1268321518}
-  - 114: {fileID: 1268321519}
-  - 114: {fileID: 1268321520}
   m_Layer: 5
   m_Name: FoodButtonController
   m_TagString: Untagged
@@ -7389,29 +7361,6 @@ MonoBehaviour:
   vegetable1: {fileID: 2800000, guid: 20fcc0ce1e2543c4b925a80e86068388, type: 3}
   vegetable2: {fileID: 2800000, guid: 4f8e1072a06b05049bd433ad0ffb1cf3, type: 3}
   vegetable3: {fileID: 2800000, guid: 650485321bff2e64da390f8948618790, type: 3}
---- !u!114 &1268321519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1268321516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 233c5f41d9d6dec41b31b77e3f03a02d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  foodList: []
---- !u!114 &1268321520
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1268321516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59dec01c0c19d7c44834fee190c7f075, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1283353023
 GameObject:
   m_ObjectHideFlags: 0
@@ -9477,17 +9426,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1268321518}
         m_MethodName: PushVegetable1
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 480215855}
-        m_MethodName: PushFood
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
