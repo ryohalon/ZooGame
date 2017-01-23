@@ -75,6 +75,7 @@ public class Timer : MonoBehaviour
         float elapsedTime = Mathf.Abs((float)nowDate.hour - (float)lastDate.hour) * 60.0f * 60.0f
             + (float)(nowDate.minute - lastDate.minute) * 60.0f
             + (nowDate.second - lastDate.second);
+
         player.GetElapsedTimeVisitors(elapsedTime);
     }
 
@@ -117,25 +118,58 @@ public class Timer : MonoBehaviour
     }
 
     private void LoadLastApplicationEndTime()
-    {
-        TextAsset csvFile = Resources.Load("Data/LastDate") as TextAsset;
-        StringReader reader = new StringReader(csvFile.text);
+    {   
+        if(File.Exists(Application.persistentDataPath + "/LastDate.csv"))
+        {
+            StreamReader sr = new StreamReader(Application.persistentDataPath + "/LastDate.csv", false);
+            string line = sr.ReadLine();
+            string[] timeData = line.Split(',');
 
-        string line = reader.ReadLine();
-        string[] timeData = line.Split(',');
+            startDayDate.year = int.Parse(timeData[0]);
+            startDayDate.month = int.Parse(timeData[1]);
+            startDayDate.day = int.Parse(timeData[2]);
+            startDayDate.hour = int.Parse(timeData[3]);
+            startDayDate.minute = int.Parse(timeData[4]);
+            startDayDate.second = int.Parse(timeData[5]);
+            lastDate.year = int.Parse(timeData[6]);
+            lastDate.month = int.Parse(timeData[7]);
+            lastDate.day = int.Parse(timeData[8]);
+            lastDate.hour = int.Parse(timeData[9]);
+            lastDate.minute = int.Parse(timeData[10]);
+            lastDate.second = float.Parse(timeData[11]);
+        }
+        else
+        {
+            FileStream f = new FileStream(Application.persistentDataPath + "/LastDate.csv", FileMode.Create);
+            SetStartDayTime();
+        }
 
-        startDayDate.year = int.Parse(timeData[0]);
-        startDayDate.month = int.Parse(timeData[1]);
-        startDayDate.day = int.Parse(timeData[2]);
-        startDayDate.hour = int.Parse(timeData[3]);
-        startDayDate.minute = int.Parse(timeData[4]);
-        startDayDate.second = int.Parse(timeData[5]);
-        lastDate.year = int.Parse(timeData[6]);
-        lastDate.month = int.Parse(timeData[7]);
-        lastDate.day = int.Parse(timeData[8]);
-        lastDate.hour = int.Parse(timeData[9]);
-        lastDate.minute = int.Parse(timeData[10]);
-        lastDate.second = float.Parse(timeData[11]);
+        //TextAsset csvFile;
+        //csvFile = Resources.Load("Data/LastDat") as TextAsset;
+        //if(csvFile != null)
+        //{
+        //    StringReader reader = new StringReader(csvFile.text);
+
+        //    string line = reader.ReadLine();
+        //    string[] timeData = line.Split(',');
+
+        //    startDayDate.year = int.Parse(timeData[0]);
+        //    startDayDate.month = int.Parse(timeData[1]);
+        //    startDayDate.day = int.Parse(timeData[2]);
+        //    startDayDate.hour = int.Parse(timeData[3]);
+        //    startDayDate.minute = int.Parse(timeData[4]);
+        //    startDayDate.second = int.Parse(timeData[5]);
+        //    lastDate.year = int.Parse(timeData[6]);
+        //    lastDate.month = int.Parse(timeData[7]);
+        //    lastDate.day = int.Parse(timeData[8]);
+        //    lastDate.hour = int.Parse(timeData[9]);
+        //    lastDate.minute = int.Parse(timeData[10]);
+        //    lastDate.second = float.Parse(timeData[11]);
+        //}
+        //else
+        //{
+        //    SetStartDayTime();
+        //}
     }
 
     void Start()
@@ -207,7 +241,7 @@ public class Timer : MonoBehaviour
     public void OnApplicationQuit()
     {
         StreamWriter writer;
-        writer = new StreamWriter(Application.dataPath + "/Resources/Data/LastDate.csv", false);
+        writer = new StreamWriter(Application.persistentDataPath + "/LastDate.csv", false);
         writer.WriteLine(startDayDate.year +
             "," + startDayDate.month +
             "," + startDayDate.day +

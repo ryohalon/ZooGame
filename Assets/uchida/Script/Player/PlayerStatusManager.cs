@@ -68,15 +68,23 @@ public class PlayerStatusManager : MonoBehaviour
 
     public void Reset()
     {
+        ZooName = "どうけい";
         entranceFee = 20;
-        StoryLevel = 1;
-        HandMoney = 0;
+        StoryLevel = 0;
+        HandMoney = 200;
         for (int i = 0; i < 5; i++)
             TargetMoney[i] = 0;
-        ResetOneDay();
+        OneDayEarnedMoney = 0;
+        OneDayUsedMoney = 0;
+        OneDayVisitors = 0;
+        OneDayFoodCost = 0;
+        OneDayAnimalPurchaseCost = 0;
+        OneDayToyCost = 0;
         TotalMoney = 0;
         TotalUsedMoney = 0;
         TotalVisitors = 0;
+        AnimalNum = 2;
+        MaxLoveDegreeAnimalNum = 0;
     }
 
     // 一日の間だけ加算する変数のリセット
@@ -97,30 +105,93 @@ public class PlayerStatusManager : MonoBehaviour
     // 起動時に外部ファイルからデータを読み込む
     private void LoadStatus()
     {
-        TextAsset csvFile = Resources.Load("Data/playerStatus") as TextAsset;
-        StringReader reader = new StringReader(csvFile.text);
+        if (File.Exists(Application.persistentDataPath + "/playerStatus.csv"))
+        {
+            StreamReader sr = new StreamReader(Application.persistentDataPath + "/playerStatus.csv", false);
+            string line = sr.ReadLine();
+            string[] status = line.Split(',');
 
-        string line = reader.ReadLine();
-        string[] status = line.Split(',');
+            ZooName = status[0];
+            StoryLevel = int.Parse(status[1]);
+            HandMoney = float.Parse(status[2]);
+            TargetMoney[0] = float.Parse(status[3]);
+            TargetMoney[1] = float.Parse(status[4]);
+            TargetMoney[2] = float.Parse(status[5]);
+            TargetMoney[3] = float.Parse(status[6]);
+            TargetMoney[4] = float.Parse(status[7]);
+            OneDayUsedMoney = float.Parse(status[9]);
+            OneDayVisitors = float.Parse(status[10]);
+            OneDayFoodCost = float.Parse(status[11]);
+            OneDayAnimalPurchaseCost = float.Parse(status[12]);
+            OneDayToyCost = float.Parse(status[13]);
+            TotalMoney = float.Parse(status[14]);
+            TotalUsedMoney = float.Parse(status[15]);
+            TotalVisitors = float.Parse(status[16]);
+            AnimalNum = int.Parse(status[17]);
+            MaxLoveDegreeAnimalNum = int.Parse(status[18]);
+        }
+        else
+        {
+            FileStream f = new FileStream(Application.persistentDataPath + "/playerStatus.csv", FileMode.Create);
+            StreamWriter sw = new StreamWriter(f);
 
-        ZooName = status[0];
-        StoryLevel = int.Parse(status[1]);
-        HandMoney = float.Parse(status[2]);
-        TargetMoney[0] = float.Parse(status[3]);
-        TargetMoney[1] = float.Parse(status[4]);
-        TargetMoney[2] = float.Parse(status[5]);
-        TargetMoney[3] = float.Parse(status[6]);
-        TargetMoney[4] = float.Parse(status[7]);
-        OneDayUsedMoney = float.Parse(status[9]);
-        OneDayVisitors = float.Parse(status[10]);
-        OneDayFoodCost = float.Parse(status[11]);
-        OneDayAnimalPurchaseCost = float.Parse(status[12]);
-        OneDayToyCost = float.Parse(status[13]);
-        TotalMoney = float.Parse(status[14]);
-        TotalUsedMoney = float.Parse(status[15]);
-        TotalVisitors = float.Parse(status[16]);
-        AnimalNum = int.Parse(status[17]);
-        MaxLoveDegreeAnimalNum = int.Parse(status[18]);
+            sw.WriteLine(ZooName +
+                "," + StoryLevel +
+                "," + HandMoney +
+                "," + TargetMoney[0] +
+                "," + TargetMoney[1] +
+                "," + TargetMoney[2] +
+                "," + TargetMoney[3] +
+                "," + TargetMoney[4] +
+                "," + OneDayEarnedMoney +
+                "," + OneDayUsedMoney +
+                "," + OneDayVisitors +
+                "," + OneDayFoodCost +
+                "," + OneDayAnimalPurchaseCost +
+                "," + OneDayToyCost +
+                "," + TotalMoney +
+                "," + TotalUsedMoney +
+                "," + TotalVisitors +
+                "," + AnimalNum +
+                "," + MaxLoveDegreeAnimalNum);
+            sw.Flush();
+            sw.Close();
+            Reset();
+        }
+
+        //TextAsset csvFile;
+        //csvFile = Resources.Load("Data/playerStatus") as TextAsset;
+        //if (csvFile != null)
+        //{
+        //    StringReader reader = new StringReader(csvFile.text);
+
+        //    string line = reader.ReadLine();
+        //    string[] status = line.Split(',');
+
+        //    ZooName = status[0];
+        //    StoryLevel = int.Parse(status[1]);
+        //    HandMoney = float.Parse(status[2]);
+        //    TargetMoney[0] = float.Parse(status[3]);
+        //    TargetMoney[1] = float.Parse(status[4]);
+        //    TargetMoney[2] = float.Parse(status[5]);
+        //    TargetMoney[3] = float.Parse(status[6]);
+        //    TargetMoney[4] = float.Parse(status[7]);
+        //    OneDayUsedMoney = float.Parse(status[9]);
+        //    OneDayVisitors = float.Parse(status[10]);
+        //    OneDayFoodCost = float.Parse(status[11]);
+        //    OneDayAnimalPurchaseCost = float.Parse(status[12]);
+        //    OneDayToyCost = float.Parse(status[13]);
+        //    TotalMoney = float.Parse(status[14]);
+        //    TotalUsedMoney = float.Parse(status[15]);
+        //    TotalVisitors = float.Parse(status[16]);
+        //    AnimalNum = int.Parse(status[17]);
+        //    MaxLoveDegreeAnimalNum = int.Parse(status[18]);
+        //}
+        //else
+        //{
+        //    Reset();
+        //}
+
     }
 
     void Awake()
@@ -137,16 +208,16 @@ public class PlayerStatusManager : MonoBehaviour
             return;
         }
 
-        timer = GameObject.Find("Timer").GetComponent<Timer>();
-        var animalList = GameObject.Find("AnimalList");
-        animalStatusCSV = animalList.GetComponent<AnimalStatusCSV>();
-        combManager = animalList.GetComponent<CombManager>();
-
         LoadStatus();
     }
 
     void Start()
     {
+        timer = GameObject.Find("Timer").GetComponent<Timer>();
+        var animalList = GameObject.Find("AnimalList");
+        animalStatusCSV = animalList.GetComponent<AnimalStatusCSV>();
+        combManager = animalList.GetComponent<CombManager>();
+
         StartCoroutine(UpdatePlayerStatus());
     }
 
@@ -173,6 +244,8 @@ public class PlayerStatusManager : MonoBehaviour
         foreach (var animal in animalList)
         {
             var animalStatus = animal.GetComponent<AnimalStatusManager>();
+            if (!animalStatus.status.IsPurchase)
+                continue;
             if (animalStatus.status.CageID == -1)
                 continue;
 
@@ -182,15 +255,13 @@ public class PlayerStatusManager : MonoBehaviour
         float totalVisitors_ = totalVisitors * combManager.totalComboRate;
 
         OneDayVisitors += totalVisitors_;
-
-        Debug.Log("お客 : " + OneDayVisitors);
     }
 
 
 
     public void OnApplicationQuit()
     {
-        StreamWriter sw = new StreamWriter(Application.dataPath + "/Resources/Data/playerStatus.csv", false);
+        StreamWriter sw = new StreamWriter(Application.persistentDataPath + "/playerStatus.csv", false);
 
         sw.WriteLine(ZooName +
             "," + StoryLevel +
