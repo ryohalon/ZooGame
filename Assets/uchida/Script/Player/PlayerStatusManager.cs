@@ -54,9 +54,6 @@ public class PlayerStatusManager : MonoBehaviour
 
 
 
-    FileInfo playerFile = null;
-
-
     // 目標までの残り金額
     public int GetMoneyToTheTarget()
     {
@@ -100,39 +97,30 @@ public class PlayerStatusManager : MonoBehaviour
     // 起動時に外部ファイルからデータを読み込む
     private void LoadStatus()
     {
-        playerFile = new FileInfo(Application.dataPath + "/uchida/resource/Text/playerStatus.csv");
-        try
-        {
-            using (StreamReader sr = new StreamReader(playerFile.Open(FileMode.Open, FileAccess.Read)))
-            {
-                string txt = sr.ReadToEnd();
+        TextAsset csvFile = Resources.Load("Data/playerStatus") as TextAsset;
+        StringReader reader = new StringReader(csvFile.text);
 
-                string[] playerStatus = txt.Split(',');
+        string line = reader.ReadLine();
+        string[] status = line.Split(',');
 
-                ZooName = playerStatus[0];
-                StoryLevel = int.Parse(playerStatus[1]);
-                HandMoney = float.Parse(playerStatus[2]);
-                TargetMoney[0] = float.Parse(playerStatus[3]);
-                TargetMoney[1] = float.Parse(playerStatus[4]);
-                TargetMoney[2] = float.Parse(playerStatus[5]);
-                TargetMoney[3] = float.Parse(playerStatus[6]);
-                TargetMoney[4] = float.Parse(playerStatus[7]);
-                OneDayUsedMoney = float.Parse(playerStatus[9]);
-                OneDayVisitors = float.Parse(playerStatus[10]);
-                OneDayFoodCost = float.Parse(playerStatus[11]);
-                OneDayAnimalPurchaseCost = float.Parse(playerStatus[12]);
-                OneDayToyCost = float.Parse(playerStatus[13]);
-                TotalMoney = float.Parse(playerStatus[14]);
-                TotalUsedMoney = float.Parse(playerStatus[15]);
-                TotalVisitors = float.Parse(playerStatus[16]);
-                AnimalNum = int.Parse(playerStatus[17]);
-                MaxLoveDegreeAnimalNum = int.Parse(playerStatus[18]);
-            }
-        }
-        catch (Exception e)
-        {
-
-        }
+        ZooName = status[0];
+        StoryLevel = int.Parse(status[1]);
+        HandMoney = float.Parse(status[2]);
+        TargetMoney[0] = float.Parse(status[3]);
+        TargetMoney[1] = float.Parse(status[4]);
+        TargetMoney[2] = float.Parse(status[5]);
+        TargetMoney[3] = float.Parse(status[6]);
+        TargetMoney[4] = float.Parse(status[7]);
+        OneDayUsedMoney = float.Parse(status[9]);
+        OneDayVisitors = float.Parse(status[10]);
+        OneDayFoodCost = float.Parse(status[11]);
+        OneDayAnimalPurchaseCost = float.Parse(status[12]);
+        OneDayToyCost = float.Parse(status[13]);
+        TotalMoney = float.Parse(status[14]);
+        TotalUsedMoney = float.Parse(status[15]);
+        TotalVisitors = float.Parse(status[16]);
+        AnimalNum = int.Parse(status[17]);
+        MaxLoveDegreeAnimalNum = int.Parse(status[18]);
     }
 
     void Awake()
@@ -202,7 +190,7 @@ public class PlayerStatusManager : MonoBehaviour
 
     public void OnApplicationQuit()
     {
-        StreamWriter sw = new StreamWriter(playerFile.Open(FileMode.Open, FileAccess.Write));
+        StreamWriter sw = new StreamWriter(Application.dataPath + "/Resources/Data/playerStatus.csv", false);
 
         sw.WriteLine(ZooName +
             "," + StoryLevel +
