@@ -75,6 +75,7 @@ public class Timer : MonoBehaviour
         float elapsedTime = Mathf.Abs((float)nowDate.hour - (float)lastDate.hour) * 60.0f * 60.0f
             + (float)(nowDate.minute - lastDate.minute) * 60.0f
             + (nowDate.second - lastDate.second);
+
         player.GetElapsedTimeVisitors(elapsedTime);
     }
 

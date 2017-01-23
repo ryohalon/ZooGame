@@ -133,6 +133,29 @@ public class PlayerStatusManager : MonoBehaviour
         else
         {
             FileStream f = new FileStream(Application.persistentDataPath + "/playerStatus.csv", FileMode.Create);
+            StreamWriter sw = new StreamWriter(f);
+
+            sw.WriteLine(ZooName +
+                "," + StoryLevel +
+                "," + HandMoney +
+                "," + TargetMoney[0] +
+                "," + TargetMoney[1] +
+                "," + TargetMoney[2] +
+                "," + TargetMoney[3] +
+                "," + TargetMoney[4] +
+                "," + OneDayEarnedMoney +
+                "," + OneDayUsedMoney +
+                "," + OneDayVisitors +
+                "," + OneDayFoodCost +
+                "," + OneDayAnimalPurchaseCost +
+                "," + OneDayToyCost +
+                "," + TotalMoney +
+                "," + TotalUsedMoney +
+                "," + TotalVisitors +
+                "," + AnimalNum +
+                "," + MaxLoveDegreeAnimalNum);
+            sw.Flush();
+            sw.Close();
             Reset();
         }
 
@@ -221,6 +244,8 @@ public class PlayerStatusManager : MonoBehaviour
         foreach (var animal in animalList)
         {
             var animalStatus = animal.GetComponent<AnimalStatusManager>();
+            if (!animalStatus.status.IsPurchase)
+                continue;
             if (animalStatus.status.CageID == -1)
                 continue;
 
