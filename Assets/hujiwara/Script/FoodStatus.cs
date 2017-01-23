@@ -49,10 +49,10 @@ public class FoodStatus : MonoBehaviour
 
     public void Read()
     {
-        for(int i = 0; i < 6; ++i)
-        {
-            foodList.Add(new FoodStatusManager2());
-        }
+        //for(int i = 0; i < 6; ++i)
+        //{
+        //    foodList.Add(new FoodStatusManager2());
+        //}
 
         for(int i = 0; i < 6; ++i)
         {
