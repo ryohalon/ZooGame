@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.IO;
 using System.Collections.Generic;
@@ -15,19 +15,23 @@ public class AnimalStatusCSV : MonoBehaviour
 
     void Awake()
     {
-        Read();
+        Make();
     }
 
     public void Read()
     {
-        csvFile = Resources.Load("AnimalStatusCSV") as TextAsset; /* Resouces/CSV下のCSV読み込み */
-        StringReader reader = new StringReader(csvFile.text);
+        StreamReader reader = new StreamReader(Application.persistentDataPath + "/AnimalStatusCSV.csv");
 
+        if (reader.Peek() == -1)
+        {
+            Make();
+            return;
+        }
         while (reader.Peek() > -1)
         {
             string line = reader.ReadLine();
-            csvDatas.Add(line.Split(',')); // リストに入れる
-            height++; // 行数加算
+            csvDatas.Add(line.Split(','));
+            height++;
         }
 
 
@@ -60,7 +64,7 @@ public class AnimalStatusCSV : MonoBehaviour
 
     public void Save()
     {
-        StreamWriter sw = new StreamWriter(Application.dataPath + "/Resources/" + "AnimalStatusCSV.csv", false);
+        StreamWriter sw = new StreamWriter(Application.persistentDataPath + "/AnimalStatusCSV.csv", false, System.Text.Encoding.UTF8);
 
         for (int i = 0; i < 17; ++i)
         {
@@ -86,4 +90,55 @@ public class AnimalStatusCSV : MonoBehaviour
         sw.Flush();
         sw.Close();
     }
+
+
+    void Make()
+    {
+        if (!File.Exists(Application.persistentDataPath + "/AnimalStatusCSV.csv"))
+        {
+            FileStream f = new FileStream(Application.persistentDataPath + "/AnimalStatusCSV.csv", FileMode.Create);
+
+            csvFile = Resources.Load("AnimalStatusCSV") as TextAsset;
+            StringReader reader = new StringReader(csvFile.text);
+
+            while (reader.Peek() > -1)
+            {
+                string line = reader.ReadLine();
+                csvDatas.Add(line.Split(','));
+                height++;
+            }
+            for (int i = 0; i < 17; ++i)
+            {
+                AnimalStatusManager animalStatus = animals[i].GetComponent<AnimalStatusManager>();
+                animalStatus.status.ID = int.Parse(csvDatas[i][0]);
+                animalStatus.status.Name = csvDatas[i][1];
+                animalStatus.status.PurchasePrice = int.Parse(csvDatas[i][2]);
+                animalStatus.status.FoodType = int.Parse(csvDatas[i][3]);
+                animalStatus.status.Rarity = int.Parse(csvDatas[i][4]);
+                animalStatus.status.AttractVisitors = int.Parse(csvDatas[i][5]);
+                animalStatus.status.LoveDegree = int.Parse(csvDatas[i][6]);
+                animalStatus.status.SatietyLevel = int.Parse(csvDatas[i][7]);
+                animalStatus.status.IsPurchase = bool.Parse(csvDatas[i][8]);
+                animalStatus.status.Ratio = float.Parse(csvDatas[i][9]);
+
+                if (int.Parse(csvDatas[i][10]) == 0)
+                    animalStatus.status.Sexuality = AnimalStatusManager.Sexuality.MALE;
+                else
+                    animalStatus.status.Sexuality = AnimalStatusManager.Sexuality.FEMALE;
+
+                animalStatus.status.CageID = int.Parse(csvDatas[i][11]);
+                Debug.Log(animalStatus.status.CageID);
+                animalStatus.status.MealNums = int.Parse(csvDatas[i][12]);
+                animalStatus.status.BurashiNums = int.Parse(csvDatas[i][13]);
+                animalStatus.status.CommunicationNums = int.Parse(csvDatas[i][14]);
+                Debug.Log(int.Parse(csvDatas[i][14]));
+            }
+
+            f.Flush();
+            f.Close();
+        }
+        else
+            Read();
+    }
+
 }

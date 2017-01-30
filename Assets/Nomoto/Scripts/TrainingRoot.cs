@@ -133,7 +133,7 @@ public class TrainingRoot : MonoBehaviour
     int canTalkNum = 0;
     int canEatNum = 0;
 
-    void Start()
+    void Awake()
     {
         explanationFoodStr[0] = "\nみんな大好き\n  赤身ステーキ!!";
         explanationFoodStr[1] = "いろんなものが\n  したたっている\n  ワイルドなご飯";
@@ -155,7 +155,7 @@ public class TrainingRoot : MonoBehaviour
         AnimalStatusManager animalStatusManager
             = GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().animals[selectNum].GetComponent<AnimalStatusManager>();
 
-        foodStatus = GameObject.Find("FoodList").GetComponent<FoodStatus>();
+        //foodStatus = GameObject.Find("FoodList").GetComponent<FoodStatus>();
 
 
         loveLevel = (int)animalStatusManager.status.LoveDegree;
@@ -177,11 +177,12 @@ public class TrainingRoot : MonoBehaviour
         moyaSize = Moya.GetComponent<RectTransform>().sizeDelta;
 
         for (int i = 0; i < 3; ++i)
-            MeetNums[i] = foodStatus.foodList[i].possessionNumber;
-
+            //MeetNums[i] = foodStatus.foodList[i].possessionNumber;
+            MeetNums[i] = 99;
 
         for (int i = 3; i < 6; ++i)
-            VegetableNums[i - 3] = foodStatus.foodList[i].possessionNumber;
+            //VegetableNums[i - 3] = foodStatus.foodList[i].possessionNumber;
+            VegetableNums[i - 3] = 99;
 
         SetFoodText();
         EatManager.Change(satietyLelel, maxSatietyLevel);
@@ -427,8 +428,8 @@ public class TrainingRoot : MonoBehaviour
     {
         SoundManager.Instance.PlaySE((int)SEList.CLOSE);
         Save();
-        GameObject.Find("AnimalList").GetComponent<AnimalStatusCSV>().Save();
         SoundManager.Instance.StopBGM();
+        UnityEngine.SceneManagement.SceneManager.LoadScene("GameMain");
     }
 
     public void PushOfBackEatBoard()
