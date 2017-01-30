@@ -46,6 +46,7 @@ public class FoodStatus : MonoBehaviour
         }
 
         Read();
+        InitSaveStatus();
     }
 
     public void ResetPossession()
@@ -65,16 +66,49 @@ public class FoodStatus : MonoBehaviour
         {
             foodList.Add(new FoodStatusManager2());
         }
+            for (int i = 0; i < 6; ++i)
+            {
+                foodList[i].ID = GetInt(i, 0);
+                foodList[i].Name = GetString(i, 1);
+                foodList[i].purchasePrice = GetInt(i, 2);
+                foodList[i].loveDegreeUpValue = GetFloat(i, 3);
+                foodList[i].satietyLevelUpValue = GetFloat(i, 4);
+                foodList[i].foodType = GetInt(i, 5);
+                foodList[i].possessionNumber = GetInt(i, 6);
+            }
+    }
 
-        for (int i = 0; i < 6; ++i)
+    public void InitSaveStatus()
+    {
+        if (!File.Exists(Application.persistentDataPath + "/" + "FoodStatus.csv"))
         {
-            foodList[i].ID = GetInt(i, 0);
-            foodList[i].Name = GetString(i, 1);
-            foodList[i].purchasePrice = GetInt(i, 2);
-            foodList[i].loveDegreeUpValue = GetFloat(i, 3);
-            foodList[i].satietyLevelUpValue = GetFloat(i, 4);
-            foodList[i].foodType = GetInt(i, 5);
-            foodList[i].possessionNumber = GetInt(i, 6);
+            using (var stream = new FileStream(Application.persistentDataPath + "/" + "FoodStatus.csv", FileMode.Create))
+            {
+                using (var writer = new StreamWriter(stream, Encoding.UTF8))
+                {
+                    string csv = string.Empty;
+                    csv += "//ID" + "," + "//名前" + "," + "//値段" + "," + "//愛情度上昇値" + "," + "//満腹度上昇値" + "," + "//種類" + "," + "//初期所持数";
+                    csv += "\n";
+                    for (int i = 0; i < 6; ++i)
+                    {
+                        csv += foodList[i].ID;
+                        csv += ",";
+                        csv += foodList[i].Name;
+                        csv += ",";
+                        csv += foodList[i].purchasePrice;
+                        csv += ",";
+                        csv += foodList[i].loveDegreeUpValue;
+                        csv += ",";
+                        csv += foodList[i].satietyLevelUpValue;
+                        csv += ",";
+                        csv += foodList[i].foodType;
+                        csv += ",";
+                        csv += foodList[i].possessionNumber;
+                        csv += "\n";
+                    }
+                    writer.WriteLine(csv);
+                }
+            }
         }
     }
 
