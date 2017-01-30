@@ -33,7 +33,7 @@ public class NotActiveAnimals : MonoBehaviour
     private void CreateCage()
     {
         var animalList_ = animalList.GetComponent<AnimalStatusCSV>().animals;
-        for(int i = 0; i < 13; i++)
+        for(int i = 0; i < 17; i++)
         {
             var animalStatus = animalList_[i].GetComponent<AnimalStatusManager>();
             if (animalStatus.status.IsPurchase == false)
