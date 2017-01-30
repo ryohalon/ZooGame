@@ -192,7 +192,7 @@ public class CageListManager : MonoBehaviour
         cageList[cageID].GetComponent<CageManager>().animalID = animalID;
 
         var animalList = animalStatusCSV.animals;
-        for (int i = 0; i < 13; i++)
+        for (int i = 0; i < 17; i++)
         {
             var animalStatus = animalList[i].GetComponent<AnimalStatusManager>();
             if (animalID == animalStatus.status.ID)
